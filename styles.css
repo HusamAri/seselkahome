@@ -1502,10 +1502,10 @@ body[data-motion="cinematic"] .weave__strip,
 body[data-motion="cinematic"] .raw-paper { transition-duration: 1900ms !important; }
 
 /* TYPE SCALE --------------------------------------------------------- */
-.hero__display     { font-size: calc(clamp(64px, 8.2vw, 132px) * var(--tw-type-scale)); }
-.s-head__title     { font-size: calc(clamp(40px, 5vw, 72px)    * var(--tw-type-scale)); }
-.hikaye__title     { font-size: calc(clamp(40px, 4.6vw, 64px)  * var(--tw-type-scale)); }
-.stat__big         { font-size: calc(clamp(54px, 5.4vw, 80px)  * var(--tw-type-scale)); }
+.hero__display     { font-size: calc(clamp(68px, 9.2vw, 156px) * var(--tw-type-scale)); }
+.s-head__title     { font-size: calc(clamp(44px, 5.8vw, 90px)  * var(--tw-type-scale)); }
+.hikaye__title     { font-size: calc(clamp(44px, 5.2vw, 80px)  * var(--tw-type-scale)); }
+.stat__big         { font-size: calc(clamp(60px, 6vw, 100px)   * var(--tw-type-scale)); }
 
 /* HERO LAYOUT -------------------------------------------------------- */
 body[data-hero="balanced"]    { --tw-hero-cols: 1fr 1.05fr; }
@@ -1628,4 +1628,53 @@ body[style*="--tw-accent"] {
 .ig-popup__media .instagram-media {
   margin: 0 auto !important;
   min-width: 0 !important;
+}
+
+/* =====================================================================
+   BOLD VISUAL PASS (taste-skill direction) — additive & reversible.
+   Tactile paper grain + filmic vignette, heavier display type, terracotta
+   accent rules, photographic depth on hover. On-brand: Seselka is a paper
+   house, so faint grain reads as stock. Delete this block to revert.
+   Overlays sit above content (z 39-40) but below the nav (50) and modals.
+   ===================================================================== */
+
+/* Heavier, tighter display type — more editorial presence. */
+.hero__display,
+.s-head__title,
+.hikaye__title { font-weight: 500; letter-spacing: -0.02em; }
+
+/* Terracotta lead-rule on every eyebrow — a small, brand-forward accent. */
+.eyebrow::before { background: var(--accent); }
+
+/* Photographic depth: framed images lift/scale under the cursor. */
+.hero__photo-img,
+.order__photo img { transition: transform var(--dur-slow) var(--ease-paper); }
+.hero__photo-frame:hover .hero__photo-img,
+.order__photo:hover img { transform: scale(1.035); }
+
+/* Filmic vignette — gives the flat paper page depth without touching surfaces. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 39;
+  pointer-events: none;
+  background: radial-gradient(132% 106% at 50% 32%, transparent 55%, rgba(46,38,29,0.07) 100%);
+}
+
+/* Tactile paper grain over the whole page (very low opacity). */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.055;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='170'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 170px 170px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__photo-img, .order__photo img { transition: none; }
 }

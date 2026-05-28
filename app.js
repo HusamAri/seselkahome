@@ -301,10 +301,26 @@
 
   /* -------------------------------------------------- ORDER form */
   function submitOrder(form) {
+    // Static site, no backend: compose the request as an email to the atelier.
+    const val = (id) => (form.querySelector('#' + id)?.value || '').trim();
+    const name = val('fn'), email = val('em'), piece = val('prc'), note = val('msg');
+
+    const subject = `Seselka — Talep: ${piece}`;
+    const body = [
+      `Ad: ${name}`,
+      `E-posta: ${email}`,
+      `Parça: ${piece}`,
+      `Not: ${note || '—'}`,
+    ].join('\n');
+    const mailto = `mailto:atolye@seselka.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
     const btn = form.querySelector('button');
     const original = btn.innerHTML;
-    btn.innerHTML = 'Teşekkürler ·';
+    btn.innerHTML = 'E-posta açılıyor ·';
     btn.style.pointerEvents = 'none';
+
+    window.location.href = mailto;
+
     setTimeout(() => {
       btn.innerHTML = original;
       btn.style.pointerEvents = '';

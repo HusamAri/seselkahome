@@ -161,8 +161,8 @@
      deboss (pressed in), emboss (raised relief), rest (a barely-there
      warm bloom under photo-like cards).                                  */
   --shadow-rest:     0 0.5px 0 rgba(255,247,232,0.6) inset,
-                     0 1px 0 rgba(74,61,48,0.05),
-                     0 6px 18px -14px rgba(74,61,48,0.18);
+                     0 2px 5px -3px rgba(74,61,48,0.12),
+                     0 22px 46px -24px rgba(74,61,48,0.34);
   --shadow-deboss:   inset 0 1px 1.5px rgba(74,61,48,0.20),
                      inset 0 -1px 0 rgba(255,247,232,0.55);
   --shadow-emboss:   inset 0 1px 0 rgba(255,247,232,0.75),
