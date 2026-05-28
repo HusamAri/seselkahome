@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<title>Seselka Home — Doğal · Sessiz · Zamansız</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="styles.css">
+<link rel="preload" as="image" href="assets/photo-packaging.png">
+<link rel="preload" as="image" href="assets/hero-hikaye.png">
+</head>
+<body>
+
+<!-- ================================================ NAV -->
+<nav class="nav" id="nav" aria-label="Primary">
+  <a class="nav__brand" href="#top" aria-label="Seselka Home">
+    <img src="assets/icon-monogram-clean.png" alt="" class="nav__mark">
+    <span>seselka<span class="dot"></span></span>
+    <span class="nav__sub">HOME</span>
+  </a>
+  <ul class="nav__links">
+    <li><a href="#hikaye"  data-nav>Hikâye</a></li>
+    <li><a href="#surec"   data-nav>Süreç</a></li>
+    <li><a href="#urunler" data-nav class="is-current">Ürünler</a></li>
+    <li><a href="#mutlu"   data-nav>Mutlu Ev</a></li>
+    <li><a href="#siparis" data-nav>Sipariş</a></li>
+  </ul>
+  <div class="nav__right">
+    <span class="nav__pagenum" id="pagenum">01 — KİMLİK</span>
+    <button class="nav__cart" id="cartBtn" aria-label="Sepet">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 7h14l-1.4 11.2a2 2 0 0 1-2 1.8H8.4a2 2 0 0 1-2-1.8L5 7Z"/>
+        <path d="M9 7V5a3 3 0 0 1 6 0v2"/>
+      </svg>
+      <span class="nav__cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<main id="top">
+
+<!-- ============================================ HERO -->
+<section class="hero" id="hero" aria-labelledby="hero-title">
+  <div class="hero__inner">
+
+    <div class="hero__copy">
+      <div class="hero__pagenum">
+        <span>01 — Kimlik</span>
+        <span class="big">01</span>
+      </div>
+
+      <h1 id="hero-title" class="hero__display" style="margin-top: 120px;">
+        <span class="ln"><span class="ln-i">Her örgü,</span></span>
+        <span class="ln"><span class="ln-i">bir <em>başlangıç</em><span class="dot"></span></span></span>
+      </h1>
+
+      <p class="hero__lede">
+        Geri dönüştürülen kâğıtlar, bir kadın ustanın elinde hasır gibi örülerek
+        gündelik yaşam için zamansız objelere dönüşür.
+      </p>
+
+      <div class="hero__cta-row">
+        <a class="btn btn--primary" href="#urunler">Koleksiyona git <span class="arrow"></span></a>
+        <a class="btn btn--ghost"   href="#hikaye">Hikâyemiz</a>
+      </div>
+
+      <div class="hero__meta">
+        <div class="hero__meta-col">
+          <span class="key">Malzeme</span>
+          <span class="val">Geri dönüşen kâğıt</span>
+        </div>
+        <div class="hero__meta-col">
+          <span class="key">Üretim</span>
+          <span class="val">10–14 gün</span>
+        </div>
+        <div class="hero__meta-col">
+          <span class="key">Atölye</span>
+          <span class="val">İzmir · 2024</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__photo">
+      <div class="hero__photo-frame">
+        <img src="assets/photo-packaging.png" alt="Seselka Home paket: kutu, kuşak, mum mührü, asılı etiket ve örme sepet" class="hero__photo-img">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="hero__tagline">
+    <span class="rule"></span>
+    <span>DOĞAL · SESSİZ · ZAMANSIZ</span>
+    <span class="scroll">Kaydır</span>
+  </div>
+</section>
+
+<!-- ============================================ MARQUEE -->
+<section class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Rooted in nature <span class="pip"></span> <em>Reimagined by hand</em> <span class="pip"></span> Made by hand <span class="pip"></span> <em>Made to last</em> <span class="pip"></span></span>
+    <span>Rooted in nature <span class="pip"></span> <em>Reimagined by hand</em> <span class="pip"></span> Made by hand <span class="pip"></span> <em>Made to last</em> <span class="pip"></span></span>
+  </div>
+</section>
+
+<!-- ============================================ HIKAYE -->
+<section id="hikaye" class="hikaye section">
+  <div class="shell hikaye__grid">
+
+    <!-- The brand's "Hikâye" poster is the visual itself -->
+    <div class="hikaye__poster" aria-label="Seselka Hikaye posteri">
+      <img src="assets/hero-hikaye.png" alt="Seselka Hikâye — örgülü amblem, kuru dal ve altın oran">
+    </div>
+
+    <div class="hikaye__copy reveal">
+      <span class="eyebrow">02 — Hikâye</span>
+      <h2 class="hikaye__title">
+        Doğadan ilhamla,<br>
+        kadın <em>emeğiyle</em><span class="dot"></span>
+      </h2>
+      <div class="hikaye__body">
+        <p>Seselka Home, atılacak kâğıdı yeniden ele alır. Her parça önce şehirden toplanır; sonra ince şeritlere kesilir, kordonlanır ve hasır geleneğinden gelen bir teknikle örülür.</p>
+        <p>Atölyede 26 kadın usta, kendi temposunda çalışır. Bir sepetin tamamlanması ortalama <em>34 saat</em> sürer — ve hiçbir parça bir diğerinin tıpatıp aynısı değildir.</p>
+      </div>
+      <span class="hikaye__sign">Rooted in nature · Reimagined by hand</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================ PROCESS -->
+<section id="surec" class="process section" data-stage="1">
+  <div class="shell">
+    <header class="s-head">
+      <div class="s-head__l">
+        <span class="eyebrow">03 — Süreç</span>
+        <h2 class="s-head__title">Bir kâğıt, dört nefes,<br>bir <em>parça</em><span class="dot"></span></h2>
+      </div>
+      <div class="s-head__r">
+        <p>Her parça aynı dört aşamadan geçer: toplanır, kordon edilir, örülür ve mum mührüyle imzalanır. Aşağıdaki adımlara dokunun — örgü gözünüzün önünde tamamlanır.</p>
+      </div>
+    </header>
+
+    <div class="process__stage">
+
+      <!-- LEFT: sticky 3D weaving canvas -->
+      <div class="process__sticky" aria-hidden="true">
+        <div class="weave">
+          <div class="weave__plane">
+            <div class="raw-paper"></div>
+            <div class="weave__strip weave__strip--v weave__strip--v1"></div>
+            <div class="weave__strip weave__strip--v weave__strip--v2"></div>
+            <div class="weave__strip weave__strip--v weave__strip--v3"></div>
+            <div class="weave__strip weave__strip--v weave__strip--v4"></div>
+            <div class="weave__strip weave__strip--h weave__strip--h1"></div>
+            <div class="weave__strip weave__strip--h weave__strip--h2"></div>
+            <div class="weave__strip weave__strip--h weave__strip--h3"></div>
+            <div class="weave__strip weave__strip--h weave__strip--h4"></div>
+          </div>
+          <img src="assets/wax-seal-clean.png" alt="" class="weave__seal">
+        </div>
+        <div class="process__pill"><span class="d"></span><span id="stagePill">Aşama 01 · Geri dönüşüm</span></div>
+      </div>
+
+      <!-- RIGHT: steps -->
+      <div class="process__steps" id="processSteps">
+        <button class="process__step is-active" data-stage="1" data-label="Geri dönüşüm">
+          <span class="num">01</span>
+          <div>
+            <span class="pin"><span class="ic"></span> Geri dönüşüm</span>
+            <h3>Topla, yıka, dinlendir.</h3>
+            <p>Şehirden ve baskıevlerinden toplanan kâğıtları yıkar, dinlendirir ve yeniden hammaddeye çeviririz. Kullanılan suyun &#37;90&#39;ı sirküle edilir.</p>
+          </div>
+        </button>
+
+        <button class="process__step" data-stage="2" data-label="Kordon">
+          <span class="num">02</span>
+          <div>
+            <span class="pin"><span class="ic"></span> Kordon</span>
+            <h3>İnce şeritler, sıkı kordonlar.</h3>
+            <p>Kâğıt 4&nbsp;cm şeritlere kesilir, sonra elde sıkıca bükülür. İki ucu birleşince hasır gibi sağlam, doğal bir lif çıkar.</p>
+          </div>
+        </button>
+
+        <button class="process__step" data-stage="3" data-label="Örgü">
+          <span class="num">03</span>
+          <div>
+            <span class="pin"><span class="ic"></span> Örgü</span>
+            <h3>Dikey, yatay, dikey, yatay.</h3>
+            <p>Kordonlar bir kadın ustanın elinde formuna kavuşur. Bir sepet ortalama <em>34&nbsp;saat</em> sürer; bir ayna çerçevesi <em>22&nbsp;saat</em>.</p>
+          </div>
+        </button>
+
+        <button class="process__step" data-stage="4" data-label="İmza">
+          <span class="num">04</span>
+          <div>
+            <span class="pin"><span class="ic"></span> İmza</span>
+            <h3>Mum mührüyle yola çıkar.</h3>
+            <p>Her parça terra cotta rengi mum mührü, el yazısı bir not ve geri dönüşen ambalajla yolculuğuna başlar.</p>
+          </div>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ STATS -->
+<section class="stats" aria-label="Geri dönüşüm etkisi">
+  <div class="stats__inner">
+    <p class="stats__hd"><em>"Doğadan aldığını,<br>doğanın hızında geri ver."</em></p>
+
+    <div class="stat">
+      <span class="stat__big">8.4<em>t</em></span>
+      <span class="stat__lbl">Geri dönüşen kâğıt</span>
+      <span class="stat__sub">2025 yılında atölyede yeniden hayata kazandırılan kâğıt.</span>
+    </div>
+
+    <div class="stat">
+      <span class="stat__big">100<em>%</em></span>
+      <span class="stat__lbl">Doğal lif</span>
+      <span class="stat__sub">Hiçbir parçada plastik, sentetik reçine ya da yapay boya yoktur.</span>
+    </div>
+
+    <div class="stat">
+      <span class="stat__big">26</span>
+      <span class="stat__lbl">Kadın usta</span>
+      <span class="stat__sub">Atölye ve evlerinde, kendi temposunda çalışan kadın ekibi.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ PRODUCTS -->
+<section id="urunler" class="products section">
+  <div class="shell">
+
+    <header class="s-head">
+      <div class="s-head__l">
+        <span class="eyebrow">04 — Ürünler</span>
+        <h2 class="s-head__title">Atölyeden, <em>eve</em><span class="dot"></span></h2>
+      </div>
+      <div class="s-head__r">
+        <p>Şu anda hazır olan parçalar. Her biri elde örülmüş, üretim siparişle başlar. Stok sınırlı — ustanın eline bağlıdır.</p>
+      </div>
+    </header>
+
+    <div class="products__bar">
+      <span class="products__count"><em>04</em>parça · tümü el yapımı, geri dönüşen kâğıttan</span>
+      <div class="products__sort">
+        <span>Sırala</span>
+        <select id="sort">
+          <option value="featured">Öne çıkanlar</option>
+          <option value="asc">Fiyat ↑</option>
+          <option value="desc">Fiyat ↓</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="products__grid" id="grid">
+      <!-- products injected by JS -->
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================ MUTLU EV -->
+<section id="mutlu" class="mutlu section">
+  <div class="shell mutlu__grid">
+
+    <!-- The brand's "Mutlu Ev" poster image is the visual -->
+    <div class="mutlu__poster reveal" aria-label="Mutlu Ev posteri">
+      <img src="assets/hero-mutlu-ev.png" alt="Mutlu Ev — kemerli nişte ayna, vazo ve sepet">
+    </div>
+
+    <div class="mutlu__copy reveal reveal--late">
+      <span class="eyebrow">05 — Mutlu Ev</span>
+      <h2 class="s-head__title">Bir parça, <em>bir oda</em><span class="dot"></span></h2>
+      <p>Seselka parçaları evinizde nasıl yaşıyor — gerçek hikâyeler, gerçek yuvalar. Müşterilerimizden <em>#mutluev</em> etiketiyle bize ulaşan kareler.</p>
+
+      <div class="mutlu__thumbs">
+        <div class="mutlu__thumb">
+          <img src="assets/photo-basket.png" alt="Hasır sepet, yatak odası köşesi">
+          <span class="mutlu__thumb-cap">— Defne · İstanbul</span>
+        </div>
+        <div class="mutlu__thumb">
+          <img src="assets/photo-detail.png" alt="Hediye seti detay, mum mührü">
+          <span class="mutlu__thumb-cap">— Selin · İzmir</span>
+        </div>
+      </div>
+
+      <a class="btn btn--ghost" href="#" style="align-self: flex-start;">#mutluev arşivi <span class="arrow"></span></a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================ ORDER -->
+<section id="siparis" class="order section">
+  <div class="shell order__grid">
+
+    <div class="order__photo reveal">
+      <img src="assets/photo-detail.png" alt="Seselka hediye seti: kutu, mum mühürlü zarf, kese">
+    </div>
+
+    <form class="order__form reveal reveal--late" onsubmit="event.preventDefault(); window.__seselka.submitOrder(this);">
+      <span class="eyebrow">06 — Sipariş</span>
+      <h3>Atölyeden eve<span class="dot"></span></h3>
+      <p>Üretim, siparişin onayından sonra başlar. Ev ölçülerinize özel boyut da yapılabilir; aşağıya yazmanız yeterli.</p>
+
+      <div class="order__row">
+        <div class="order__field">
+          <label for="fn">Adınız</label>
+          <input id="fn" type="text" autocomplete="name" placeholder="Defne Aksoy" required>
+        </div>
+        <div class="order__field">
+          <label for="em">E-posta</label>
+          <input id="em" type="email" autocomplete="email" placeholder="defne@ev.com" required>
+        </div>
+      </div>
+
+      <div class="order__field">
+        <label for="prc">Parça</label>
+        <select id="prc">
+          <option>Hasır Sepet</option>
+          <option>Hediye Kutusu</option>
+          <option>Mum Mühürlü Set</option>
+          <option>Özel Sipariş</option>
+        </select>
+      </div>
+
+      <div class="order__field">
+        <label for="msg">Not</label>
+        <textarea id="msg" placeholder="Renk, ölçü, kapı eşiğine bırakma…"></textarea>
+      </div>
+
+      <button class="btn btn--primary" type="submit" style="align-self: flex-start; margin-top: 8px;">Gönder <span class="arrow"></span></button>
+    </form>
+
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================ FOOTER -->
+<footer class="foot">
+  <div class="foot__inner">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <img src="assets/logo-primary-vertical-clean.png" alt="Seselka Home">
+        <p>Rooted in nature.<br>Reimagined by hand.<br>Made to last.</p>
+      </div>
+      <div class="foot__col">
+        <h5>Atölye</h5>
+        <ul>
+          <li><a href="#hikaye">Hikâye</a></li>
+          <li><a href="#surec">Süreç</a></li>
+          <li><a href="#">Atölye gezisi</a></li>
+          <li><a href="#">Basın</a></li>
+        </ul>
+      </div>
+      <div class="foot__col">
+        <h5>Koleksiyon</h5>
+        <ul>
+          <li><a href="#urunler">Sepet</a></li>
+          <li><a href="#urunler">Hediye kutusu</a></li>
+          <li><a href="#urunler">Mum mühürlü set</a></li>
+          <li><a href="#siparis">Özel ölçü</a></li>
+        </ul>
+      </div>
+      <div class="foot__col">
+        <h5>İletişim</h5>
+        <ul>
+          <li><a href="mailto:atolye@seselka.com">atolye@seselka.com</a></li>
+          <li><a href="#">+90 232 000 00 00</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Pinterest</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>DOĞAL · SESSİZ · ZAMANSIZ</span>
+      <span>© 2026 Seselka Home</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast">Sepete eklendi · <span id="toastName">Sepet</span></div>
+
+<script src="app.js"></script>
+
+<!-- ================================================ TWEAKS PANEL -->
+<div id="tweaks-root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="tweaks-app.jsx"></script>
+</body>
+</html>
