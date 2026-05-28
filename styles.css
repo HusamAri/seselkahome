@@ -1502,10 +1502,10 @@ body[data-motion="cinematic"] .weave__strip,
 body[data-motion="cinematic"] .raw-paper { transition-duration: 1900ms !important; }
 
 /* TYPE SCALE --------------------------------------------------------- */
-.hero__display     { font-size: calc(clamp(68px, 9.2vw, 156px) * var(--tw-type-scale)); }
-.s-head__title     { font-size: calc(clamp(44px, 5.8vw, 90px)  * var(--tw-type-scale)); }
-.hikaye__title     { font-size: calc(clamp(44px, 5.2vw, 80px)  * var(--tw-type-scale)); }
-.stat__big         { font-size: calc(clamp(60px, 6vw, 100px)   * var(--tw-type-scale)); }
+.hero__display     { font-size: calc(clamp(64px, 10.5vw, 184px) * var(--tw-type-scale)); }
+.s-head__title     { font-size: calc(clamp(42px, 6.6vw, 104px)  * var(--tw-type-scale)); }
+.hikaye__title     { font-size: calc(clamp(42px, 6vw, 92px)     * var(--tw-type-scale)); }
+.stat__big         { font-size: calc(clamp(56px, 7vw, 116px)    * var(--tw-type-scale)); }
 
 /* HERO LAYOUT -------------------------------------------------------- */
 body[data-hero="balanced"]    { --tw-hero-cols: 1fr 1.05fr; }
@@ -1659,7 +1659,7 @@ body::before {
   inset: 0;
   z-index: 39;
   pointer-events: none;
-  background: radial-gradient(132% 106% at 50% 32%, transparent 55%, rgba(46,38,29,0.07) 100%);
+  background: radial-gradient(132% 112% at 50% 30%, transparent 48%, rgba(46,38,29,0.14) 100%);
 }
 
 /* Tactile paper grain over the whole page (very low opacity). */
@@ -1669,7 +1669,7 @@ body::after {
   inset: 0;
   z-index: 40;
   pointer-events: none;
-  opacity: 0.055;
+  opacity: 0.09;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='170'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 170px 170px;
