@@ -2,9 +2,11 @@
 name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
 on:
-  # Runs on pushes targeting the default branch
+  # Runs on pushes to the published branches. `main` is the conventional
+  # source of truth; the claude/* branch is kept so the existing deploy
+  # path is not broken.
   push:
-    branches: ["claude/inspiring-hopper-BU7vN"]
+    branches: ["main", "claude/inspiring-hopper-BU7vN"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

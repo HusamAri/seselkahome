@@ -2,9 +2,9 @@ name: NodeJS with Webpack
 
 on:
   push:
-    branches: [ "claude/inspiring-hopper-BU7vN" ]
+    branches: [ "main", "claude/inspiring-hopper-BU7vN" ]
   pull_request:
-    branches: [ "claude/inspiring-hopper-BU7vN" ]
+    branches: [ "main", "claude/inspiring-hopper-BU7vN" ]
 
 jobs:
   build:
