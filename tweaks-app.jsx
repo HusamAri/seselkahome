@@ -1,3 +1,10 @@
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import {
+  useTweaks, TweaksPanel, TweakSection,
+  TweakRadio, TweakToggle, TweakSlider, TweakColor,
+} from './tweaks-panel.jsx';
+
 /* Seselka Tweaks — design + motion controls
    Writes data-* attributes and CSS vars on <body>, plus window.__tweaks
    for the vanilla script (process autoplay).
@@ -97,12 +104,9 @@ function SeselkaTweaksApp() {
   );
 }
 
-/* Mount when DOM + tweaks-panel globals are ready */
+/* Mount once the host's #tweaks-root exists */
 (function mount() {
-  if (typeof TweaksPanel === "undefined" || typeof useTweaks === "undefined") {
-    return setTimeout(mount, 30);
-  }
   const root = document.getElementById("tweaks-root");
   if (!root) return setTimeout(mount, 30);
-  ReactDOM.createRoot(root).render(<SeselkaTweaksApp />);
+  createRoot(root).render(<SeselkaTweaksApp />);
 })();
