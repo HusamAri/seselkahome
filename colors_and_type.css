@@ -1,0 +1,365 @@
+/* =========================================================================
+   Seselka Home — Colors & Typography
+   "Doğal · Sessiz · Zamansız"  ·  Natural · Quiet · Timeless
+   ========================================================================= */
+
+/* ----- Fonts ------------------------------------------------------------ */
+@font-face {
+  font-family: "Cormorant Upright";
+  src: url("fonts/CormorantUpright-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Upright";
+  src: url("fonts/CormorantUpright-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Upright";
+  src: url("fonts/CormorantUpright-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Upright";
+  src: url("fonts/CormorantUpright-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Upright";
+  src: url("fonts/CormorantUpright-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cormorant Unicase";
+  src: url("fonts/CormorantUnicase-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Unicase";
+  src: url("fonts/CormorantUnicase-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cormorant SC";
+  src: url("fonts/CormorantSC-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Body face — Plus Jakarta Sans, the warm humanist sans that pairs with
+   Cormorant's display serifs. Italic Cormorant Garamond is loaded from
+   Google Fonts for the brand's italic accents ("Rooted in nature.")     */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("fonts/PlusJakartaSans-VariableFont_wght.ttf") format("truetype-variations"),
+       url("fonts/PlusJakartaSans-VariableFont_wght.ttf") format("truetype");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("fonts/PlusJakartaSans-Italic-VariableFont_wght.ttf") format("truetype-variations"),
+       url("fonts/PlusJakartaSans-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap");
+
+/* ----- Palette ---------------------------------------------------------- */
+:root {
+  /* Paper — the foundation. Everything Seselka sits on a warm parchment. */
+  --paper-100:      #FEFBF3;   /* highlight / lightest cream             */
+  --paper-200:      #F9F3E4;   /* default page background — lighter      */
+  --paper-300:      #F0E7D3;   /* card paper, tag stock                  */
+  --paper-400:      #E2D6BC;   /* deeper kraft, hang-tag tan             */
+  --paper-500:      #CCBC9F;   /* muted stone                            */
+
+  /* Ink — warm taupe used for the wordmark and body text.               */
+  --ink-100:        #BFAE96;
+  --ink-200:        #A89679;   /* secondary type                         */
+  --ink-300:        #8E7B65;   /* primary wordmark taupe                 */
+  --ink-400:        #6D5C49;   /* body copy                              */
+  --ink-500:        #4A3D30;   /* heading / strongest                    */
+  --ink-600:        #2E261D;   /* near-black for high-stakes contrast    */
+
+  /* Terracotta — the one warm accent. The dot. The wax seal. Sparingly. */
+  --terracotta-100: #E6BFA8;
+  --terracotta-300: #C97A55;
+  --terracotta-500: #B85837;   /* the brand dot                          */
+  --terracotta-700: #8F4226;   /* deep wax                               */
+
+  /* Botanical sage — supporting hue for muted backgrounds (cards 04, 06).*/
+  --sage-200:       #D5D2BE;
+  --sage-400:       #9CA088;
+  --sage-600:       #6A6F58;
+
+  /* Semantic tokens — refer to these in product code, not the raw scale.*/
+  --bg-page:        var(--paper-200);
+  --bg-elevated:    var(--paper-100);
+  --bg-sunken:      var(--paper-300);
+  --bg-inverse:     var(--ink-500);
+
+  --fg-strong:      var(--ink-500);
+  --fg-default:     var(--ink-400);
+  --fg-muted:       var(--ink-300);
+  --fg-subtle:      var(--ink-200);
+  --fg-on-inverse:  var(--paper-200);
+
+  --accent:         var(--terracotta-500);
+  --accent-deep:    var(--terracotta-700);
+  --accent-soft:    var(--terracotta-100);
+
+  --rule:           color-mix(in oklab, var(--ink-300) 35%, transparent);
+  --rule-strong:    color-mix(in oklab, var(--ink-300) 60%, transparent);
+
+  /* Spacing — 8px base grid (per ui-ux-pro-max). All component spacing
+     MUST be a multiple of these tokens; no arbitrary pixel values. The
+     golden ratio survives as a visual motif (the spiral overlay) but is
+     not a literal spacing unit.                                          */
+  --space-0:        0px;
+  --space-1:        4px;
+  --space-2:        8px;
+  --space-3:        12px;
+  --space-4:        16px;
+  --space-5:        24px;
+  --space-6:        32px;
+  --space-7:        48px;
+  --space-8:        64px;
+  --space-9:        96px;
+  --space-10:       128px;
+  --space-11:       160px;
+
+  /* Radii — Seselka shapes are circles, pills and golden arcs; cards are
+     either fully square (paper sheets) or pill-rounded (hang-tags).     */
+  --radius-sm:      2px;
+  --radius-md:      6px;
+  --radius-lg:      14px;
+  --radius-pill:    9999px;
+
+  /* Shadows — paper, not material. Seselka surfaces don't FLY; they sit
+     in the paper, like a stamped or embossed impression. Three modes:
+     deboss (pressed in), emboss (raised relief), rest (a barely-there
+     warm bloom under photo-like cards).                                  */
+  --shadow-rest:     0 0.5px 0 rgba(255,247,232,0.6) inset,
+                     0 1px 0 rgba(74,61,48,0.05),
+                     0 6px 18px -14px rgba(74,61,48,0.18);
+  --shadow-deboss:   inset 0 1px 1.5px rgba(74,61,48,0.20),
+                     inset 0 -1px 0 rgba(255,247,232,0.55);
+  --shadow-emboss:   inset 0 1px 0 rgba(255,247,232,0.75),
+                     inset 0 -1px 1.5px rgba(74,61,48,0.16);
+  --shadow-press:    inset 0 2px 4px rgba(74,61,48,0.28),
+                     inset 0 -1px 0 rgba(74,61,48,0.06);
+  /* Aliases retained for code that already used the old names.          */
+  --shadow-paper:    var(--shadow-rest);
+  --shadow-card:     var(--shadow-rest);
+
+  /* Motion — slow, considered. Nothing on Seselka snaps. */
+  --ease-paper:     cubic-bezier(0.22, 0.61, 0.36, 1);   /* gentle settle */
+  --ease-strip:    cubic-bezier(0.65, 0, 0.35, 1);       /* paper strip   */
+  --ease-deckle:   cubic-bezier(0.34, 1.2, 0.64, 1);     /* soft overshoot*/
+  --dur-quick:     240ms;
+  --dur-slow:      640ms;
+  --dur-cinema:   1400ms;
+}
+
+/* ----- Type ramp -------------------------------------------------------
+   Modular ratio: 1.25 (major third). Body 16px (WCAG floor on web).
+   Two families: Cormorant Upright (display), Plus Jakarta Sans (body).
+   ---------------------------------------------------------------------- */
+:root {
+  --font-display:  "Cormorant Upright", "Cormorant Garamond", Georgia, serif;
+  --font-serif:    "Cormorant Garamond", "Cormorant Upright", Georgia, serif;  /* italic accents only */
+  --font-body:     "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-unicase:  "Cormorant Unicase", "Cormorant Upright", Georgia, serif;
+  --font-sc:       "Cormorant SC", "Cormorant Upright", Georgia, serif;
+}
+
+/* The Seselka voice is a serif display, sans body. Sentences end with a
+   period. Captions are letter-spaced caps. Headlines breathe.            */
+.h-hero,
+.h-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(80px, 14vw, 240px);   /* kinetic-type scale on hero  */
+  line-height: 0.94;
+  letter-spacing: -0.018em;
+  color: var(--fg-strong);
+  text-wrap: balance;
+}
+
+h1, .h-1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(48px, 5.4vw, 96px);
+  line-height: 1.04;
+  letter-spacing: -0.005em;
+  color: var(--fg-strong);
+  text-wrap: balance;
+}
+
+h2, .h-2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(34px, 3.4vw, 56px);
+  line-height: 1.12;
+  letter-spacing: -0.002em;
+  color: var(--fg-strong);
+  text-wrap: balance;
+}
+
+h3, .h-3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--fg-strong);
+}
+
+h4, .h-4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.3;
+  color: var(--fg-strong);
+}
+
+/* Eyebrow — the small caps line above section titles in the brand book. */
+.eyebrow {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* Caption — bottom-of-page italic murmur. Italic Cormorant Garamond.    */
+.caption {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: var(--fg-muted);
+}
+
+/* Body — Plus Jakarta Sans. The reading workhorse of the system. */
+.p, p, .body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.62;
+  letter-spacing: 0.005em;
+  color: var(--fg-default);
+  text-wrap: pretty;
+}
+
+.small {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.55;
+  letter-spacing: 0.012em;
+  color: var(--fg-muted);
+}
+
+/* Wordmark — the second word in the lockup, e.g. "HOME". Wide tracked.   */
+.wordmark-tag {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--fg-default);
+}
+
+/* Pagination numerals — top right of every brand-book spread. */
+.pagenum {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--fg-muted);
+}
+
+/* Base page reset — opt-in via .seselka-page on the body or root frame. */
+.seselka-page {
+  background: var(--bg-page);
+  color: var(--fg-default);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Accessibility scaffolding ---------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 150ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* The signature dot — brand period rendered as an element so it can be
+   colored, animated and kept consistent across surfaces. Use as
+   <span class="dot"></span>.                                              */
+.dot {
+  display: inline-block;
+  width: 0.32em;
+  height: 0.32em;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: 0.1em;
+  margin-left: 0.05em;
+}
+
+/* Hairline section rule — short, with a centred or end-set dot. */
+.rule-with-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.rule-with-dot::before {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: var(--rule-strong);
+}
+.rule-with-dot::after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
