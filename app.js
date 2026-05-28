@@ -340,8 +340,8 @@
     // Tatil aralığı (dahil, yerel saat). Popup yalnızca bu aralıkta ve oturum
     // başına bir kez açılır. Test için URL'ye ?bayram=preview ekle (tarihten
     // bağımsız açılır).
-    const START = '2026-06-26';   // TODO: gerçek bayram başlangıcı (YYYY-MM-DD)
-    const END   = '2026-06-30';   // TODO: gerçek bayram bitişi    (YYYY-MM-DD)
+    const START = '2026-05-27';   // bayram başlangıcı (YYYY-MM-DD, dahil)
+    const END   = '2026-05-29';   // bayram bitişi    (YYYY-MM-DD, dahil)
     // ----------------------------------------------------------------------
 
     const preview  = new URLSearchParams(location.search).get('bayram') === 'preview';
