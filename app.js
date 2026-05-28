@@ -331,6 +331,46 @@
     });
   }
 
+  /* -------------------------------------------------- BAYRAM popup (date-gated) */
+  function bayramPopup() {
+    const el = $('#bayramPopup');
+    if (!el) return;
+
+    // ---- CONFIG ----------------------------------------------------------
+    // Tatil aralığı (dahil, yerel saat). Popup yalnızca bu aralıkta ve oturum
+    // başına bir kez açılır. Test için URL'ye ?bayram=preview ekle (tarihten
+    // bağımsız açılır).
+    const START = '2026-06-26';   // TODO: gerçek bayram başlangıcı (YYYY-MM-DD)
+    const END   = '2026-06-30';   // TODO: gerçek bayram bitişi    (YYYY-MM-DD)
+    // ----------------------------------------------------------------------
+
+    const preview  = new URLSearchParams(location.search).get('bayram') === 'preview';
+    const now      = new Date();
+    const inWindow = now >= new Date(START + 'T00:00:00') && now <= new Date(END + 'T23:59:59');
+    const seen     = sessionStorage.getItem('seselka-bayram') === '1';
+    if (!preview && (!inWindow || seen)) return;
+
+    const open = () => {
+      el.classList.add('is-open');
+      el.setAttribute('aria-hidden', 'false');
+      document.documentElement.style.overflow = 'hidden';
+      if (window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process();
+    };
+    const close = () => {
+      el.classList.remove('is-open');
+      el.setAttribute('aria-hidden', 'true');
+      document.documentElement.style.overflow = '';
+      try { sessionStorage.setItem('seselka-bayram', '1'); } catch (e) {}
+    };
+
+    el.querySelectorAll('[data-close]').forEach((b) => b.addEventListener('click', close));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && el.classList.contains('is-open')) close();
+    });
+
+    setTimeout(open, preview ? 200 : 1000);
+  }
+
   /* -------------------------------------------------- BOOT */
   function boot() {
     heroReveal();
@@ -340,6 +380,7 @@
     reveals();
     nav();
     cartUi();
+    bayramPopup();
   }
 
   if (document.readyState === 'loading') {

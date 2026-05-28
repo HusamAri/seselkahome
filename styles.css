@@ -1523,3 +1523,109 @@ body[style*="--tw-accent"] {
   .hero__inner   { grid-template-columns: 1fr; }
   .hikaye__grid, .mutlu__grid, .order__grid, .process__stage { grid-template-columns: 1fr; }
 }
+
+/* =====================================================================
+   INSTAGRAM — in-section embeds + Bayram (date-gated) popup
+   Each post is the official blockquote embed processed by embed.js; we
+   only frame it on-brand. Instagram owns the card's interior styling.
+   ===================================================================== */
+.ig-embed {
+  margin-top: clamp(56px, 7vw, 96px);
+  padding-top: clamp(32px, 4vw, 48px);
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.ig-embed .eyebrow { align-self: center; }
+.ig-embed__card {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.ig-embed .instagram-media {
+  margin: 0 auto !important;
+  max-width: 540px !important;
+  min-width: 0 !important;
+  border-radius: 2px !important;
+  border: 1px solid var(--rule) !important;
+  box-shadow: 0 22px 50px -32px rgba(74, 61, 48, 0.30) !important;
+}
+
+/* Bayram popup ------------------------------------------------------- */
+.ig-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--dur-slow) var(--ease-paper),
+              visibility var(--dur-slow) var(--ease-paper);
+}
+.ig-popup.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+.ig-popup__backdrop {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in oklab, var(--ink-600) 56%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.ig-popup__panel {
+  position: relative;
+  z-index: 1;
+  width: min(440px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: var(--paper-100);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: clamp(28px, 4vw, 44px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 50px 90px -36px rgba(74, 61, 48, 0.5);
+  transform: translateY(16px);
+  transition: transform var(--dur-slow) var(--ease-deckle);
+}
+.ig-popup.is-open .ig-popup__panel { transform: translateY(0); }
+.ig-popup__close {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--rule-strong);
+  background: transparent;
+  color: var(--ink-400);
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--dur-quick) var(--ease-paper);
+}
+.ig-popup__close:hover { background: var(--paper-300); }
+.ig-popup__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 30px;
+  margin: 0;
+  color: var(--fg-strong);
+}
+.ig-popup__lede {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-400);
+}
+.ig-popup__media { margin-top: 4px; }
+.ig-popup__media .instagram-media {
+  margin: 0 auto !important;
+  min-width: 0 !important;
+}
