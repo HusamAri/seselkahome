@@ -123,7 +123,7 @@ h1,h2,h3,h4,p{margin:0}
 .display{font-family:var(--serif);font-weight:720;line-height:1.04;letter-spacing:-0.01em;color:var(--ink);font-size:clamp(2.7rem,6.6vw,4.7rem)}
 .h2{font-family:var(--serif);font-weight:700;line-height:1.08;letter-spacing:-0.008em;color:var(--ink);font-size:clamp(2.1rem,4vw,3.25rem)}
 .h3{font-family:var(--serif);font-weight:640;line-height:1.16;color:var(--ink);font-size:1.36rem}
-.mark{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--ink)}  /* editorial italic emphasis */
+.mark{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--accent)}  /* editorial italic emphasis, accent colour */
 
 /* ----------------------------------------------------- Glass panels (shared) */
 .hero__photo,.story__img,.happy__big,.happy__thumb,.order__photo,.order__form,
