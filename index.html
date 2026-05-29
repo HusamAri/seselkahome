@@ -6,10 +6,17 @@
 <meta name="color-scheme" content="light only">
 <meta name="description" content="Seselka Home: geri dönüşen kâğıttan, bir kadın ustanın elinde örülen zamansız ev objeleri. Doğal, sessiz, zamansız.">
 <title>Seselka Home · Doğal, Sessiz, Zamansız</title>
-<link rel="stylesheet" href="seselka.css?v=3">
+<link rel="stylesheet" href="seselka.css?v=4">
 <link rel="preload" as="image" href="assets/photo-packaging.png">
 </head>
 <body>
+
+<!-- floating warm orbs (decorative, perf-safe fixed layer) -->
+<div class="bg" aria-hidden="true">
+  <span class="orb orb--1"></span>
+  <span class="orb orb--2"></span>
+  <span class="orb orb--3"></span>
+</div>
 
 <!-- ===================================================== NAV -->
 <nav class="nav" id="nav" aria-label="Birincil">
@@ -112,8 +119,8 @@
 </section>
 
 <!-- ===================================================== STATS (dark band) -->
-<section class="stats" aria-label="Geri dönüşüm etkisi">
-  <div class="stats__inner wrap section">
+<section class="stats wrap section" aria-label="Geri dönüşüm etkisi">
+  <div class="stats__inner">
     <p class="stats__quote">Doğadan aldığını, doğanın hızında geri ver.</p>
     <div class="stat">
       <span class="stat__big">8.4<i>t</i></span>
@@ -269,6 +276,6 @@
 <!-- Toast -->
 <div class="toast" id="toast" role="status" aria-live="polite"><b>Seselka</b> · <span id="toastName">Sepet</span></div>
 
-<script defer src="seselka.js?v=3"></script>
+<script defer src="seselka.js?v=4"></script>
 </body>
 </html>
