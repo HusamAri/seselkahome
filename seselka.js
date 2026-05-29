@@ -12,21 +12,21 @@
   /* ---------------------------------------------------- PRODUCTS */
   var products = [
     {
-      id: 'sepet-hasir', name: 'Hasır Sepet', sub: 'Sepet · Orta', price: 1480,
-      desc: 'Geri dönüşen kâğıttan elde örülmüş, çift kulplu. Battaniyeden ekmeğe, günün her saatine.',
-      img: 'assets/photo-basket.png', meta: ['28 x 24 cm', 'Doğal ton', '~34 saat'],
+      id: 'asili-sepet', name: 'Asılı Sepet', sub: 'Duvar · Sepet', price: 1480,
+      desc: 'Elde örülmüş, kuru çiçekleriyle; duvarda ya da kapı arkasında zarif bir köşe.',
+      img: 'assets/products/asili-sepet.png', meta: ['Ø ~28 cm', 'Doğal', 'El yapımı'],
       badge: 'YENİ', featured: 1
     },
     {
-      id: 'hediye-kutusu', name: 'Hediye Kutusu', sub: 'Ambalaj · Küçük', price: 2180,
-      desc: 'Mukavva kutu, kuşaklı bağ, mum mühür ve örme sepet. Bir parça hediye etmenin Seselka yolu.',
-      img: 'assets/photo-packaging.png', meta: ['32 x 22 x 12 cm', 'Doğal · Krem', 'Hediye paketinde'],
+      id: 'yuvarlak-sepet', name: 'Yuvarlak Sepet', sub: 'Sepet · Tepsi', price: 1180,
+      desc: 'Yuvarlak, sık örgülü hasır sepet. Ekmekten meyveye, masada gündelik bir güzellik.',
+      img: 'assets/products/yuvarlak-sepet.png', meta: ['Ø ~30 cm', 'Doğal ton', 'Stokta'],
       badge: '', featured: 2
     },
     {
-      id: 'mum-muhurlu', name: 'Mum Mühürlü Set', sub: 'Hediye Seti', price: 980,
-      desc: 'Bez kese, el yazısı tebrik kartı, mum mühürlü zarf ve kurdele. Kapı eşiğinde açılacak küçük bir ritüel.',
-      img: 'assets/photo-detail.png', meta: ['4 parça', 'Doğal', 'Stokta'],
+      id: 'horoz-sepet', name: 'Bayram Horozu', sub: 'Dekoratif · Bayram', price: 1680,
+      desc: 'Horoz formunda örme sepet; bayrama özel, ikramlık şekerleriyle küçük bir sürpriz.',
+      img: 'assets/products/horoz-sepet.png', meta: ['~25 cm', 'Doğal', 'Az sayıda'],
       badge: 'AZ', featured: 3
     },
     {
