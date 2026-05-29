@@ -60,17 +60,17 @@
     }
     return '' +
       '<article class="card" data-id="' + p.id + '">' +
-        '<div class="card__photo">' +
+        '<div class="card__cut">' +
           (p.badge ? '<span class="card__badge' + (p.badge === 'YENİ' ? ' is-new' : '') + '">' + p.badge + '</span>' : '') +
           '<img src="' + p.img + '" alt="' + p.name + '" loading="lazy">' +
         '</div>' +
         '<div class="card__body">' +
           '<div class="card__row">' +
-            '<span class="card__name"><span class="sub">' + p.sub + '</span>' + p.name + '</span>' +
             '<span class="card__price">' + fmtPrice(p.price) + '</span>' +
+            '<span class="card__size">' + (p.meta[0] || '') + '</span>' +
           '</div>' +
+          '<span class="card__name"><span class="sub">' + p.sub + '</span>' + p.name + '</span>' +
           '<p class="card__desc">' + p.desc + '</p>' +
-          '<div class="card__foot">' + metaHtml(p.meta) + '</div>' +
           '<button class="card__add" type="button" data-add="' + p.id + '">Sepete ekle</button>' +
         '</div>' +
       '</article>';
