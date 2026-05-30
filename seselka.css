@@ -255,7 +255,7 @@ h1,h2,h3,h4,p{margin:0}
 .products__head{margin-bottom:clamp(26px,4vw,40px)}
 .products__head h2{margin-top:12px}
 .products__note{font-size:.96rem;color:var(--ink-2);max-width:54ch;margin-top:14px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);column-gap:clamp(16px,2.4vw,28px);row-gap:clamp(64px,6vw,88px);margin-top:78px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);column-gap:clamp(16px,2.4vw,28px);row-gap:clamp(84px,8vw,104px);padding-top:80px}
 .card{
   position:relative;display:flex;flex-direction:column;overflow:visible;padding:0 18px 20px;
   opacity:0;transform:translateY(16px);transition:opacity .6s, transform .6s, box-shadow .3s;
@@ -263,10 +263,10 @@ h1,h2,h3,h4,p{margin:0}
 .card.is-in{opacity:1;transform:none}
 .card:hover{box-shadow:0 34px 80px rgba(120,70,25,.22), var(--glass-hi);transform:translateY(-4px)}
 /* floating product cutout */
-.card__cut{position:relative;margin-top:-72px;height:172px;display:flex;align-items:flex-end;justify-content:center}
+.card__cut{position:relative;margin-top:-56px;height:150px;display:flex;align-items:flex-end;justify-content:center}
 .card__cut img{max-width:88%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:18px;filter:drop-shadow(0 20px 26px rgba(120,70,25,.3));transition:transform .5s cubic-bezier(.16,1,.3,1)}
 .card:hover .card__cut img{transform:translateY(-6px) scale(1.03)}
-.card__badge{position:absolute;top:-58px;left:14px;z-index:2;background:rgba(42,36,29,.82);color:#fff;backdrop-filter:blur(6px);font-size:.64rem;font-weight:700;letter-spacing:.08em;padding:5px 10px;border-radius:999px}
+.card__badge{position:absolute;top:-30px;left:16px;z-index:2;background:rgba(42,36,29,.82);color:#fff;backdrop-filter:blur(6px);font-size:.64rem;font-weight:700;letter-spacing:.08em;padding:5px 10px;border-radius:999px}
 .card__badge.is-new{background:var(--orange-deep)}
 .card__body{padding-top:8px;display:flex;flex-direction:column;gap:7px;flex:1}
 .card__row{display:flex;justify-content:space-between;align-items:center;gap:12px}
