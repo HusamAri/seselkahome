@@ -385,6 +385,38 @@ h1,h2,h3,h4,p{margin:0}
 .popup__media{border-radius:14px 14px 14px 40px}
 
 /* =============================================================
+   EMIL POLISH - meaningful brand marks + refined micro-motion
+   ============================================================= */
+/* brand marks (monogram in nav + footer) */
+.brand__mark{width:24px;height:24px;object-fit:contain;flex:none;align-self:center;margin-right:.12em}
+.foot__mark{width:52px;height:52px;object-fit:contain;display:block;margin-bottom:14px}
+
+/* wax seal on the "Imza" process step (the step is about the seal) */
+.step{position:relative}
+.step__seal{position:absolute;top:16px;right:16px;width:50px;height:50px;object-fit:contain;opacity:.92;transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.step--imza:hover .step__seal{transform:rotate(-7deg) scale(1.06)}
+
+/* Bayram popup shows the actual product cutout, floating on a warm tint */
+.popup__media--cut{background:radial-gradient(120% 100% at 50% 32%, var(--peach), rgba(255,210,168,.22));display:flex;align-items:center;justify-content:center;padding:14px}
+.popup__media--cut img{width:auto;height:100%;max-width:92%;object-fit:contain;filter:drop-shadow(0 14px 22px rgba(120,70,25,.28))}
+
+/* tactile feedback (respond to touch/click) */
+.card__add:active{transform:translateY(1px) scale(.99)}
+.nav__links a:active,.foot ul a:active{opacity:.65}
+
+/* hero entrance - draws the eye into the value prop (motion-safe) */
+@media (prefers-reduced-motion: no-preference){
+  .hero__copy>*{opacity:0;animation:heroUp .7s cubic-bezier(.16,1,.3,1) forwards}
+  .hero__copy>*:nth-child(1){animation-delay:.05s}
+  .hero__copy>*:nth-child(2){animation-delay:.13s}
+  .hero__copy>*:nth-child(3){animation-delay:.21s}
+  .hero__copy>*:nth-child(4){animation-delay:.29s}
+  .hero__photo{opacity:0;animation:heroIn .9s cubic-bezier(.16,1,.3,1) .16s forwards}
+}
+@keyframes heroUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes heroIn{from{opacity:0;transform:translateY(20px) scale(.985)}to{opacity:1;transform:none}}
+
+/* =============================================================
    RESPONSIVE
    ============================================================= */
 @media (max-width:1000px){
