@@ -112,6 +112,15 @@ html.lenis body {
   font-feature-settings: 'liga' 1, 'dlig' 1;
 }
 
+/* Hide scrollbar (mobile product carousel) */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Eyebrow pill — microscopic tracked badge before big headings */
 .eyebrow {
   display: inline-flex;

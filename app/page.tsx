@@ -29,6 +29,9 @@ function FloatCutout({ src, className, rotate = 0 }: { src: string; className: s
 
 const FRAME_SHADOW = 'shadow-[0_50px_90px_-50px_rgba(120,70,25,0.45)]';
 
+const shopItems = products.filter((p) => !p.custom);
+const customItem = products.find((p) => p.custom);
+
 export default function Home() {
   return (
     <CartProvider>
@@ -112,11 +115,19 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="mt-24 grid grid-cols-1 gap-x-7 gap-y-24 sm:grid-cols-2 lg:grid-cols-3">
-              {products.map((p, i) => (
-                <ProductCard key={p.id} product={p} priority={i < 3} />
+            {/* mobile: swipeable row · sm+: grid */}
+            <div className="no-scrollbar -mx-6 mt-16 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-8 pt-2 sm:mx-0 sm:mt-24 sm:grid sm:grid-cols-2 sm:gap-x-7 sm:gap-y-24 sm:overflow-visible sm:px-0 sm:pb-0 sm:pt-0 lg:grid-cols-3">
+              {shopItems.map((p, i) => (
+                <div key={p.id} className="w-[78%] shrink-0 snap-center sm:w-auto sm:shrink-0">
+                  <ProductCard product={p} priority={i < 3} />
+                </div>
               ))}
             </div>
+            {customItem ? (
+              <div className="mt-10 sm:mt-16">
+                <ProductCard product={customItem} />
+              </div>
+            ) : null}
           </div>
         </section>
 
