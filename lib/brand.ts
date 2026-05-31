@@ -30,8 +30,8 @@ export const brand = {
   voice: 'Sessiz lüks: sakin, kendinden emin, gösterişsiz.',
   founded: 2026,
   taglines: {
-    primary: 'Made for home. Made to last.',
-    short: 'Made to last.',
+    primary: 'Doğada köklenir, elde yeniden doğar.',
+    short: 'Zamansız kalır.',
   },
   fonts: {
     display: 'Cormorant Garamond', // high-contrast serif — the SESELKA wordmark
@@ -73,25 +73,25 @@ export const products: Product[] = [
   {
     id: 'asili-sepet', name: 'Asılı Sepet', sub: 'Duvar · Sepet', price: 1480,
     image: '/assets/products/asili-sepet.webp', badge: 'Yeni',
-    desc: 'Elde örülmüş, kuru çiçekleriyle; duvarda ya da kapı arkasında zarif, sessiz bir köşe.',
-    meta: ['Ø ~28 cm', 'Doğal', 'El yapımı'],
+    desc: 'Kuru çiçek tasarımıyla birlikte; duvarda ya da kapı arkasında rafine ve sessiz bir köşe.',
+    meta: ['Ø ~28 cm', 'Doğal lif', 'El yapımı dekor'],
   },
   {
     id: 'yuvarlak-sepet', name: 'Yuvarlak Sepet', sub: 'Sepet · Tepsi', price: 1180,
     image: '/assets/products/yuvarlak-sepet.webp',
-    desc: 'Yuvarlak, sık örgülü hasır sepet. Ekmekten meyveye, masada gündelik bir güzellik.',
-    meta: ['Ø ~30 cm', 'Doğal ton', 'Stokta'],
+    desc: 'Sık örgülü ve dayanıklı form. Masada ekmekten meyveye, gündelik yaşamın içinde sanatsal bir detay.',
+    meta: ['Ø ~30 cm', 'Doğal ton', 'Siparişe özel'],
   },
   {
     id: 'horoz-sepet', name: 'Bayram Horozu', sub: 'Dekoratif · Bayram', price: 1680,
-    image: '/assets/products/horoz-sepet.webp', badge: 'Az sayıda',
-    desc: 'Horoz formunda örme sepet; bayrama özel, ikramlık şekerleriyle küçük bir sürpriz.',
-    meta: ['~25 cm', 'Doğal', 'Az sayıda'],
+    image: '/assets/products/horoz-sepet.webp', badge: 'Sınırlı sayıda',
+    desc: 'Geleneksel hasır teknikleriyle elde örülen horoz formlu sepet; ikramlarınıza eşlik eden sıcak bir karşılaşma.',
+    meta: ['~25 cm', 'Organik doku', 'Özel seri'],
   },
   {
     id: 'ozel', name: 'Özel Ölçü', sub: 'Ölçüye özel', price: null, custom: true,
     image: '/assets/wax-seal.webp',
-    desc: 'Aklınızdaki ölçü, kullanım ya da renk için bize yazın. Atölye sırasına alınır, üretim 4-6 hafta sürer.',
+    desc: 'Düşlediğiniz ölçü, form veya kullanım amacını bize ulaştırın. Kağıttan dallar atölyemizde tamamen sizin için şekillensin.',
     meta: ['Konuşalım', 'Ölçüye özel', '4-6 hafta'],
   },
 ];
@@ -104,27 +104,27 @@ export function formatPrice(value: number | null): string {
 
 export const contact = {
   email: 'atolye@seselka.com',
-  phone: '+90 232 000 00 00',
-  location: 'İzmir',
+  phone: '+90 212 000 00 00',
+  location: 'İstanbul',
 };
 
 export const heroMeta = [
-  { k: 'Malzeme', v: 'Geri dönüşen kâğıt' },
-  { k: 'Üretim', v: '10-14 gün' },
-  { k: 'Atölye', v: 'İzmir' },
+  { k: 'Malzeme', v: 'Geri dönüşen kağıt' },
+  { k: 'Üretim', v: 'Siparişe özel' },
+  { k: 'Atölye', v: 'İstanbul' },
 ];
 
 export type Step = { n: string; t: string; d: string };
 export const processSteps: Step[] = [
-  { n: '01', t: 'Geri dönüşüm', d: 'Toplanan kâğıtları yıkar, dinlendirir ve yeniden hammaddeye çeviririz. Kullanılan suyun büyük kısmı geri kazanılır.' },
-  { n: '02', t: 'Kordon', d: 'Kâğıt ince şeritlere kesilir, elde sıkıca bükülür; hasır gibi sağlam, doğal bir lif çıkar.' },
-  { n: '03', t: 'Örgü', d: 'Kordonlar bir kadın ustanın elinde formuna kavuşur. Bir sepet ortalama 34 saat sürer.' },
-  { n: '04', t: 'İmza', d: 'Her parça mum mührü, el yazısı bir not ve geri dönüşen ambalajla yolculuğuna başlar.' },
+  { n: '01', t: 'Toplama ve Dönüşüm', d: 'Şehrin atık kağıtları kimyasal işlemlere uğramadan, tamamen fiziksel yöntemlerle temizlenip ayıklanarak atölyemizin ham maddesine dönüşür.' },
+  { n: '02', t: 'Kordon ve Dal Formu', d: 'Temizlenen kağıtlar ince şeritler halinde kesilerek elde sıkıca bükülür. Ortaya hasır kadar dayanıklı, organik lif yapısında kağıt dallar çıkar.' },
+  { n: '03', t: 'Örgü ve Zanaat', d: 'Hazırlanan kordonlar bir kadın ustanın ellerinde biçim kazanır. Sabır ve sakinlikle yürütülen bu örgü sürecinde kağıt, yeni ve zamansız bir gövdeye kavuşur.' },
+  { n: '04', t: 'Özen ve İmza', d: 'Üretimi tamamlanan her parça, el yazısı özel bir not ve mum mührüyle taçlandırılarak sürdürülebilir el yapımı ambalajına girer.' },
 ];
 
 export type Stat = { big: string; unit: string; label: string; sub: string };
 export const stats: Stat[] = [
-  { big: '8.4', unit: 't', label: 'Geri dönüşen kâğıt', sub: '2025’te atölyede yeniden hayata kazandırılan kâğıt.' },
-  { big: '100', unit: '%', label: 'Doğal lif', sub: 'Hiçbir parçada plastik, sentetik reçine ya da yapay boya yok.' },
-  { big: '26', unit: '', label: 'Kadın usta', sub: 'Atölye ve evlerinde, kendi temposunda çalışan ekip.' },
+  { big: '8.4', unit: 't', label: 'Dönüşen kağıt', sub: 'Atölyede sanatsal tasarımlarla yeniden hayata kazandırılan kağıt miktarı.' },
+  { big: '100', unit: '%', label: 'Doğal içerik', sub: 'Üretimin hiçbir aşamasında plastik, sentetik reçine ya da yapay boya kullanılmaz.' },
+  { big: '26', unit: '', label: 'Kadın usta', sub: 'Atölyede ve evlerinde, kendi ritimleriyle üretime katılan zanaatkar kadınlar.' },
 ];

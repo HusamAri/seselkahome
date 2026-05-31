@@ -15,14 +15,14 @@ function BuyButton({ product, className = '' }: { product: Product; className?: 
   if (product.custom) {
     return (
       <a href="#siparis" className={`${base} ${className}`}>
-        Sipariş ver
+        Bize yazın
         <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
       </a>
     );
   }
   return (
     <button type="button" onClick={() => cart.add(product.name)} className={`${base} ${className}`}>
-      Sepete ekle
+      Sipariş listesine ekle
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
     </button>
   );
@@ -39,7 +39,7 @@ export function ProductCard({ product, priority = false }: Props) {
         <div className="flex-1">
           <span className="block text-[0.62rem] uppercase tracking-[0.2em] text-muted">{sub}</span>
           <h3 className="mt-1 font-display text-[1.9rem] leading-none text-fg">
-            Aklınızdaki parça <span className="italic text-accent">için</span>
+            Yaşam alanınıza <span className="italic text-accent">özel</span>
           </h3>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">{desc}</p>
         </div>

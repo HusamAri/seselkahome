@@ -22,7 +22,7 @@ export function OrderForm() {
     const piece = String(data.get('prc') || '');
     const note = String(data.get('msg') || '').trim();
 
-    const subject = `Seselka - Talep: ${piece}`;
+    const subject = `Seselka - Tasarım Talebi: ${piece}`;
     const body = [`Ad: ${name}`, `E-posta: ${email}`, `Parça: ${piece}`, `Not: ${note || '-'}`].join('\n');
     window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
@@ -47,7 +47,7 @@ export function OrderForm() {
       </div>
 
       <div>
-        <label className={label} htmlFor="prc">Parça</label>
+        <label className={label} htmlFor="prc">İlgilendiğiniz tasarım</label>
         <select className={field} id="prc" name="prc" defaultValue={PIECES[0]}>
           {PIECES.map((p) => (
             <option key={p}>{p}</option>
@@ -56,15 +56,15 @@ export function OrderForm() {
       </div>
 
       <div>
-        <label className={label} htmlFor="msg">Not</label>
-        <textarea className={`${field} min-h-28 resize-y`} id="msg" name="msg" placeholder="Renk, ölçü, kapı eşiğine bırakma notu..." />
+        <label className={label} htmlFor="msg">Notunuz</label>
+        <textarea className={`${field} min-h-28 resize-y`} id="msg" name="msg" placeholder="Düşlediğiniz renk, ölçü ya da yaşam alanınıza dair detaylar..." />
       </div>
 
       <button
         type="submit"
         className="inline-flex items-center gap-2 bg-accent-fill px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] text-on-accent transition-transform duration-500 ease-quiet hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
       >
-        {sent ? 'E-posta açılıyor' : 'Gönder'} <span aria-hidden="true">&rarr;</span>
+        {sent ? 'E-posta açılıyor' : 'Talebi İlet'} <span aria-hidden="true">&rarr;</span>
       </button>
     </form>
   );
