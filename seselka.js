@@ -14,19 +14,19 @@
     {
       id: 'asili-sepet', name: 'Asılı Sepet', sub: 'Duvar · Sepet', price: 1480,
       desc: 'Elde örülmüş, kuru çiçekleriyle; duvarda ya da kapı arkasında zarif bir köşe.',
-      img: 'assets/products/asili-sepet.png', meta: ['Ø ~28 cm', 'Doğal', 'El yapımı'],
+      img: 'assets/products/asili-sepet.webp', meta: ['Ø ~28 cm', 'Doğal', 'El yapımı'],
       badge: 'YENİ', featured: 1
     },
     {
       id: 'yuvarlak-sepet', name: 'Yuvarlak Sepet', sub: 'Sepet · Tepsi', price: 1180,
       desc: 'Yuvarlak, sık örgülü hasır sepet. Ekmekten meyveye, masada gündelik bir güzellik.',
-      img: 'assets/products/yuvarlak-sepet.png', meta: ['Ø ~30 cm', 'Doğal ton', 'Stokta'],
+      img: 'assets/products/yuvarlak-sepet.webp', meta: ['Ø ~30 cm', 'Doğal ton', 'Stokta'],
       badge: '', featured: 2
     },
     {
       id: 'horoz-sepet', name: 'Bayram Horozu', sub: 'Dekoratif · Bayram', price: 1680,
       desc: 'Horoz formunda örme sepet; bayrama özel, ikramlık şekerleriyle küçük bir sürpriz.',
-      img: 'assets/products/horoz-sepet.png', meta: ['~25 cm', 'Doğal', 'Az sayıda'],
+      img: 'assets/products/horoz-sepet.webp', meta: ['~25 cm', 'Doğal', 'Az sayıda'],
       badge: 'AZ', featured: 3
     },
     {
