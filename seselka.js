@@ -214,10 +214,16 @@
       });
     });
 
-    // mobile menu
+    // mobile menu (keep aria-expanded in sync; close links collapse it)
     var toggle = $('#navToggle');
     if (toggle) {
-      toggle.addEventListener('click', function () { navEl.classList.toggle('is-menu'); });
+      toggle.addEventListener('click', function () {
+        var open = navEl.classList.toggle('is-menu');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      $$('a', $('#navLinks')).forEach(function (a) {
+        a.addEventListener('click', function () { toggle.setAttribute('aria-expanded', 'false'); });
+      });
     }
   }
 
@@ -265,20 +271,32 @@
     try { seen = sessionStorage.getItem('seselka-bayram') === '1'; } catch (e) {}
     if (!preview && (!inWindow || seen)) return;
 
+    var panel = $('.popup__panel', el);
+    var closeBtn = $('.popup__close', el);
+    var lastFocus = null;
     var open = function () {
+      lastFocus = document.activeElement;
       el.classList.add('is-open');
       el.setAttribute('aria-hidden', 'false');
       document.documentElement.style.overflow = 'hidden';
+      if (closeBtn) closeBtn.focus();
     };
     var close = function () {
       el.classList.remove('is-open');
       el.setAttribute('aria-hidden', 'true');
       document.documentElement.style.overflow = '';
       try { sessionStorage.setItem('seselka-bayram', '1'); } catch (e) {}
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
     };
     $$('[data-close]', el).forEach(function (b) { b.addEventListener('click', close); });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && el.classList.contains('is-open')) close();
+      if (!el.classList.contains('is-open')) return;
+      if (e.key === 'Escape') { close(); return; }
+      // simple focus trap: keep Tab inside the panel
+      if (e.key === 'Tab' && panel && !panel.contains(e.target)) {
+        e.preventDefault();
+        if (closeBtn) closeBtn.focus();
+      }
     });
     setTimeout(open, preview ? 200 : 900);
   }
