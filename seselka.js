@@ -41,50 +41,59 @@
     return '₺ ' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   }
 
-  function metaHtml(meta) {
-    return meta.map(function (m) { return '<span>' + m + '</span>'; }).join('');
+  function metaLine(p) { return p.meta.join(' · '); }
+  function idxHtml(n, p) {
+    return '<span class="shop__no">' + n + (p.badge ? ' · ' + p.badge : '') + '</span>';
   }
-
-  function card(p) {
-    if (p.custom) {
-      return '' +
-        '<article class="card card--custom" data-id="' + p.id + '">' +
-          '<div class="card__body">' +
-            '<span class="eyebrow">' + p.sub + '</span>' +
-            '<h4 class="h3">Aklınızdaki parça <span class="mark">için</span></h4>' +
-            '<p class="card__desc">' + p.desc + '</p>' +
-            '<div class="card__foot">' + metaHtml(p.meta) + '</div>' +
-            '<a class="card__add" href="#siparis" data-jump="' + p.name + '">Sipariş ver</a>' +
-          '</div>' +
-        '</article>';
-    }
-    return '' +
-      '<article class="card" data-id="' + p.id + '">' +
-        '<div class="card__cut">' +
-          (p.badge ? '<span class="card__badge' + (p.badge === 'YENİ' ? ' is-new' : '') + '">' + p.badge + '</span>' : '') +
-          '<img src="' + p.img + '" alt="' + p.name + '" loading="lazy">' +
-        '</div>' +
-        '<div class="card__body">' +
-          '<div class="card__row">' +
-            '<span class="card__price">' + fmtPrice(p.price) + '</span>' +
-            '<span class="card__size">' + (p.meta[0] || '') + '</span>' +
-          '</div>' +
-          '<span class="card__name"><span class="sub">' + p.sub + '</span>' + p.name + '</span>' +
-          '<p class="card__desc">' + p.desc + '</p>' +
-          '<button class="card__add" type="button" data-add="' + p.id + '">Sepete ekle</button>' +
-        '</div>' +
-      '</article>';
+  function buyHtml(p) {
+    return '<div class="shop__buy">' +
+      (p.price != null ? '<span class="shop__price">' + fmtPrice(p.price) + '</span>' : '') +
+      '<button class="shop__add" type="button" data-add="' + p.id + '">Sepete ekle <span class="arr"></span></button>' +
+    '</div>';
   }
-
+  function featureHtml(p, n) {
+    return '<article class="shop__feature reveal" data-id="' + p.id + '">' +
+      '<div class="shop__feature-img"><img src="' + p.img + '" alt="' + p.name + '" loading="lazy"></div>' +
+      '<div class="shop__feature-txt">' + idxHtml(n, p) +
+        '<h3 class="shop__name shop__name--lg">' + p.name + '</h3>' +
+        '<p class="shop__desc">' + p.desc + '</p>' + buyHtml(p) +
+        '<span class="shop__meta">' + metaLine(p) + '</span>' +
+      '</div>' +
+    '</article>';
+  }
+  function itemHtml(p, n, late) {
+    return '<article class="shop__item reveal' + (late ? ' d1' : '') + '" data-id="' + p.id + '">' +
+      '<div class="shop__item-img"><img src="' + p.img + '" alt="' + p.name + '" loading="lazy"></div>' +
+      idxHtml(n, p) +
+      '<h4 class="shop__name">' + p.name + '</h4>' +
+      '<p class="shop__desc">' + p.desc + '</p>' + buyHtml(p) +
+      '<span class="shop__meta">' + metaLine(p) + '</span>' +
+    '</article>';
+  }
+  function customHtml(p, n) {
+    return '<article class="shop__custom reveal" data-id="' + p.id + '">' +
+      '<img class="shop__custom-mark" src="assets/wax-seal.webp" alt="" loading="lazy">' +
+      '<div class="shop__custom-txt">' + idxHtml(n, p) +
+        '<h3 class="shop__name">Aklınızdaki parça <span class="mark">için</span></h3>' +
+        '<p class="shop__desc">' + p.desc + '</p>' +
+        '<a class="shop__add" href="#siparis" data-jump="' + p.name + '">Sipariş ver <span class="arr"></span></a>' +
+      '</div>' +
+    '</article>';
+  }
   function renderProducts() {
     var grid = $('#grid');
     if (!grid) return;
-    grid.innerHTML = products.map(card).join('');
-    var cards = $$('.card', grid);
-    cards.forEach(function (c, i) {
-      if (reduce) { c.classList.add('is-in'); return; }
-      setTimeout(function () { c.classList.add('is-in'); }, 80 * i + 60);
-    });
+    var normal = products.filter(function (p) { return !p.custom; });
+    var custom = products.filter(function (p) { return p.custom; })[0];
+    var html = featureHtml(normal[0], '01');
+    if (normal.length > 1) {
+      html += '<div class="shop__row">';
+      for (var i = 1; i < normal.length; i++) { html += itemHtml(normal[i], '0' + (i + 1), i > 1); }
+      html += '</div>';
+    }
+    if (custom) { html += customHtml(custom, '0' + (normal.length + 1)); }
+    grid.innerHTML = html;
+    if (reduce) { $$('.reveal', grid).forEach(function (el) { el.classList.add('is-in'); }); }
 
     grid.addEventListener('click', function (e) {
       var add = e.target.closest('[data-add]');
