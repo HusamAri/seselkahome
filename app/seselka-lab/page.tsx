@@ -3,6 +3,7 @@ import { ParallaxImage } from '@/components/motion/ParallaxImage';
 import { RevealImage } from '@/components/motion/RevealImage';
 import { RevealText } from '@/components/motion/RevealText';
 import { ProductCard } from '@/components/ProductCard';
+import { CartProvider } from '@/components/shop/CartProvider';
 import { brand, products } from '@/lib/brand';
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ const DISPLAY = 'font-display font-medium';
 
 export default function SeselkaLab() {
   return (
+    <CartProvider>
     <main className="bg-bg text-fg">
       {/* ---------------------------------------------------- README / dev notes */}
       <ReadmeBlock />
@@ -88,19 +90,9 @@ export default function SeselkaLab() {
             </p>
           </div>
 
-          <div className="mt-14 grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
             {products.map((p, i) => (
-              <ProductCard
-                key={p.id}
-                name={p.name}
-                sub={p.sub}
-                price={p.price}
-                image={p.image}
-                badge={p.badge}
-                href={`#${p.id}`}
-                priority={i < 3}
-                cta={p.price == null ? 'Sipariş ver' : 'Sepete ekle'}
-              />
+              <ProductCard key={p.id} product={p} priority={i < 2} />
             ))}
           </div>
         </div>
@@ -178,6 +170,7 @@ export default function SeselkaLab() {
         </div>
       </footer>
     </main>
+    </CartProvider>
   );
 }
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useLenis } from '@/components/providers/SmoothScrollProvider';
+import { useCart } from '@/components/shop/CartProvider';
 
 const LINKS = [
   { href: '#koleksiyon', label: 'Koleksiyon' },
@@ -15,6 +16,7 @@ const EASE = 'cubic-bezier(0.32,0.72,0,1)';
  * menu opens as a full overlay with a staggered reveal. Motion stays calm. */
 export function SiteNav() {
   const lenis = useLenis();
+  const cart = useCart();
   const [tight, setTight] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -75,6 +77,22 @@ export function SiteNav() {
           </ul>
 
           <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={cart.open}
+              aria-label={`Sepet (${cart.count} parça)`}
+              className="relative flex h-9 w-9 items-center justify-center rounded-full border border-line text-fg transition-colors duration-300 hover:bg-surface"
+            >
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M5 7h14l-1.3 11.1a2 2 0 0 1-2 1.9H8.3a2 2 0 0 1-2-1.9L5 7Z" />
+                <path d="M9 7V5a3 3 0 0 1 6 0v2" />
+              </svg>
+              {cart.count > 0 ? (
+                <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-accent-fill px-1 text-[0.58rem] font-semibold text-on-accent">
+                  {cart.count}
+                </span>
+              ) : null}
+            </button>
             <a
               href="#siparis"
               onClick={go('#siparis')}

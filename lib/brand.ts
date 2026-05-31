@@ -62,13 +62,44 @@ export type Product = {
   price: number | null;
   image: string;
   badge?: string;
+  desc?: string;
+  meta?: string[];
+  /** Made-to-order piece: routes to the order form instead of the cart. */
+  custom?: boolean;
 };
 
-/** Curated collection — clean single-product studio shots, Sessiz Cesaret copy. */
+/** Shop catalog — real product photography, Sessiz Cesaret copy. */
 export const products: Product[] = [
-  { id: 'asili-sepet', name: 'Asılı Sepet', sub: 'Duvar · Sepet', price: 1480, image: '/assets/products/asili-sepet.webp', badge: 'Yeni' },
-  { id: 'yuvarlak-sepet', name: 'Yuvarlak Sepet', sub: 'Sepet · Tepsi', price: 1180, image: '/assets/products/yuvarlak-sepet.webp' },
-  { id: 'horoz-sepet', name: 'Bayram Horozu', sub: 'Dekoratif · Bayram', price: 1680, image: '/assets/products/horoz-sepet.webp', badge: 'Az sayıda' },
+  {
+    id: 'asili-sepet', name: 'Asılı Sepet', sub: 'Duvar · Sepet', price: 1480,
+    image: '/assets/products/asili-sepet.webp', badge: 'Yeni',
+    desc: 'Elde örülmüş, kuru çiçekleriyle; duvarda ya da kapı arkasında zarif, sessiz bir köşe.',
+    meta: ['Ø ~28 cm', 'Doğal', 'El yapımı'],
+  },
+  {
+    id: 'yuvarlak-sepet', name: 'Yuvarlak Sepet', sub: 'Sepet · Tepsi', price: 1180,
+    image: '/assets/products/yuvarlak-sepet.webp',
+    desc: 'Yuvarlak, sık örgülü hasır sepet. Ekmekten meyveye, masada gündelik bir güzellik.',
+    meta: ['Ø ~30 cm', 'Doğal ton', 'Stokta'],
+  },
+  {
+    id: 'horoz-sepet', name: 'Bayram Horozu', sub: 'Dekoratif · Bayram', price: 1680,
+    image: '/assets/products/horoz-sepet.webp', badge: 'Az sayıda',
+    desc: 'Horoz formunda örme sepet; bayrama özel, ikramlık şekerleriyle küçük bir sürpriz.',
+    meta: ['~25 cm', 'Doğal', 'Az sayıda'],
+  },
+  {
+    id: 'hasir-sepet', name: 'Hasır Sepet', sub: 'Yatak odası · Banyo', price: 1240,
+    image: '/assets/photo-basket.webp',
+    desc: 'Keten örtüsüyle; yatak odası köşesinde ya da banyoda sıcak, doğal bir dokunuş.',
+    meta: ['~24 cm', 'Hasır', 'Stokta'],
+  },
+  {
+    id: 'ozel', name: 'Özel Ölçü', sub: 'Ölçüye özel', price: null, custom: true,
+    image: '/assets/wax-seal.webp',
+    desc: 'Aklınızdaki ölçü, kullanım ya da renk için bize yazın. Atölye sırasına alınır, üretim 4-6 hafta sürer.',
+    meta: ['Konuşalım', 'Ölçüye özel', '4-6 hafta'],
+  },
 ];
 
 /** Currency formatter — Turkish locale, calm typographic price. */

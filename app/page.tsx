@@ -2,32 +2,31 @@ import { ParallaxImage } from '@/components/motion/ParallaxImage';
 import { RevealImage } from '@/components/motion/RevealImage';
 import { RevealText } from '@/components/motion/RevealText';
 import { ProductCard } from '@/components/ProductCard';
+import { CartProvider } from '@/components/shop/CartProvider';
 import { OrderForm } from '@/components/site/OrderForm';
 import { ProcessSteps } from '@/components/site/ProcessSteps';
 import { SiteFooter } from '@/components/site/SiteFooter';
 import { SiteNav } from '@/components/site/SiteNav';
-import { brand, formatPrice, heroMeta, products, stats } from '@/lib/brand';
+import { brand, heroMeta, products, stats } from '@/lib/brand';
 
-const H2 = 'font-display font-medium text-[clamp(2.75rem,7vw,6rem)] leading-[0.9]';
-const featured = products[0];
-const rest = products.slice(1);
+const H2 = 'font-display font-medium text-[clamp(2.5rem,6.5vw,5.5rem)] leading-[0.92]';
 
 export default function Home() {
   return (
-    <>
+    <CartProvider>
       <SiteNav />
 
       <main id="top" className="bg-bg text-fg">
-        {/* ---------------------------------------------------- HERO (editorial split) */}
+        {/* ---------------------------------------------------- HERO (compact, shop-leading) */}
         <section className="relative overflow-hidden">
-          <div className="mx-auto grid min-h-[100dvh] max-w-wrap items-center gap-10 px-6 pb-16 pt-28 md:grid-cols-[1.04fr_0.96fr] md:gap-14 md:pb-0 md:pt-24">
+          <div className="mx-auto grid max-w-wrap items-center gap-10 px-6 pb-16 pt-32 md:min-h-[88vh] md:grid-cols-[1.04fr_0.96fr] md:gap-14 md:pb-12 md:pt-28">
             <div className="relative z-10">
               <span className="eyebrow">Sessiz Cesaret · {brand.founded}</span>
               <RevealText
                 as="h1"
                 text={['Eve ait,', 'elde örülü.']}
                 className="mt-6 text-fg"
-                lineClassName="font-display font-medium text-[clamp(2.75rem,7.5vw,7rem)] leading-[0.86]"
+                lineClassName="font-display font-medium text-[clamp(2.75rem,7vw,6.5rem)] leading-[0.86]"
               />
               <p className="mt-7 max-w-md text-base leading-relaxed text-fg/70 sm:text-lg">
                 Geri dönüştürülen kâğıt, bir kadın ustanın elinde örülerek gündelik yaşam için zamansız objelere dönüşür.
@@ -35,10 +34,10 @@ export default function Home() {
 
               <div className="mt-9 flex flex-wrap items-center gap-3">
                 <a
-                  href="#koleksiyon"
+                  href="#urunler"
                   className="group inline-flex items-center gap-2.5 rounded-full bg-accent-fill py-2 pl-6 pr-2 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-on-accent transition-transform duration-500 ease-quiet hover:-translate-y-0.5 active:scale-[0.98]"
                 >
-                  Koleksiyon
+                  Koleksiyona git
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-on-accent/15 transition-transform duration-500 ease-quiet group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
                   </span>
@@ -73,72 +72,28 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ---------------------------------------------------- TAGLINE STRIP */}
-        <div className="border-y border-line bg-surface/40">
-          <div className="mx-auto flex max-w-wrap items-center justify-center gap-5 px-6 py-5 text-[0.66rem] uppercase tracking-[0.28em] text-muted">
-            <span>Doğal</span>
-            <span className="text-accent" aria-hidden="true">◆</span>
-            <span>Sessiz</span>
-            <span className="text-accent" aria-hidden="true">◆</span>
-            <span>Zamansız</span>
-          </div>
-        </div>
-
-        {/* ---------------------------------------------------- COLLECTION */}
-        <section id="koleksiyon" className="scroll-mt-28">
-          <div className="mx-auto max-w-wrap px-6 py-28 md:py-40">
+        {/* ---------------------------------------------------- SHOP */}
+        <section id="urunler" className="scroll-mt-28 border-t border-line">
+          <div className="mx-auto max-w-wrap px-6 py-24 md:py-32">
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <div>
                 <span className="eyebrow">Koleksiyon</span>
-                <RevealText as="h2" text={['Atölyeden,', 'eve.']} className="mt-5 text-fg" lineClassName={H2} />
+                <RevealText as="h2" text={['Atölyeden, eve.']} className="mt-5 text-fg" lineClassName={H2} />
               </div>
               <p className="max-w-xs text-sm leading-relaxed text-muted">
-                Şu anda hazır parçalar. Her biri elde örülür; üretim siparişle başlar.
+                Elde örülmüş, hazır parçalar. Sepete ekleyin; üretim siparişle başlar, 10-14 günde kapınızda.
               </p>
             </div>
 
-            {/* featured piece — editorial split */}
-            <div className="mt-16 grid items-center gap-10 md:grid-cols-2 md:gap-16">
-              <div className="rounded-[1.8rem] border border-line bg-surface/30 p-2">
-                <RevealImage
-                  src={featured.image}
-                  alt={featured.name}
-                  sizes="(min-width:768px) 50vw, 90vw"
-                  className="aspect-[4/5] w-full rounded-[1.35rem]"
-                />
-              </div>
-              <div>
-                <span className="text-[0.66rem] uppercase tracking-[0.2em] text-muted">{featured.sub}</span>
-                <RevealText as="h3" text={featured.name} className="mt-2 text-fg" lineClassName="font-display text-[clamp(2.25rem,5vw,3.75rem)] leading-[0.95]" />
-                <p className="mt-5 max-w-md text-base leading-relaxed text-fg/75">
-                  Elde örülmüş, kuru çiçekleriyle; duvarda ya da kapı arkasında zarif, sessiz bir köşe.
-                </p>
-                <div className="mt-7 flex items-center gap-6">
-                  <span className="font-display text-2xl text-fg">{formatPrice(featured.price)}</span>
-                  <a href="#siparis" className="group inline-flex items-center gap-2.5 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-fg">
-                    Sipariş ver
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full border border-line transition-transform duration-500 ease-quiet group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
-                    </span>
-                  </a>
-                </div>
-              </div>
+            {/* lead piece */}
+            <div className="mt-14">
+              <ProductCard product={products[0]} featured priority />
             </div>
 
-            {/* the rest — double-bezel grid */}
-            <div className="mt-24 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2">
-              {rest.map((p, i) => (
-                <ProductCard
-                  key={p.id}
-                  name={p.name}
-                  sub={p.sub}
-                  price={p.price}
-                  image={p.image}
-                  badge={p.badge}
-                  href="#siparis"
-                  priority={i < 2}
-                  cta={p.price == null ? 'Sipariş ver' : 'İncele'}
-                />
+            {/* catalog */}
+            <div className="mt-20 grid grid-cols-1 gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+              {products.slice(1).map((p) => (
+                <ProductCard key={p.id} product={p} />
               ))}
             </div>
           </div>
@@ -146,10 +101,10 @@ export default function Home() {
 
         {/* ---------------------------------------------------- STORY */}
         <section id="hikaye" className="scroll-mt-28 bg-surface">
-          <div className="mx-auto grid max-w-wrap items-center gap-12 px-6 py-28 md:grid-cols-[1fr_1.05fr] md:gap-20 md:py-40">
+          <div className="mx-auto grid max-w-wrap items-center gap-12 px-6 py-24 md:grid-cols-[1fr_1.05fr] md:gap-20 md:py-32">
             <div className="order-2 md:order-1">
               <span className="eyebrow">Hikâye · 01</span>
-              <RevealText as="h2" text={['Doğadan ilhamla,', 'kadın emeğiyle.']} className="mt-5 text-fg" lineClassName="font-display font-medium text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[0.95]" />
+              <RevealText as="h2" text={['Doğadan ilhamla,', 'kadın emeğiyle.']} className="mt-5 text-fg" lineClassName="font-display font-medium text-[clamp(2.25rem,5vw,4rem)] leading-[0.95]" />
               <RevealText
                 as="p"
                 text={[
@@ -181,10 +136,10 @@ export default function Home() {
 
         {/* ---------------------------------------------------- PROCESS */}
         <section id="surec" className="scroll-mt-28">
-          <div className="mx-auto max-w-wrap px-6 py-28 md:py-40">
+          <div className="mx-auto max-w-wrap px-6 py-24 md:py-32">
             <div className="max-w-2xl">
               <span className="eyebrow">Süreç · 02</span>
-              <RevealText as="h2" text={['Bir kâğıt, dört nefes,', 'bir parça.']} className="mt-5 text-fg" lineClassName={H2} />
+              <RevealText as="h2" text={['Bir kâğıt, dört nefes,', 'bir parça.']} className="mt-5 text-fg" lineClassName="font-display font-medium text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[0.95]" />
               <p className="mt-6 text-base leading-relaxed text-muted">
                 Her parça aynı dört aşamadan geçer: toplanır, kordon edilir, örülür ve mum mührüyle imzalanır.
               </p>
@@ -193,13 +148,13 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ---------------------------------------------------- STATS (dark band) */}
+        {/* ---------------------------------------------------- STATS */}
         <section className="bg-ink text-linen">
-          <div className="mx-auto max-w-wrap px-6 py-24 md:py-32">
+          <div className="mx-auto max-w-wrap px-6 py-24 md:py-28">
             <p className="max-w-xl font-display text-[clamp(1.6rem,3.4vw,2.6rem)] leading-tight text-linen">
               Doğadan aldığını, doğanın hızında geri ver.
             </p>
-            <div className="mt-16 grid gap-12 sm:grid-cols-3">
+            <div className="mt-14 grid gap-12 sm:grid-cols-3">
               {stats.map((s) => (
                 <div key={s.label} className="border-t border-linen/20 pt-6">
                   <span className="font-display text-[clamp(3.5rem,7vw,5.5rem)] leading-none text-linen">
@@ -216,11 +171,11 @@ export default function Home() {
 
         {/* ---------------------------------------------------- ORDER */}
         <section id="siparis" className="scroll-mt-28 bg-surface">
-          <div className="mx-auto grid max-w-wrap items-center gap-12 px-6 py-28 md:grid-cols-[1fr_1.1fr] md:gap-16 md:py-40">
+          <div className="mx-auto grid max-w-wrap items-center gap-12 px-6 py-24 md:grid-cols-[1fr_1.1fr] md:gap-16 md:py-32">
             <div className="rounded-[1.8rem] border border-line bg-bg/40 p-2">
               <RevealImage
-                src="/assets/photo-basket.webp"
-                alt="Örme sepetler, keten örtü ve Seselka etiketi"
+                src="/assets/photo-detail.webp"
+                alt="Seselka hediye seti: kutu, mum mühürlü zarf ve kese"
                 sizes="(min-width:768px) 45vw, 90vw"
                 className="aspect-[4/5] w-full rounded-[1.35rem]"
               />
@@ -241,6 +196,6 @@ export default function Home() {
       </main>
 
       <SiteFooter />
-    </>
+    </CartProvider>
   );
 }
