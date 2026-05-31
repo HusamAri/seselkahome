@@ -32,16 +32,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const add = useCallback(
     (name: string) => {
       setCount((c) => c + 1);
-      showToast(`${name} sepete eklendi`);
+      showToast(`${name} listeye eklendi`);
     },
     [showToast],
   );
 
   const open = useCallback(() => {
     setCount((c) => {
-      if (c === 0) showToast('Sepetiniz henüz boş');
+      if (c === 0) showToast('Listeniz henüz boş');
       else {
-        showToast(`${c} parça · siparişe geçin`);
+        showToast(`${c} parça · Siparişi Detaylandırın`);
         document.getElementById('siparis')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
       return c;

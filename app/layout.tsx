@@ -22,16 +22,17 @@ const body = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://seselka.com'),
-  title: 'Seselka Home · Sessiz Cesaret',
+  title: 'Seselka Home | El Yapımı Kağıt Hasır Tasarım Ev Objeleri',
   description:
-    'Geri dönüşen kâğıttan, bir kadın ustanın elinde örülen zamansız ev objeleri. Sessiz lüks: doğal, sessiz, zamansız.',
+    'Geri dönüştürülmüş kağıtların kadın emeğiyle zamansız dekorasyon nesnelerine dönüşme hikayesi. Sürdürülebilir, el yapımı hasır sepet ve dekoratif objeler.',
   icons: {
     icon: `${BASE_PATH}/assets/favicon-48.png`,
     apple: `${BASE_PATH}/assets/apple-touch-icon.png`,
   },
   openGraph: {
-    title: 'Seselka Home · Sessiz Cesaret',
-    description: 'Made for home. Made to last.',
+    title: 'Seselka Home | El Yapımı Kağıt Hasır Tasarım Ev Objeleri',
+    description:
+      'Geri dönüştürülmüş kağıtların kadın emeğiyle zamansız dekorasyon nesnelerine dönüşme hikayesi. Sürdürülebilir, el yapımı hasır sepet ve dekoratif objeler.',
     locale: 'tr_TR',
     type: 'website',
   },

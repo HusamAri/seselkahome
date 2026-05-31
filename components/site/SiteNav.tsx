@@ -6,7 +6,7 @@ import { useCart } from '@/components/shop/CartProvider';
 
 const LINKS = [
   { href: '#koleksiyon', label: 'Koleksiyon' },
-  { href: '#hikaye', label: 'Hikâye' },
+  { href: '#hikaye', label: 'Hikaye' },
   { href: '#surec', label: 'Süreç' },
 ];
 
@@ -80,7 +80,7 @@ export function SiteNav() {
             <button
               type="button"
               onClick={cart.open}
-              aria-label={`Sepet (${cart.count} parça)`}
+              aria-label={`Sipariş listesi (${cart.count} parça)`}
               className="relative flex h-9 w-9 items-center justify-center rounded-full border border-line text-fg transition-colors duration-300 hover:bg-surface"
             >
               <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

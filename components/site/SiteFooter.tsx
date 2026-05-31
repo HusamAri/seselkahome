@@ -1,8 +1,8 @@
 import { brand, contact } from '@/lib/brand';
 
 const COLS = [
-  { h: 'Atölye', items: [{ t: 'Hikâye', href: '#hikaye' }, { t: 'Süreç', href: '#surec' }, { t: 'Koleksiyon', href: '#koleksiyon' }] },
-  { h: 'Koleksiyon', items: [{ t: 'Asılı sepet', href: '#koleksiyon' }, { t: 'Yuvarlak sepet', href: '#koleksiyon' }, { t: 'Özel ölçü', href: '#siparis' }] },
+  { h: 'Atölye', items: [{ t: 'Hikaye', href: '#hikaye' }, { t: 'Süreç', href: '#surec' }, { t: 'Koleksiyon', href: '#koleksiyon' }] },
+  { h: 'Koleksiyon', items: [{ t: 'Asılı Sepet', href: '#koleksiyon' }, { t: 'Yuvarlak Sepet', href: '#koleksiyon' }, { t: 'Özel Ölçü', href: '#siparis' }] },
 ];
 
 export function SiteFooter() {
@@ -16,7 +16,7 @@ export function SiteFooter() {
               <span className="text-lg uppercase tracking-[0.3em] text-muted">Home</span>
             </a>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
-              Rooted in nature.<br />Reimagined by hand.<br />Made to last.
+              Doğada köklenir.<br />Elde yeniden doğar.<br />Zamansız kalır.
             </p>
           </div>
 
