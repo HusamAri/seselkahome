@@ -1,11 +1,29 @@
 {
   "version": 1,
   "skills": {
+    "agent-harness-construction": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "skillPath": "skills/agent-harness-construction/SKILL.md",
+      "computedHash": "5601e5ab105717b62a249aa6875482d1865433dfd89e2d7fe25166df950e13ec"
+    },
     "emil-design-eng": {
       "source": "emilkowalski/skill",
       "sourceType": "github",
       "skillPath": "skills/emil-design-eng/SKILL.md",
       "computedHash": "8bdf9e4e6de7a4969147bf4828a4ad2c5aacd9fba4b690b250a85e0467ca387d"
+    },
+    "eval-harness": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "skillPath": "skills/eval-harness/SKILL.md",
+      "computedHash": "74550bf0080223fa5547c4da45279660df907f726fa8247de85ca75733c7fe79"
+    },
+    "harness-writing": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/testing-handbook-skills/skills/harness-writing/SKILL.md",
+      "computedHash": "5ae4711d431c4ec5031a74c87f91f5d4c525cce43bbda2865cccd1001e6aa738"
     }
   }
 }
