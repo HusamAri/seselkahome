@@ -9,8 +9,6 @@ import { SiteFooter } from '@/components/site/SiteFooter';
 import { SiteNav } from '@/components/site/SiteNav';
 import { brand, heroMeta, products, stats } from '@/lib/brand';
 
-const H2 = 'font-display font-medium text-[clamp(2.5rem,6.5vw,5.5rem)] leading-[0.92]';
-
 export default function Home() {
   return (
     <CartProvider>
@@ -73,27 +71,28 @@ export default function Home() {
         </section>
 
         {/* ---------------------------------------------------- SHOP */}
-        <section id="urunler" className="scroll-mt-28 border-t border-line">
-          <div className="mx-auto max-w-wrap px-6 py-24 md:py-32">
+        <section id="urunler" className="relative scroll-mt-28 overflow-hidden border-t border-line">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-44 h-[520px] w-[860px] max-w-[120vw] -translate-x-1/2 rounded-full"
+            style={{ background: 'radial-gradient(circle, rgba(var(--glow), 0.45), transparent 64%)' }}
+          />
+          <div className="relative mx-auto max-w-wrap px-6 py-24 md:py-32">
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <div>
                 <span className="eyebrow">Koleksiyon</span>
-                <RevealText as="h2" text={['Atölyeden, eve.']} className="mt-5 text-fg" lineClassName={H2} />
+                <h2 className="mt-5 font-display font-medium text-[clamp(2.5rem,6.5vw,5.5rem)] leading-[0.92] text-fg">
+                  Atölyeden, <span className="italic text-accent">eve</span>
+                </h2>
               </div>
               <p className="max-w-xs text-sm leading-relaxed text-muted">
                 Elde örülmüş, hazır parçalar. Sepete ekleyin; üretim siparişle başlar, 10-14 günde kapınızda.
               </p>
             </div>
 
-            {/* lead piece */}
-            <div className="mt-14">
-              <ProductCard product={products[0]} featured priority />
-            </div>
-
-            {/* catalog */}
-            <div className="mt-20 grid grid-cols-1 gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-              {products.slice(1).map((p) => (
-                <ProductCard key={p.id} product={p} />
+            <div className="mt-24 grid grid-cols-1 gap-x-7 gap-y-24 sm:grid-cols-2 lg:grid-cols-3">
+              {products.map((p, i) => (
+                <ProductCard key={p.id} product={p} priority={i < 3} />
               ))}
             </div>
           </div>
@@ -174,8 +173,8 @@ export default function Home() {
           <div className="mx-auto grid max-w-wrap items-center gap-12 px-6 py-24 md:grid-cols-[1fr_1.1fr] md:gap-16 md:py-32">
             <div className="rounded-[1.8rem] border border-line bg-bg/40 p-2">
               <RevealImage
-                src="/assets/photo-detail.webp"
-                alt="Seselka hediye seti: kutu, mum mühürlü zarf ve kese"
+                src="/assets/photo-basket.webp"
+                alt="Örme sepetler, keten örtü ve Seselka etiketi"
                 sizes="(min-width:768px) 45vw, 90vw"
                 className="aspect-[4/5] w-full rounded-[1.35rem]"
               />

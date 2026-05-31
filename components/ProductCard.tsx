@@ -5,162 +5,89 @@ import { withBase } from '@/lib/basePath';
 import { formatPrice, type Product } from '@/lib/brand';
 import { useCart } from '@/components/shop/CartProvider';
 
-type Props = {
-  product: Product;
-  /** Large editorial split layout (the lead piece). */
-  featured?: boolean;
-  priority?: boolean;
-};
+type Props = { product: Product; priority?: boolean };
 
-function PlusIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true">
-      <path d="M12 5v14M5 12h14" />
-    </svg>
-  );
-}
-function ArrowIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M7 17 17 7M9 7h8v8" />
-    </svg>
-  );
-}
-
-/** Add-to-cart (or "Sipariş ver" for made-to-order) — button-in-button. */
-function BuyButton({ product }: { product: Product }) {
+/** Dark, full-width add-to-cart (or "Sipariş ver" for made-to-order). */
+function BuyButton({ product, className = '' }: { product: Product; className?: string }) {
   const cart = useCart();
+  const base =
+    'flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-bg bg-fg transition-all duration-500 ease-quiet hover:bg-ink active:scale-[0.99]';
   if (product.custom) {
     return (
-      <a
-        href="#siparis"
-        className="group/btn flex w-full items-center justify-between rounded-full border border-line py-2 pl-5 pr-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-fg transition-colors duration-500 ease-quiet hover:border-accent/40 hover:bg-bg"
-      >
+      <a href="#siparis" className={`${base} ${className}`}>
         Sipariş ver
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-fill text-on-accent transition-transform duration-500 ease-quiet group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5">
-          <ArrowIcon />
-        </span>
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
       </a>
     );
   }
   return (
-    <button
-      type="button"
-      onClick={() => cart.add(product.name)}
-      className="group/btn flex w-full items-center justify-between rounded-full border border-line py-2 pl-5 pr-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-fg transition-colors duration-500 ease-quiet hover:border-accent/40 hover:bg-surface active:scale-[0.99]"
-    >
+    <button type="button" onClick={() => cart.add(product.name)} className={`${base} ${className}`}>
       Sepete ekle
-      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-fill text-on-accent transition-transform duration-500 ease-quiet group-hover/btn:rotate-90">
-        <PlusIcon />
-      </span>
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
     </button>
   );
 }
 
-function Price({ product }: { product: Product }) {
-  return <span className="shrink-0 font-display text-xl text-fg sm:text-2xl">{formatPrice(product.price)}</span>;
-}
+export function ProductCard({ product, priority = false }: Props) {
+  const { name, image, sub, badge, desc, price, meta } = product;
 
-function MetaLine({ product }: { product: Product }) {
-  if (!product.meta?.length) return null;
-  return <span className="mt-3 block text-[0.62rem] uppercase tracking-[0.18em] text-muted">{product.meta.join(' · ')}</span>;
-}
-
-export function ProductCard({ product, featured = false, priority = false }: Props) {
-  const { name, image, sub, badge, desc } = product;
-
-  // Made-to-order card: wax seal, no photo, routes to the form.
+  // Made-to-order — wide card with the wax seal, routes to the form.
   if (product.custom) {
     return (
-      <article className="flex flex-col justify-between rounded-[1.6rem] border border-line bg-surface/40 p-7">
-        <div>
-          <Image src={withBase(image)} alt="" width={48} height={48} className="h-12 w-12 object-contain opacity-80" />
-          <span className="mt-5 block text-[0.62rem] uppercase tracking-[0.2em] text-muted">{sub}</span>
-          <h3 className="mt-1 font-display text-[1.7rem] leading-none text-fg">
-            Aklınızdaki parça <span className="text-accent">için</span>
+      <article className="flex flex-col items-start gap-6 rounded-[1.7rem] bg-card p-7 shadow-[0_30px_60px_-38px_rgba(120,70,25,0.45)] sm:col-span-2 sm:flex-row sm:items-center lg:col-span-3">
+        <Image src={withBase(image)} alt="" width={72} height={72} className="h-16 w-16 shrink-0 object-contain opacity-90" />
+        <div className="flex-1">
+          <span className="block text-[0.62rem] uppercase tracking-[0.2em] text-muted">{sub}</span>
+          <h3 className="mt-1 font-display text-[1.9rem] leading-none text-fg">
+            Aklınızdaki parça <span className="italic text-accent">için</span>
           </h3>
-          <p className="mt-3 text-sm leading-relaxed text-muted">{desc}</p>
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">{desc}</p>
         </div>
-        <div className="mt-6">
+        <div className="w-full sm:w-52">
           <BuyButton product={product} />
         </div>
       </article>
     );
   }
 
-  if (featured) {
-    return (
-      <article className="group grid items-center gap-8 md:grid-cols-2 md:gap-14">
-        <div className="rounded-[2rem] border border-line bg-surface/30 p-2.5">
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[1.6rem] bg-surface">
-            <Image
-              src={withBase(image)}
-              alt={name}
-              fill
-              sizes="(min-width:768px) 50vw, 90vw"
-              priority={priority}
-              className="object-cover transition-transform duration-[900ms] ease-quiet group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
-            />
-            {badge ? (
-              <span className="absolute left-3 top-3 rounded-full border border-line bg-bg/80 px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-fg backdrop-blur-sm">
-                {badge}
-              </span>
-            ) : null}
-          </div>
-        </div>
-        <div>
-          <span className="text-[0.66rem] uppercase tracking-[0.2em] text-muted">{sub}</span>
-          <h3 className="mt-1.5 font-display text-[clamp(2.25rem,5vw,3.5rem)] leading-[0.95] text-fg">
-            {name}
-            <span className="text-accent">.</span>
-          </h3>
-          {desc ? <p className="mt-5 max-w-md text-base leading-relaxed text-fg/75">{desc}</p> : null}
-          <MetaLine product={product} />
-          <div className="mt-7 flex items-center gap-6">
-            <Price product={product} />
-            <div className="w-44"><BuyButton product={product} /></div>
-          </div>
-        </div>
-      </article>
-    );
-  }
-
-  // Standard shop card.
+  // Standard cutout card — product floats above a warm-white card.
   return (
-    <article className="group flex flex-col">
-      <div className="rounded-[1.4rem] border border-line bg-surface/30 p-2 transition-colors duration-500 ease-quiet group-hover:border-accent/30">
-        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[1rem] bg-surface">
+    <article className="group relative flex flex-col">
+      {badge ? (
+        <span className="absolute left-4 top-3 z-20 rounded-full bg-accent-fill px-3 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-on-accent">
+          {badge}
+        </span>
+      ) : null}
+
+      <div className="relative z-10 -mb-16 flex h-52 items-end justify-center px-8">
+        <div className="relative h-full w-full">
           <Image
             src={withBase(image)}
             alt={name}
             fill
-            sizes="(min-width:1024px) 24vw, (min-width:640px) 45vw, 90vw"
             priority={priority}
-            className="object-cover transition-transform duration-[900ms] ease-quiet group-hover:scale-[1.05] motion-reduce:group-hover:scale-100"
+            sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 90vw"
+            className="object-contain object-bottom drop-shadow-[0_22px_28px_rgba(120,70,25,0.3)] transition-transform duration-700 ease-quiet group-hover:-translate-y-2 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0"
           />
-          {badge ? (
-            <span className="absolute left-3 top-3 rounded-full border border-line bg-bg/80 px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-fg backdrop-blur-sm">
-              {badge}
-            </span>
+        </div>
+      </div>
+
+      <div className="rounded-[1.7rem] bg-card px-6 pb-6 pt-20 shadow-[0_34px_64px_-36px_rgba(120,70,25,0.5)]">
+        <div className="flex items-start justify-between gap-3">
+          <span className="font-display text-[1.9rem] leading-none text-fg">{formatPrice(price)}</span>
+          {meta?.[0] ? (
+            <span className="shrink-0 rounded-full border border-line px-3 py-1 text-[0.62rem] uppercase tracking-[0.1em] text-muted">{meta[0]}</span>
           ) : null}
         </div>
-      </div>
-
-      <div className="mt-4 flex items-baseline justify-between gap-3 px-1">
-        <div className="min-w-0">
-          {sub ? <span className="block truncate text-[0.62rem] uppercase tracking-[0.18em] text-muted">{sub}</span> : null}
-          <h3 className="mt-0.5 font-display text-2xl leading-none text-fg">
-            {name}
-            <span className="text-accent">.</span>
-          </h3>
+        <span className="mt-4 block text-[0.62rem] uppercase tracking-[0.2em] text-muted">{sub}</span>
+        <h3 className="mt-1 font-display text-2xl leading-none text-fg">
+          {name}
+          <span className="text-accent">.</span>
+        </h3>
+        {desc ? <p className="mt-2 text-sm leading-relaxed text-muted">{desc}</p> : null}
+        <div className="mt-6">
+          <BuyButton product={product} />
         </div>
-        <Price product={product} />
-      </div>
-
-      {desc ? <p className="mt-2 px-1 text-sm leading-relaxed text-muted">{desc}</p> : null}
-
-      <div className="mt-4 px-1">
-        <BuyButton product={product} />
       </div>
     </article>
   );

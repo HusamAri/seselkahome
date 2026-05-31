@@ -89,12 +89,6 @@ export const products: Product[] = [
     meta: ['~25 cm', 'Doğal', 'Az sayıda'],
   },
   {
-    id: 'hasir-sepet', name: 'Hasır Sepet', sub: 'Yatak odası · Banyo', price: 1240,
-    image: '/assets/photo-basket.webp',
-    desc: 'Keten örtüsüyle; yatak odası köşesinde ya da banyoda sıcak, doğal bir dokunuş.',
-    meta: ['~24 cm', 'Hasır', 'Stokta'],
-  },
-  {
     id: 'ozel', name: 'Özel Ölçü', sub: 'Ölçüye özel', price: null, custom: true,
     image: '/assets/wax-seal.webp',
     desc: 'Aklınızdaki ölçü, kullanım ya da renk için bize yazın. Atölye sırasına alınır, üretim 4-6 hafta sürer.',

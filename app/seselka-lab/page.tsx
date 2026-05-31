@@ -90,7 +90,7 @@ export default function SeselkaLab() {
             </p>
           </div>
 
-          <div className="mt-14 grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-20 grid grid-cols-1 gap-x-6 gap-y-24 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((p, i) => (
               <ProductCard key={p.id} product={p} priority={i < 2} />
             ))}
