@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import type { ElementType } from 'react';
+import { useReveal } from './useReveal';
 import { usePrefersReducedMotion } from './usePrefersReducedMotion';
 
 type Props = {
@@ -20,17 +21,18 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 /**
  * Line-based masked reveal. Each line sits in an overflow-hidden mask and
- * slides up into view with a slow stagger. Reduced motion renders statically.
- * Pass line breaks via "\n" or an array — the caller controls the lines.
+ * slides up into view with a slow stagger, triggered by a real
+ * IntersectionObserver. Reduced motion renders statically.
  */
 export function RevealText({ text, as = 'h2', className = '', lineClassName = '', delay = 0 }: Props) {
   const reduced = usePrefersReducedMotion();
+  const { ref, inView } = useReveal<HTMLElement>();
   const lines = Array.isArray(text) ? text : String(text).split('\n');
   const Tag = as as ElementType;
 
   if (reduced) {
     return (
-      <Tag className={className}>
+      <Tag ref={ref as never} className={className}>
         {lines.map((line, i) => (
           <span key={i} className={`block ${lineClassName}`}>
             {line}
@@ -41,14 +43,13 @@ export function RevealText({ text, as = 'h2', className = '', lineClassName = ''
   }
 
   return (
-    <Tag className={className} aria-label={lines.join(' ')}>
+    <Tag ref={ref as never} className={className} aria-label={lines.join(' ')}>
       {lines.map((line, i) => (
-        <span key={i} className="block overflow-hidden" aria-hidden="true">
+        <span key={i} className="block overflow-hidden pb-[0.05em]" aria-hidden="true">
           <motion.span
             className={`block will-change-transform ${lineClassName}`}
             initial={{ y: '115%' }}
-            whileInView={{ y: '0%' }}
-            viewport={{ once: true, margin: '0px 0px -12% 0px' }}
+            animate={{ y: inView ? '0%' : '115%' }}
             transition={{ duration: 0.8, ease: EASE, delay: delay + i * 0.09 }}
           >
             {line}

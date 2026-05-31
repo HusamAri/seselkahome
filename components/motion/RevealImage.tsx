@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { withBase } from '@/lib/basePath';
+import { useReveal } from './useReveal';
 import { usePrefersReducedMotion } from './usePrefersReducedMotion';
 
 type Props = {
@@ -17,20 +18,20 @@ type Props = {
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 /**
- * Slow scale + fade image reveal (scale 1.04 -> 1) on viewport enter.
- * The wrapper clips the scale so there is no layout shift.
- * Reduced motion renders the image statically.
+ * Slow scale + fade image reveal (scale 1.04 -> 1) triggered on viewport enter.
+ * The wrapper clips the scale so there is no layout shift. Reduced motion
+ * renders statically.
  */
 export function RevealImage({ src, alt, priority = false, className = '', sizes = '100vw' }: Props) {
   const reduced = usePrefersReducedMotion();
+  const { ref, inView } = useReveal<HTMLDivElement>();
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div ref={ref} className={`relative overflow-hidden ${className}`}>
       <motion.div
         className="relative h-full w-full will-change-transform"
         initial={reduced ? false : { opacity: 0, scale: 1.04 }}
-        whileInView={reduced ? undefined : { opacity: 1, scale: 1 }}
-        viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+        animate={reduced ? undefined : { opacity: inView ? 1 : 0, scale: inView ? 1 : 1.04 }}
         transition={{ duration: 1.1, ease: EASE }}
       >
         <Image src={withBase(src)} alt={alt} fill priority={priority} sizes={sizes} className="object-cover" />
