@@ -64,14 +64,11 @@ export type Product = {
   badge?: string;
 };
 
-/** Sample collection — real Seselka product photography, Sessiz Cesaret copy. */
+/** Curated collection — clean single-product studio shots, Sessiz Cesaret copy. */
 export const products: Product[] = [
   { id: 'asili-sepet', name: 'Asılı Sepet', sub: 'Duvar · Sepet', price: 1480, image: '/assets/products/asili-sepet.webp', badge: 'Yeni' },
   { id: 'yuvarlak-sepet', name: 'Yuvarlak Sepet', sub: 'Sepet · Tepsi', price: 1180, image: '/assets/products/yuvarlak-sepet.webp' },
-  { id: 'horoz-sepet', name: 'Bayram Horozu', sub: 'Dekoratif', price: 1680, image: '/assets/products/horoz-sepet.webp', badge: 'Az sayıda' },
-  { id: 'orgu-detay', name: 'El Örgüsü Hediye Seti', sub: 'Kutu · Mum mührü', price: 1980, image: '/assets/photo-detail.webp', badge: 'Hediye' },
-  { id: 'hasir-sepet', name: 'Hasır Sepet', sub: 'Yatak odası köşesi', price: 1240, image: '/assets/photo-basket.webp' },
-  { id: 'ozel', name: 'Özel Ölçü', sub: 'Ölçüye özel · 4-6 hafta', price: null, image: '/assets/photo-packaging.webp' },
+  { id: 'horoz-sepet', name: 'Bayram Horozu', sub: 'Dekoratif · Bayram', price: 1680, image: '/assets/products/horoz-sepet.webp', badge: 'Az sayıda' },
 ];
 
 /** Currency formatter — Turkish locale, calm typographic price. */
@@ -79,3 +76,30 @@ export function formatPrice(value: number | null): string {
   if (value == null) return 'Konuşalım';
   return '₺ ' + value.toLocaleString('tr-TR');
 }
+
+export const contact = {
+  email: 'atolye@seselka.com',
+  phone: '+90 232 000 00 00',
+  location: 'İzmir',
+};
+
+export const heroMeta = [
+  { k: 'Malzeme', v: 'Geri dönüşen kâğıt' },
+  { k: 'Üretim', v: '10-14 gün' },
+  { k: 'Atölye', v: 'İzmir' },
+];
+
+export type Step = { n: string; t: string; d: string };
+export const processSteps: Step[] = [
+  { n: '01', t: 'Geri dönüşüm', d: 'Toplanan kâğıtları yıkar, dinlendirir ve yeniden hammaddeye çeviririz. Kullanılan suyun büyük kısmı geri kazanılır.' },
+  { n: '02', t: 'Kordon', d: 'Kâğıt ince şeritlere kesilir, elde sıkıca bükülür; hasır gibi sağlam, doğal bir lif çıkar.' },
+  { n: '03', t: 'Örgü', d: 'Kordonlar bir kadın ustanın elinde formuna kavuşur. Bir sepet ortalama 34 saat sürer.' },
+  { n: '04', t: 'İmza', d: 'Her parça mum mührü, el yazısı bir not ve geri dönüşen ambalajla yolculuğuna başlar.' },
+];
+
+export type Stat = { big: string; unit: string; label: string; sub: string };
+export const stats: Stat[] = [
+  { big: '8.4', unit: 't', label: 'Geri dönüşen kâğıt', sub: '2025’te atölyede yeniden hayata kazandırılan kâğıt.' },
+  { big: '100', unit: '%', label: 'Doğal lif', sub: 'Hiçbir parçada plastik, sentetik reçine ya da yapay boya yok.' },
+  { big: '26', unit: '', label: 'Kadın usta', sub: 'Atölye ve evlerinde, kendi temposunda çalışan ekip.' },
+];
