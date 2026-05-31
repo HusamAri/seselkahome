@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ParallaxImage } from '@/components/motion/ParallaxImage';
 import { RevealImage } from '@/components/motion/RevealImage';
 import { RevealText } from '@/components/motion/RevealText';
@@ -7,9 +8,29 @@ import { OrderForm } from '@/components/site/OrderForm';
 import { ProcessSteps } from '@/components/site/ProcessSteps';
 import { SiteFooter } from '@/components/site/SiteFooter';
 import { SiteNav } from '@/components/site/SiteNav';
+import { withBase } from '@/lib/basePath';
 import { brand, heroMeta, products, stats } from '@/lib/brand';
 
-const H2 = 'font-display font-medium text-[clamp(2.5rem,6.5vw,5.5rem)] leading-[0.92]';
+/** Decorative cutout that overflows/overlaps its neighbour (layered depth, md+). */
+function FloatCutout({ src, className, rotate = 0 }: { src: string; className: string; rotate?: number }) {
+  return (
+    <div className={`pointer-events-none absolute z-20 hidden md:block ${className}`} aria-hidden="true">
+      <Image
+        src={withBase(src)}
+        alt=""
+        fill
+        sizes="240px"
+        className="object-contain drop-shadow-[0_28px_36px_rgba(120,70,25,0.42)]"
+        style={{ transform: `rotate(${rotate}deg)` }}
+      />
+    </div>
+  );
+}
+
+const FRAME_SHADOW = 'shadow-[0_50px_90px_-50px_rgba(120,70,25,0.45)]';
+
+const shopItems = products.filter((p) => !p.custom);
+const customItem = products.find((p) => p.custom);
 
 export default function Home() {
   return (
@@ -58,7 +79,7 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <div className="rounded-[2rem] border border-line bg-surface/30 p-2.5">
+              <div className={`rounded-[2rem] border border-line bg-surface/30 p-2.5 ${FRAME_SHADOW}`}>
                 <RevealImage
                   src="/assets/photo-detail.webp"
                   alt="Seselka hediye seti: kraft kutu, mum mührü ve örme kese"
@@ -67,35 +88,46 @@ export default function Home() {
                   className="aspect-[4/5] w-full rounded-[1.6rem]"
                 />
               </div>
+              {/* cutout overflowing the frame — layered depth */}
+              <FloatCutout src="/assets/products/yuvarlak-sepet.webp" rotate={-7} className="-bottom-10 -left-12 h-40 w-40 lg:h-48 lg:w-48" />
               <span className="absolute -left-3 top-10 hidden h-2.5 w-2.5 rounded-full bg-accent md:block" aria-hidden="true" />
             </div>
           </div>
         </section>
 
         {/* ---------------------------------------------------- SHOP */}
-        <section id="urunler" className="scroll-mt-28 border-t border-line">
-          <div className="mx-auto max-w-wrap px-6 py-24 md:py-32">
+        <section id="urunler" className="relative scroll-mt-28 overflow-hidden border-t border-line">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-44 h-[520px] w-[860px] max-w-[120vw] -translate-x-1/2 rounded-full"
+            style={{ background: 'radial-gradient(circle, rgba(var(--glow), 0.45), transparent 64%)' }}
+          />
+          <div className="relative mx-auto max-w-wrap px-6 py-24 md:py-32">
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <div>
                 <span className="eyebrow">Koleksiyon</span>
-                <RevealText as="h2" text={['Atölyeden, eve.']} className="mt-5 text-fg" lineClassName={H2} />
+                <h2 className="mt-5 font-display font-medium text-[clamp(2.5rem,6.5vw,5.5rem)] leading-[0.92] text-fg">
+                  Atölyeden, <span className="italic text-accent">eve</span>
+                </h2>
               </div>
               <p className="max-w-xs text-sm leading-relaxed text-muted">
                 Elde örülmüş, hazır parçalar. Sepete ekleyin; üretim siparişle başlar, 10-14 günde kapınızda.
               </p>
             </div>
 
-            {/* lead piece */}
-            <div className="mt-14">
-              <ProductCard product={products[0]} featured priority />
-            </div>
-
-            {/* catalog */}
-            <div className="mt-20 grid grid-cols-1 gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-              {products.slice(1).map((p) => (
-                <ProductCard key={p.id} product={p} />
+            {/* mobile: swipeable row · sm+: grid */}
+            <div className="no-scrollbar -mx-6 mt-16 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-8 pt-2 sm:mx-0 sm:mt-24 sm:grid sm:grid-cols-2 sm:gap-x-7 sm:gap-y-24 sm:overflow-visible sm:px-0 sm:pb-0 sm:pt-0 lg:grid-cols-3">
+              {shopItems.map((p, i) => (
+                <div key={p.id} className="w-[78%] shrink-0 snap-center sm:w-auto sm:shrink-0">
+                  <ProductCard product={p} priority={i < 3} />
+                </div>
               ))}
             </div>
+            {customItem ? (
+              <div className="mt-10 sm:mt-16">
+                <ProductCard product={customItem} />
+              </div>
+            ) : null}
           </div>
         </section>
 
@@ -122,14 +154,18 @@ export default function Home() {
               <p className="mt-9 font-display text-xl italic text-accent">Rooted in nature · Reimagined by hand</p>
             </div>
 
-            <div className="order-1 rounded-[1.8rem] border border-line bg-bg/40 p-2 md:order-2">
-              <ParallaxImage
-                src="/assets/photo-packaging.webp"
-                alt="Seselka ambalajı: kraft kutu, kuşak, mum mührü ve örme sepet"
-                strength={0.14}
-                sizes="(min-width:768px) 50vw, 90vw"
-                className="aspect-[4/5] w-full rounded-[1.35rem]"
-              />
+            <div className="relative order-1 md:order-2">
+              <div className={`rounded-[1.8rem] border border-line bg-bg/40 p-2 ${FRAME_SHADOW}`}>
+                <ParallaxImage
+                  src="/assets/photo-packaging.webp"
+                  alt="Seselka ambalajı: kraft kutu, kuşak, mum mührü ve örme sepet"
+                  strength={0.14}
+                  sizes="(min-width:768px) 50vw, 90vw"
+                  className="aspect-[4/5] w-full rounded-[1.35rem]"
+                />
+              </div>
+              {/* wax seal overflowing the frame */}
+              <FloatCutout src="/assets/wax-seal.webp" rotate={-10} className="-left-9 -top-9 h-24 w-24" />
             </div>
           </div>
         </section>
@@ -149,8 +185,10 @@ export default function Home() {
         </section>
 
         {/* ---------------------------------------------------- STATS */}
-        <section className="bg-ink text-linen">
-          <div className="mx-auto max-w-wrap px-6 py-24 md:py-28">
+        <section className="relative bg-ink text-linen">
+          {/* a piece crests over the top edge of the dark band */}
+          <FloatCutout src="/assets/products/asili-sepet.webp" rotate={5} className="-top-28 right-[7%] h-56 w-44 lg:right-[10%]" />
+          <div className="relative mx-auto max-w-wrap px-6 py-24 md:py-28">
             <p className="max-w-xl font-display text-[clamp(1.6rem,3.4vw,2.6rem)] leading-tight text-linen">
               Doğadan aldığını, doğanın hızında geri ver.
             </p>
@@ -172,10 +210,10 @@ export default function Home() {
         {/* ---------------------------------------------------- ORDER */}
         <section id="siparis" className="scroll-mt-28 bg-surface">
           <div className="mx-auto grid max-w-wrap items-center gap-12 px-6 py-24 md:grid-cols-[1fr_1.1fr] md:gap-16 md:py-32">
-            <div className="rounded-[1.8rem] border border-line bg-bg/40 p-2">
+            <div className={`rounded-[1.8rem] border border-line bg-bg/40 p-2 ${FRAME_SHADOW}`}>
               <RevealImage
-                src="/assets/photo-detail.webp"
-                alt="Seselka hediye seti: kutu, mum mühürlü zarf ve kese"
+                src="/assets/photo-basket.webp"
+                alt="Örme sepetler, keten örtü ve Seselka etiketi"
                 sizes="(min-width:768px) 45vw, 90vw"
                 className="aspect-[4/5] w-full rounded-[1.35rem]"
               />

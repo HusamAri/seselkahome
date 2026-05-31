@@ -27,6 +27,7 @@ const config: Config = {
         'accent-fill': 'var(--accent-fill)',
         'on-accent': 'var(--on-accent)',
         plum: 'var(--plum)',
+        card: 'var(--card)',
       },
       fontFamily: {
         display: ['var(--font-display)', 'Cormorant Garamond', 'Georgia', 'serif'],

@@ -30,6 +30,8 @@
   --on-accent: #f4efe6;     /* linen on ember — ~5:1 */
   --plum: #6e4a5a;          /* fig — founder accent, sparing */
   --wipe: #6e4a5a;          /* fig plum — signature page-transition wipe */
+  --card: #fcfaf4;          /* warm white — floating product cards */
+  --glow: 232, 168, 124;    /* warm peach glow (rgb) */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -47,6 +49,8 @@
     --plum: #a3768585;      /* lightened fig for dark accents */
     --plum: #a37685;
     --wipe: #6e4a5a;
+    --card: #322c25;          /* elevated warm dark — cards on dark */
+    --glow: 168, 54, 43;      /* deep ember glow on dark */
   }
 }
 
@@ -106,6 +110,15 @@ html.lenis body {
 /* Editorial type rendering */
 .font-display {
   font-feature-settings: 'liga' 1, 'dlig' 1;
+}
+
+/* Hide scrollbar (mobile product carousel) */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 /* Eyebrow pill — microscopic tracked badge before big headings */
