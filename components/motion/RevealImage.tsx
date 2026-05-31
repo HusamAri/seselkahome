@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { withBase } from '@/lib/basePath';
 import { usePrefersReducedMotion } from './usePrefersReducedMotion';
 
 type Props = {
@@ -32,7 +33,7 @@ export function RevealImage({ src, alt, priority = false, className = '', sizes 
         viewport={{ once: true, margin: '0px 0px -10% 0px' }}
         transition={{ duration: 1.1, ease: EASE }}
       >
-        <Image src={src} alt={alt} fill priority={priority} sizes={sizes} className="object-cover" />
+        <Image src={withBase(src)} alt={alt} fill priority={priority} sizes={sizes} className="object-cover" />
       </motion.div>
     </div>
   );

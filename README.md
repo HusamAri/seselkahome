@@ -1,93 +1,68 @@
 # Seselka Home
 
-[![NodeJS with Webpack](https://github.com/HusamAri/seselkahome/actions/workflows/webpack.yml/badge.svg)](https://github.com/HusamAri/seselkahome/actions/workflows/webpack.yml)
+Brand storefront for **Seselka Home** — handwoven baskets made from recycled
+paper, crafted by women artisans. Positioning: **Sessiz Cesaret** (quiet
+courage) / *sessiz lüks*. *Rooted in nature · Reimagined by hand.*
 
-Brand site for **Seselka Home** — handwoven baskets made from recycled paper,
-crafted by women artisans. *Rooted in nature · Reimagined by hand.*
+A **Next.js 14 (App Router) + TypeScript + Tailwind** site with a calm,
+deliberate motion system (Framer Motion + Lenis). It builds to a **static
+export** and deploys to **GitHub Pages** at
+`https://husamari.github.io/seselkahome/`.
 
-A zero-framework **static site** (HTML + CSS) whose JavaScript is bundled with
-webpack. No server, no database — it can be served from any static host.
+> The previous vanilla HTML/CSS/JS site is archived under [`/legacy`](legacy/).
 
 ## Tech stack
 
-- **HTML / CSS** — hand-authored, no UI framework.
-- **Vanilla JS** (`app.js`) — navigation, cart/toast, the CSS "Süreç" weaving
-  process, scroll reveals, and the date-gated Bayram popup.
-- **React** — a small floating **Tweaks** panel (design/motion controls),
-  compiled from JSX.
-- **webpack + Babel** — bundle `app.js` and the React panel into a single
-  `dist/bundle.js`. React/ReactDOM are compiled in (no CDN runtime).
+- **Next.js 14** App Router, static export (`output: 'export'`).
+- **TypeScript** + **Tailwind CSS** (brand tokens wired in `tailwind.config.ts`).
+- **Framer Motion** for transform/opacity-only motion; **Lenis** smooth scroll.
+- All motion respects `prefers-reduced-motion`; light/dark locked via
+  `prefers-color-scheme`.
+
+## Brand tokens
+
+Single source of truth, pulled from the *SESELKA HOME — Adaptive Logo System*
+board: [`lib/brand.ts`](lib/brand.ts) + [`app/globals.css`](app/globals.css),
+documented in [`BRAND.md`](BRAND.md). Six Turkish-named colors (LOOM, CLAY, INK,
+LINEN, EMBER, FIG PLUM), the ember-dot signature, and the type pairing.
 
 ## Project structure
 
 ```
 seselkahome/
-├── index.html                    # the whole page (loads dist/bundle.js)
-├── styles.css                    # layout + component styles
-├── colors_and_type.css           # design tokens (color, type scale)
-├── app.js                        # vanilla site interactions  ┐ bundled
-├── tweaks-panel.jsx              # reusable React Tweaks controls │  into
-├── tweaks-app.jsx                # mounts the Tweaks panel        ┘ dist/bundle.js
-├── webpack.config.js             # build config
-├── package.json
-├── dist/bundle.js                # built bundle (committed; served by the page)
-├── assets/                       # images (hero, products, logo, seal…)
-└── .github/workflows/webpack.yml # CI: `npm install && npx webpack` on Node 18/20/22
+├── app/
+│   ├── layout.tsx                # fonts, metadata, SmoothScrollProvider
+│   ├── template.tsx              # PageTransition (replays per route)
+│   ├── globals.css               # tokens + dual-mode + reduced-motion
+│   ├── page.tsx                  # homepage (renders the lab view)
+│   └── seselka-lab/page.tsx      # demo composition + README block
+├── components/
+│   ├── motion/                   # RevealText, RevealImage, ParallaxImage, PageTransition
+│   ├── providers/                # SmoothScrollProvider (Lenis)
+│   └── ProductCard.tsx
+├── lib/
+│   ├── brand.ts                  # brand tokens + sample products
+│   └── basePath.ts               # /seselkahome prefix helpers
+├── public/assets/                # images (hero, products, logo, seal…)
+├── legacy/                       # archived vanilla site
+└── .github/workflows/            # ci.yml (PR build) + deploy-pages.yml
 ```
 
 ## Getting started
 
-The built bundle is committed, so viewing the site needs no build step:
-
-```bash
-python3 -m http.server 8000
-# open http://localhost:8000
-```
-
-To work on the JavaScript:
-
 ```bash
 npm install
-npm run build     # one-off production bundle → dist/bundle.js
-npm run watch     # rebuild on change (development mode)
+npm run dev      # http://localhost:3000
+npm run build    # static export -> ./out
 ```
 
-> After editing `app.js`, `tweaks-panel.jsx`, or `tweaks-app.jsx`, **rebuild**
-> (`npm run build`) and commit the updated `dist/bundle.js` — the page serves
-> the bundle, not the source files.
+> In dev the basePath is disabled (served at `/`). The production build applies
+> the `/seselkahome` basePath for GitHub Pages.
 
-## Features
+## Continuous integration & deployment
 
-- **Sections:** fixed nav + cart, hero, tagline marquee, *Hikâye* story,
-  *Süreç* (3D CSS weaving process), stats band, product list with cart + toast,
-  *Mutlu Ev* gallery, *Sipariş* form, footer.
-- **Instagram embeds** inside the *Hikâye*, *Süreç*, and *Ürünler* sections
-  (official `embed.js`; posts must be public to render).
-- **Tweaks panel** — motion / density / accent controls. Hidden on a normal
-  load; it only appears when a design host activates edit mode.
-
-### Bayram popup
-
-A dismissible holiday popup that shows **only within a date window**, once per
-browser session. Configure the window in `app.js` (`bayramPopup()`):
-
-```js
-const START = '2026-05-27';   // inclusive (YYYY-MM-DD, local time)
-const END   = '2026-05-29';   // inclusive
-```
-
-Append `?bayram=preview` to the URL to force it open for testing, regardless of
-the date.
-
-## Continuous integration
-
-`.github/workflows/webpack.yml` runs `npm install && npx webpack` on Node 18,
-20, and 22 for every push/PR to the development branch, verifying the bundle
-builds.
-
-## Deployment
-
-The site is fully static and uses relative paths, so it works from any static
-host (GitHub Pages, Vercel, Netlify, Cloudflare Pages, …) including under a
-subpath. Two client-side resources load from CDNs at runtime: Google Fonts and
-Instagram's `embed.js`.
+- **CI** — `.github/workflows/ci.yml` runs `npm ci` + `next build` on Node 20/22
+  for every PR to `main`.
+- **Deploy** — `.github/workflows/deploy-pages.yml` builds the static export and
+  publishes `./out` to GitHub Pages on every push to `main`
+  (Pages source: GitHub Actions).

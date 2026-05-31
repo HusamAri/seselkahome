@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { useRef } from 'react';
+import { withBase } from '@/lib/basePath';
 import { usePrefersReducedMotion } from './usePrefersReducedMotion';
 
 type Props = {
@@ -39,7 +40,7 @@ export function ParallaxImage({
     <div ref={ref} className={`relative overflow-hidden ${className}`}>
       <motion.div className="absolute inset-0 will-change-transform" style={reduced ? undefined : { y }}>
         <div className="absolute -top-[14%] h-[128%] w-full">
-          <Image src={src} alt={alt} fill priority={priority} sizes={sizes} className="object-cover" />
+          <Image src={withBase(src)} alt={alt} fill priority={priority} sizes={sizes} className="object-cover" />
         </div>
       </motion.div>
     </div>
