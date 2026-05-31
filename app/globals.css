@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   SESELKA HOME — design tokens
+   Light is the brand's native mode. Dark is a locked brand
+   override (prefers-color-scheme), not an auto-inverted guess.
+   Contrast checked against WCAG AA in both modes.
+   ============================================================ */
+:root {
+  color-scheme: light;
+
+  /* raw brand palette — fixed, never flips */
+  --loom: #e4d9c4;
+  --clay: #b89476;
+  --ink: #2a2520;
+  --ember: #a8362b;
+  --linen: #f4efe6;
+  --fig: #6e4a5a;
+
+  /* semantic tokens — light mode */
+  --bg: #f4efe6;            /* linen — nefes */
+  --surface: #e4d9c4;       /* loom — arka plan */
+  --fg: #2a2520;            /* ink — ~13:1 on bg */
+  --muted: #6e6052;         /* readable warm gray — ~5.6:1 on bg */
+  --line: rgba(42, 37, 32, 0.14);
+  --accent: #a8362b;        /* ember — ~5:1 on bg */
+  --accent-fill: #a8362b;
+  --on-accent: #f4efe6;     /* linen on ember — ~5:1 */
+  --plum: #6e4a5a;          /* fig — founder accent, sparing */
+  --wipe: #6e4a5a;          /* fig plum — signature page-transition wipe */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --bg: #221e1a;          /* deep ink-brown */
+    --surface: #2a2520;     /* ink */
+    --fg: #f4efe6;          /* linen — ~12:1 on bg */
+    --muted: #b89476;       /* clay reads well on dark — ~4.6:1 */
+    --line: rgba(244, 239, 230, 0.16);
+    --accent: #d8897b;      /* lightened ember — ~5.2:1 on bg */
+    --accent-fill: #a8362b; /* ember fill keeps brand red, linen text on top */
+    --on-accent: #f4efe6;
+    --plum: #a3768585;      /* lightened fig for dark accents */
+    --plum: #a37685;
+    --wipe: #6e4a5a;
+  }
+}
+
+html,
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+body {
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Lenis smooth scroll — recommended baseline */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ============================================================
+   Reduced motion — disable transforms, show content statically.
+   Components also gate individually; this is the safety net.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Small shared primitives */
+.eyebrow {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+}
