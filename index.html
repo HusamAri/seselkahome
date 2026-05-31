@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light only">
+<script>document.documentElement.className='js';</script>
 <meta name="description" content="Seselka Home: geri dönüşen kâğıttan, bir kadın ustanın elinde örülen zamansız ev objeleri. Doğal, sessiz, zamansız.">
 <title>Seselka Home · Doğal, Sessiz, Zamansız</title>
 <link rel="canonical" href="https://husamari.github.io/seselkahome/">
@@ -14,12 +15,19 @@
 <meta property="og:title" content="Seselka Home · Doğal, Sessiz, Zamansız">
 <meta property="og:description" content="Geri dönüşen kâğıttan, bir kadın ustanın elinde örülen zamansız ev objeleri.">
 <meta property="og:image" content="https://husamari.github.io/seselkahome/assets/hero-hikaye.webp">
+<meta property="og:image:width" content="1254">
+<meta property="og:image:height" content="1254">
+<meta name="twitter:image" content="https://husamari.github.io/seselkahome/assets/hero-hikaye.webp">
 <meta property="og:locale" content="tr_TR">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="seselka.css?v=12">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Seselka Home","url":"https://husamari.github.io/seselkahome/","logo":"https://husamari.github.io/seselkahome/assets/apple-touch-icon.png","description":"Geri dönüşen kâğıttan, bir kadın ustanın elinde örülen zamansız ev objeleri.","email":"atolye@seselka.com","slogan":"Doğal, Sessiz, Zamansız","areaServed":"TR"}
+</script>
+<link rel="stylesheet" href="seselka.css?v=13">
 <link rel="preload" as="image" href="assets/photo-packaging.webp">
 </head>
 <body>
+<a class="skip" href="#top">İçeriğe geç</a>
 
 <!-- floating warm orbs (decorative, perf-safe fixed layer) -->
 <div class="bg" aria-hidden="true">
@@ -34,7 +42,7 @@
     <img class="brand__mark" src="assets/monogram.webp" alt="" width="24" height="24">
     <b>seselka</b><span class="pip"></span><span class="sub">Home</span>
   </a>
-  <ul class="nav__links">
+  <ul class="nav__links" id="navLinks">
     <li><a href="#hikaye"  data-nav>Hikâye</a></li>
     <li><a href="#surec"   data-nav>Süreç</a></li>
     <li><a href="#urunler" data-nav>Ürünler</a></li>
@@ -42,14 +50,14 @@
     <li><a href="#siparis" data-nav>Sipariş</a></li>
   </ul>
   <div class="nav__right">
-    <button class="nav__cart" id="cartBtn" aria-label="Sepet">
+    <button class="nav__cart" id="cartBtn" type="button" aria-label="Sepet">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M5 7h14l-1.4 11.2a2 2 0 0 1-2 1.8H8.4a2 2 0 0 1-2-1.8L5 7Z"/>
         <path d="M9 7V5a3 3 0 0 1 6 0v2"/>
       </svg>
-      <span class="nav__cart-count" id="cartCount">0</span>
+      <span class="nav__cart-count" id="cartCount" aria-hidden="true">0</span>
     </button>
-    <button class="nav__toggle" id="navToggle" aria-label="Menü">
+    <button class="nav__toggle" id="navToggle" type="button" aria-label="Menü" aria-controls="navLinks" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
         <path d="M4 7h16M4 12h16M4 17h16"/>
       </svg>
@@ -197,7 +205,7 @@
     </div>
     <form class="order__form reveal d1" onsubmit="event.preventDefault(); window.__seselka.submitOrder(this);">
       <span class="s-no">05</span>
-      <h3 class="h2">Siparişe başlayın</h3>
+      <h2 class="h2">Siparişe başlayın</h2>
       <p>Üretim, siparişin onayından sonra başlar. Ev ölçülerinize özel boyut da yapılabilir; aşağıya yazmanız yeterli.</p>
       <div class="order__two">
         <div class="field">
@@ -292,6 +300,6 @@
 <!-- Toast -->
 <div class="toast" id="toast" role="status" aria-live="polite"><b>Seselka</b> · <span id="toastName">Sepet</span></div>
 
-<script defer src="seselka.js?v=12"></script>
+<script defer src="seselka.js?v=13"></script>
 </body>
 </html>
