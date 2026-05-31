@@ -252,38 +252,48 @@ h1,h2,h3,h4,p{margin:0}
 /* =============================================================
    PRODUCTS
    ============================================================= */
-.products__head{margin-bottom:clamp(26px,4vw,40px)}
+.products__head{margin-bottom:clamp(30px,4vw,44px)}
 .products__head h2{margin-top:12px}
-.products__note{font-size:.96rem;color:var(--ink-2);max-width:54ch;margin-top:14px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);column-gap:clamp(16px,2.4vw,28px);row-gap:clamp(84px,8vw,104px);padding-top:80px}
-.card{
-  position:relative;display:flex;flex-direction:column;overflow:visible;padding:0 18px 20px;
-  opacity:0;transform:translateY(16px);transition:opacity .6s, transform .6s, box-shadow .3s;
+.products__note{font-size:.96rem;color:var(--ink-2);max-width:52ch;margin-top:14px}
+
+/* editorial catalogue: cutouts float on the page; asymmetric, no cards */
+.grid{display:flex;flex-direction:column;gap:clamp(46px,6vw,80px)}
+.shop__no{display:block;font-family:var(--serif);font-style:italic;font-weight:500;font-size:1.3rem;color:var(--accent);line-height:1;margin-bottom:12px}
+.shop__name{font-family:var(--serif);font-weight:640;color:var(--ink);letter-spacing:-0.01em;line-height:1.08;font-size:1.7rem}
+.shop__name--lg{font-size:clamp(2.1rem,3.4vw,3rem)}
+.shop__desc{color:var(--ink-2);font-size:.95rem;line-height:1.6;margin-top:12px;max-width:44ch}
+.shop__meta{display:block;margin-top:12px;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.shop__buy{display:flex;align-items:baseline;gap:22px;margin-top:20px;flex-wrap:wrap}
+.shop__price{font-family:var(--serif);font-weight:600;font-size:1.7rem;color:var(--ink);line-height:1}
+.shop__add{display:inline-flex;align-items:center;gap:.45em;position:relative;color:var(--accent);font-weight:600;font-size:.95rem;background:none;border:0;padding:2px 0;cursor:pointer}
+.shop__add .arr{width:.85em;height:.85em}
+.shop__add::after{content:"";position:absolute;left:0;right:100%;bottom:-1px;height:1.5px;background:var(--accent);transition:right .3s cubic-bezier(.16,1,.3,1)}
+.shop__add:hover::after{right:0}
+.shop__add:active{transform:translateY(1px)}
+.shop__feature-img img,.shop__item-img img{width:auto;object-fit:contain;filter:drop-shadow(0 24px 34px rgba(120,70,25,.26));transition:transform .5s cubic-bezier(.16,1,.3,1)}
+
+.shop__feature{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(28px,4vw,64px);align-items:center;border-top:1px solid var(--line);padding-top:clamp(30px,4vw,46px)}
+.shop__feature-img{display:flex;justify-content:center;align-items:center}
+.shop__feature-img img{max-width:100%;max-height:440px}
+.shop__feature:hover .shop__feature-img img{transform:translateY(-6px)}
+
+.shop__row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px)}
+.shop__item{border-top:1px solid var(--line);padding-top:26px}
+.shop__item-img{display:flex;justify-content:center;align-items:flex-end;height:230px;margin-bottom:18px}
+.shop__item-img img{max-width:82%;max-height:230px}
+.shop__item:hover .shop__item-img img{transform:translateY(-6px) scale(1.02)}
+
+.shop__custom{display:flex;align-items:center;gap:clamp(20px,3vw,40px);border-top:1px solid var(--line);padding-top:clamp(28px,3vw,40px)}
+.shop__custom-mark{width:84px;height:84px;object-fit:contain;flex:none;opacity:.92}
+.shop__custom .shop__name{font-size:clamp(1.6rem,2.6vw,2.1rem)}
+
+@media (max-width:760px){
+  .shop__feature{grid-template-columns:1fr;gap:22px}
+  .shop__feature-img{order:-1}
+  .shop__feature-img img{max-height:300px}
+  .shop__row{grid-template-columns:1fr;gap:38px}
+  .shop__custom{flex-direction:column;align-items:flex-start;gap:18px}
 }
-.card.is-in{opacity:1;transform:none}
-.card:hover{box-shadow:0 34px 80px rgba(120,70,25,.22), var(--glass-hi);transform:translateY(-4px)}
-/* floating product cutout */
-.card__cut{position:relative;margin-top:-56px;height:150px;display:flex;align-items:flex-end;justify-content:center}
-.card__cut img{max-width:88%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:18px;filter:drop-shadow(0 20px 26px rgba(120,70,25,.3));transition:transform .5s cubic-bezier(.16,1,.3,1)}
-.card:hover .card__cut img{transform:translateY(-6px) scale(1.03)}
-.card__badge{position:absolute;top:-30px;left:16px;z-index:2;background:rgba(42,36,29,.82);color:#fff;backdrop-filter:blur(6px);font-size:.64rem;font-weight:700;letter-spacing:.08em;padding:5px 10px;border-radius:999px}
-.card__badge.is-new{background:var(--orange-deep)}
-.card__body{padding-top:8px;display:flex;flex-direction:column;gap:7px;flex:1}
-.card__row{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.card__price{font-family:var(--serif);font-weight:600;font-size:1.6rem;color:var(--ink);white-space:nowrap;line-height:1}
-.card__size{font-size:.72rem;color:var(--ink-2);border:1px solid var(--line-2);padding:4px 11px;border-radius:999px;white-space:nowrap}
-.card__name{font-weight:660;color:var(--ink);font-size:1.08rem;letter-spacing:-0.01em;margin-top:2px}
-.card__name .sub{display:block;font-size:.64rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.card__desc{font-size:.86rem;color:var(--ink-2);flex:1}
-.card__add{
-  margin-top:10px;display:inline-flex;align-items:center;justify-content:center;gap:.5em;
-  padding:.82em 1em;border-radius:999px;background:var(--ink);color:var(--on-dark);
-  font-weight:600;font-size:.9rem;transition:background-color .2s, transform .15s;
-}
-.card__add:hover{background:#181410;transform:translateY(-1px)}
-.card--custom{background:linear-gradient(150deg, rgba(255,210,168,.55), rgba(255,251,246,.5));border-style:dashed;border-color:rgba(201,85,31,.4);padding:30px 26px;justify-content:center}
-.card--custom .card__body{justify-content:center;gap:12px;padding:0}
-.card--custom .h3{font-size:1.36rem}
 
 /* =============================================================
    HAPPY HOME
@@ -381,7 +391,6 @@ h1,h2,h3,h4,p{margin:0}
 .happy__big img{border-radius:26px 88px 26px 26px}
 .order__photo{border-radius:34px 34px 96px 34px}
 .order__photo img{border-radius:26px 26px 88px 26px}
-.card__cut img{border-radius:18px 18px 18px 46px}
 .popup__media{border-radius:14px 14px 14px 40px}
 
 /* =============================================================
@@ -401,7 +410,6 @@ h1,h2,h3,h4,p{margin:0}
 .popup__media--cut img{width:auto;height:100%;max-width:92%;object-fit:contain;filter:drop-shadow(0 14px 22px rgba(120,70,25,.28))}
 
 /* tactile feedback (respond to touch/click) */
-.card__add:active{transform:translateY(1px) scale(.99)}
 .nav__links a:active,.foot ul a:active{opacity:.65}
 
 /* hero entrance - draws the eye into the value prop (motion-safe) */
