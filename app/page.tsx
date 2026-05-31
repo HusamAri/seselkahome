@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ParallaxImage } from '@/components/motion/ParallaxImage';
 import { RevealImage } from '@/components/motion/RevealImage';
 import { RevealText } from '@/components/motion/RevealText';
@@ -7,7 +8,26 @@ import { OrderForm } from '@/components/site/OrderForm';
 import { ProcessSteps } from '@/components/site/ProcessSteps';
 import { SiteFooter } from '@/components/site/SiteFooter';
 import { SiteNav } from '@/components/site/SiteNav';
+import { withBase } from '@/lib/basePath';
 import { brand, heroMeta, products, stats } from '@/lib/brand';
+
+/** Decorative cutout that overflows/overlaps its neighbour (layered depth, md+). */
+function FloatCutout({ src, className, rotate = 0 }: { src: string; className: string; rotate?: number }) {
+  return (
+    <div className={`pointer-events-none absolute z-20 hidden md:block ${className}`} aria-hidden="true">
+      <Image
+        src={withBase(src)}
+        alt=""
+        fill
+        sizes="240px"
+        className="object-contain drop-shadow-[0_28px_36px_rgba(120,70,25,0.42)]"
+        style={{ transform: `rotate(${rotate}deg)` }}
+      />
+    </div>
+  );
+}
+
+const FRAME_SHADOW = 'shadow-[0_50px_90px_-50px_rgba(120,70,25,0.45)]';
 
 export default function Home() {
   return (
@@ -56,7 +76,7 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <div className="rounded-[2rem] border border-line bg-surface/30 p-2.5">
+              <div className={`rounded-[2rem] border border-line bg-surface/30 p-2.5 ${FRAME_SHADOW}`}>
                 <RevealImage
                   src="/assets/photo-detail.webp"
                   alt="Seselka hediye seti: kraft kutu, mum mührü ve örme kese"
@@ -65,6 +85,8 @@ export default function Home() {
                   className="aspect-[4/5] w-full rounded-[1.6rem]"
                 />
               </div>
+              {/* cutout overflowing the frame — layered depth */}
+              <FloatCutout src="/assets/products/yuvarlak-sepet.webp" rotate={-7} className="-bottom-10 -left-12 h-40 w-40 lg:h-48 lg:w-48" />
               <span className="absolute -left-3 top-10 hidden h-2.5 w-2.5 rounded-full bg-accent md:block" aria-hidden="true" />
             </div>
           </div>
@@ -121,14 +143,18 @@ export default function Home() {
               <p className="mt-9 font-display text-xl italic text-accent">Rooted in nature · Reimagined by hand</p>
             </div>
 
-            <div className="order-1 rounded-[1.8rem] border border-line bg-bg/40 p-2 md:order-2">
-              <ParallaxImage
-                src="/assets/photo-packaging.webp"
-                alt="Seselka ambalajı: kraft kutu, kuşak, mum mührü ve örme sepet"
-                strength={0.14}
-                sizes="(min-width:768px) 50vw, 90vw"
-                className="aspect-[4/5] w-full rounded-[1.35rem]"
-              />
+            <div className="relative order-1 md:order-2">
+              <div className={`rounded-[1.8rem] border border-line bg-bg/40 p-2 ${FRAME_SHADOW}`}>
+                <ParallaxImage
+                  src="/assets/photo-packaging.webp"
+                  alt="Seselka ambalajı: kraft kutu, kuşak, mum mührü ve örme sepet"
+                  strength={0.14}
+                  sizes="(min-width:768px) 50vw, 90vw"
+                  className="aspect-[4/5] w-full rounded-[1.35rem]"
+                />
+              </div>
+              {/* wax seal overflowing the frame */}
+              <FloatCutout src="/assets/wax-seal.webp" rotate={-10} className="-left-9 -top-9 h-24 w-24" />
             </div>
           </div>
         </section>
@@ -148,8 +174,10 @@ export default function Home() {
         </section>
 
         {/* ---------------------------------------------------- STATS */}
-        <section className="bg-ink text-linen">
-          <div className="mx-auto max-w-wrap px-6 py-24 md:py-28">
+        <section className="relative bg-ink text-linen">
+          {/* a piece crests over the top edge of the dark band */}
+          <FloatCutout src="/assets/products/asili-sepet.webp" rotate={5} className="-top-28 right-[7%] h-56 w-44 lg:right-[10%]" />
+          <div className="relative mx-auto max-w-wrap px-6 py-24 md:py-28">
             <p className="max-w-xl font-display text-[clamp(1.6rem,3.4vw,2.6rem)] leading-tight text-linen">
               Doğadan aldığını, doğanın hızında geri ver.
             </p>
@@ -171,7 +199,7 @@ export default function Home() {
         {/* ---------------------------------------------------- ORDER */}
         <section id="siparis" className="scroll-mt-28 bg-surface">
           <div className="mx-auto grid max-w-wrap items-center gap-12 px-6 py-24 md:grid-cols-[1fr_1.1fr] md:gap-16 md:py-32">
-            <div className="rounded-[1.8rem] border border-line bg-bg/40 p-2">
+            <div className={`rounded-[1.8rem] border border-line bg-bg/40 p-2 ${FRAME_SHADOW}`}>
               <RevealImage
                 src="/assets/photo-basket.webp"
                 alt="Örme sepetler, keten örtü ve Seselka etiketi"
