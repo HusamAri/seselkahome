@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Cormorant_Garamond, Plus_Jakarta_Sans } from 'next/font/google';
 import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider';
+import { BASE_PATH } from '@/lib/basePath';
 import './globals.css';
 
 // Display = high-contrast serif (the SESELKA wordmark).
@@ -25,8 +26,8 @@ export const metadata: Metadata = {
   description:
     'Geri dönüşen kâğıttan, bir kadın ustanın elinde örülen zamansız ev objeleri. Sessiz lüks: doğal, sessiz, zamansız.',
   icons: {
-    icon: '/assets/favicon-48.png',
-    apple: '/assets/apple-touch-icon.png',
+    icon: `${BASE_PATH}/assets/favicon-48.png`,
+    apple: `${BASE_PATH}/assets/apple-touch-icon.png`,
   },
   openGraph: {
     title: 'Seselka Home · Sessiz Cesaret',

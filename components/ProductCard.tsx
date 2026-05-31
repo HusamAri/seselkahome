@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { withBase } from '@/lib/basePath';
 import { formatPrice } from '@/lib/brand';
 
 type Props = {
@@ -35,7 +36,7 @@ export function ProductCard({
     <Link href={href} className="group block focus:outline-none">
       <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[3px] bg-surface">
         <Image
-          src={image}
+          src={withBase(image)}
           alt={name}
           fill
           sizes={sizes}
