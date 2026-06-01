@@ -21,10 +21,11 @@ const body = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://seselka.com'),
+  metadataBase: new URL('https://seselkahome.com'),
   title: 'Seselka Home | El Yapımı Kağıt Hasır Tasarım Ev Objeleri',
   description:
     'Geri dönüştürülmüş kağıtların kadın emeğiyle zamansız dekorasyon nesnelerine dönüşme hikayesi. Sürdürülebilir, el yapımı hasır sepet ve dekoratif objeler.',
+  alternates: { canonical: '/' },
   icons: {
     icon: `${BASE_PATH}/assets/favicon-48.png`,
     apple: `${BASE_PATH}/assets/apple-touch-icon.png`,
@@ -33,6 +34,8 @@ export const metadata: Metadata = {
     title: 'Seselka Home | El Yapımı Kağıt Hasır Tasarım Ev Objeleri',
     description:
       'Geri dönüştürülmüş kağıtların kadın emeğiyle zamansız dekorasyon nesnelerine dönüşme hikayesi. Sürdürülebilir, el yapımı hasır sepet ve dekoratif objeler.',
+    url: 'https://seselkahome.com',
+    siteName: 'Seselka Home',
     locale: 'tr_TR',
     type: 'website',
   },
