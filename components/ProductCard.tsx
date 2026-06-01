@@ -50,6 +50,53 @@ export function ProductCard({ product, priority = false }: Props) {
     );
   }
 
+  // Sold piece — dimmed, not orderable.
+  if (product.sold) {
+    return (
+      <article className="relative flex flex-col">
+        <span className="absolute left-4 top-3 z-20 rounded-full bg-ink/80 px-3 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-linen">
+          Satıldı
+        </span>
+
+        <div className="relative z-10 -mb-16 flex h-52 items-end justify-center px-8">
+          <div className="relative h-full w-full opacity-55 grayscale">
+            <Image
+              src={withBase(image)}
+              alt={`${name} (satıldı)`}
+              fill
+              priority={priority}
+              sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 90vw"
+              className="object-contain object-bottom drop-shadow-[0_22px_28px_rgba(120,70,25,0.18)]"
+            />
+          </div>
+        </div>
+
+        <div className="rounded-[1.7rem] bg-card/70 px-6 pb-6 pt-20 shadow-[0_34px_64px_-44px_rgba(120,70,25,0.4)]">
+          <div className="flex items-start justify-between gap-3">
+            <span className="font-display text-[1.9rem] leading-none text-muted line-through decoration-1">{formatPrice(price)}</span>
+            {meta?.[0] ? (
+              <span className="shrink-0 rounded-full border border-line px-3 py-1 text-[0.62rem] uppercase tracking-[0.1em] text-muted">{meta[0]}</span>
+            ) : null}
+          </div>
+          <span className="mt-4 block text-[0.62rem] uppercase tracking-[0.2em] text-muted">{sub}</span>
+          <h3 className="mt-1 font-display text-2xl leading-none text-muted">
+            {name}
+            <span className="text-accent/50">.</span>
+          </h3>
+          {desc ? <p className="mt-2 text-sm leading-relaxed text-muted/80">{desc}</p> : null}
+          <div className="mt-6">
+            <span
+              aria-disabled="true"
+              className="flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-full border border-line py-3.5 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-muted"
+            >
+              Satıldı
+            </span>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
   // Standard cutout card — product floats above a warm-white card.
   return (
     <article className="group relative flex flex-col">
