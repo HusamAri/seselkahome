@@ -119,7 +119,7 @@ export default function Home() {
             </div>
 
             {/* mobile: swipeable row · sm+: grid */}
-            <div className="no-scrollbar -mx-6 mt-16 flex snap-x snap-mandatory items-end gap-5 overflow-x-auto px-6 pb-8 pt-12 sm:mx-0 sm:mt-24 sm:grid sm:grid-cols-2 sm:items-end sm:gap-x-7 sm:gap-y-24 sm:overflow-visible sm:px-0 sm:pb-0 sm:pt-6 lg:grid-cols-3">
+            <div className="no-scrollbar -mx-6 mt-12 flex snap-x snap-mandatory items-end gap-5 overflow-x-auto overflow-y-clip px-6 pb-8 pt-6 sm:mx-0 sm:mt-24 sm:grid sm:grid-cols-2 sm:items-end sm:gap-x-7 sm:gap-y-24 sm:overflow-visible sm:px-0 sm:pb-0 sm:pt-6 lg:grid-cols-3">
               {shopItems.map((p, i) => (
                 <div key={p.id} className="w-[78%] shrink-0 snap-center sm:w-auto sm:shrink-0">
                   <ProductCard product={p} priority={i < 3} />

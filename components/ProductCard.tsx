@@ -58,11 +58,8 @@ export function ProductCard({ product, priority = false }: Props) {
           Satıldı
         </span>
 
-        <div className="relative z-10 -mb-12 flex h-64 items-end justify-center px-6">
-          <div
-            className="relative h-full w-full origin-bottom opacity-55 grayscale"
-            style={{ transform: `scale(${product.scale ?? 1})` }}
-          >
+        <div className="relative z-10 -mb-12 flex h-72 items-end justify-center px-4">
+          <div className="relative h-full w-full opacity-55 grayscale">
             <Image
               src={withBase(image)}
               alt={`${name} (satıldı)`}

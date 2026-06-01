@@ -97,7 +97,7 @@ export const products: Product[] = [
   },
   {
     id: 'orgu-ayna', name: 'Güneş Ayna', sub: 'Duvar · Ayna', price: 2240,
-    image: '/assets/products/orgu-ayna.webp', sold: true, scale: 1.78,
+    image: '/assets/products/orgu-ayna.webp', sold: true, scale: 1,
     desc: 'Güneş formunda, elde örülmüş çerçeveli yuvarlak ayna. Tek parça olarak üretildi; sahibini buldu.',
     meta: ['Ø ~50 cm', 'Doğal lif', 'Tek parça'],
   },
