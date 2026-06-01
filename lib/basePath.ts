@@ -1,8 +1,7 @@
-// Path prefix for the GitHub Pages project site (served from /seselkahome/).
-export const BASE_PATH = process.env.NODE_ENV === 'production' ? '/seselkahome' : '';
+// Served from the root of the custom domain (seselkahome.com), so no prefix.
+export const BASE_PATH = '';
 
-// next/image does NOT prefix raw src under static export, so prepend it for
-// any absolute public path. No-op in dev and for remote/relative URLs.
+// Kept so callers stay stable; now a no-op (root paths already resolve).
 export function withBase(path: string): string {
-  return path.startsWith('/') ? `${BASE_PATH}${path}` : path;
+  return path;
 }
