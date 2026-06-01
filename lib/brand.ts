@@ -116,7 +116,7 @@ export function formatPrice(value: number | null): string {
 }
 
 export const contact = {
-  email: 'atolye@seselka.com',
+  email: 'atolye@seselkahome.com',
   phone: '+90 212 000 00 00',
   location: 'İstanbul',
 };
