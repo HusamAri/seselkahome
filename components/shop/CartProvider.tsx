@@ -42,7 +42,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       if (c === 0) showToast('Listeniz henüz boş');
       else {
         showToast(`${c} parça · Siparişi Detaylandırın`);
-        document.getElementById('siparis')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const el = document.getElementById('siparis');
+        if (el) {
+          const y = el.getBoundingClientRect().top + window.scrollY - 88;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
       }
       return c;
     });

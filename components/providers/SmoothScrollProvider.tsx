@@ -34,8 +34,29 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
     };
     frame = requestAnimationFrame(raf);
 
+    // Global smooth-anchor handler: any in-page #link lands just below the
+    // floating nav, consistently through Lenis. Skips links that opt out.
+    const NAV_OFFSET = 88;
+    const onClick = (e: MouseEvent) => {
+      const a = (e.target as HTMLElement)?.closest?.('a[href^="#"]') as HTMLAnchorElement | null;
+      if (!a || a.dataset.noscroll !== undefined) return;
+      const href = a.getAttribute('href');
+      if (!href || href === '#') return;
+      const el = document.querySelector(href);
+      if (!el) return;
+      e.preventDefault();
+      if (href === '#top') {
+        instance.scrollTo(0);
+        return;
+      }
+      const y = (el as HTMLElement).getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+      instance.scrollTo(y);
+    };
+    document.addEventListener('click', onClick);
+
     return () => {
       cancelAnimationFrame(frame);
+      document.removeEventListener('click', onClick);
       instance.destroy();
       setLenis(null);
     };
