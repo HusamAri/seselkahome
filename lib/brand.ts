@@ -139,5 +139,5 @@ export type Stat = { big: string; unit: string; label: string; sub: string };
 export const stats: Stat[] = [
   { big: '8.4', unit: 't', label: 'Dönüşen kağıt', sub: 'Atölyede sanatsal tasarımlarla yeniden hayata kazandırılan kağıt miktarı.' },
   { big: '100', unit: '%', label: 'Doğal içerik', sub: 'Üretimin hiçbir aşamasında plastik, sentetik reçine ya da yapay boya kullanılmaz.' },
-  { big: '26', unit: '', label: 'Kadın usta', sub: 'Atölyede ve evlerinde, kendi ritimleriyle üretime katılan zanaatkar kadınlar.' },
+  { big: 'El', unit: 'le', label: 'Kadın emeği', sub: 'Her parça kadın elinde, “kadın isterse” diye başlayan bir cümlenin elle tutulabilir hali olarak doğar.' },
 ];
