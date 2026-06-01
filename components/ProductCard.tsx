@@ -58,7 +58,7 @@ export function ProductCard({ product, priority = false }: Props) {
           Satıldı
         </span>
 
-        <div className="relative z-10 -mb-16 flex h-52 items-end justify-center px-8">
+        <div className="relative z-10 -mb-12 flex h-64 items-end justify-center px-6">
           <div
             className="relative h-full w-full origin-bottom opacity-55 grayscale"
             style={{ transform: `scale(${product.scale ?? 1})` }}
@@ -137,10 +137,58 @@ export function ProductCard({ product, priority = false }: Props) {
           <span className="text-accent">.</span>
         </h3>
         {desc ? <p className="mt-2 text-sm leading-relaxed text-muted">{desc}</p> : null}
+        {product.maker ? <MakerTag maker={product.maker} /> : null}
         <div className="mt-6">
           <BuyButton product={product} />
         </div>
       </div>
     </article>
+  );
+}
+
+function InstagramIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+    </svg>
+  );
+}
+
+/**
+ * Maker credit: a tag showing "Üreten Eller: Banu Kayaalp"; on hover/focus the
+ * panel behind it reveals the Instagram-linked handle. The whole tag is the
+ * link, so a tap on touch devices opens Instagram directly.
+ */
+function MakerTag({ maker }: { maker: NonNullable<Product['maker']> }) {
+  return (
+    <a
+      href={maker.instagram}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-noscroll
+      aria-label={`Üreten Eller: ${maker.name} — Instagram ${maker.handle}`}
+      className="group/mk mt-5 block overflow-hidden rounded-[1rem] border border-line bg-bg/50 transition-colors duration-300 hover:border-accent/40 focus-visible:border-accent/40"
+    >
+      <div className="flex items-center justify-between gap-3 px-4 py-3">
+        <div>
+          <span className="block text-[0.56rem] uppercase tracking-[0.2em] text-muted">Üreten Eller</span>
+          <span className="mt-0.5 block font-display text-lg leading-none text-fg">{maker.name}</span>
+        </div>
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line text-fg transition-all duration-300 group-hover/mk:border-accent/40 group-hover/mk:bg-accent-fill group-hover/mk:text-on-accent">
+          <InstagramIcon />
+        </span>
+      </div>
+      {/* reveal panel */}
+      <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-quiet group-hover/mk:grid-rows-[1fr] group-focus-visible/mk:grid-rows-[1fr]">
+        <div className="overflow-hidden">
+          <div className="flex items-center gap-2 border-t border-line px-4 py-2.5 text-[0.8rem] font-medium text-accent">
+            <InstagramIcon />
+            {maker.handle}
+          </div>
+        </div>
+      </div>
+    </a>
   );
 }
