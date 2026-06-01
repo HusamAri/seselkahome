@@ -138,12 +138,15 @@ export default function Home() {
           <div className="mx-auto grid max-w-wrap items-center gap-12 px-6 py-24 md:grid-cols-[1fr_1.05fr] md:gap-20 md:py-32">
             <div className="order-2 md:order-1">
               <span className="eyebrow">Hikaye · 01</span>
-              <RevealText as="h2" text={['Doğadan ilhamla,', 'kadın emeğiyle.']} className="mt-5 text-fg" lineClassName="font-display font-medium text-[clamp(2.25rem,5vw,4rem)] leading-[0.95]" />
+              <RevealText as="h2" text={['Hayata getiren elden,', 'hayata döndüren ele.']} className="mt-5 text-fg" lineClassName="font-display font-medium text-[clamp(2.25rem,5vw,4rem)] leading-[0.95]" />
               <p className="mt-7 max-w-md text-base leading-[1.9] text-fg/75">
-                Seselka Home, ömrünü tamamlamış kağıtları sanatsal bir geri dönüşüm vizyonuyla yeniden ele alır. Şehirden toplanan kağıtlar ince şeritler halinde kesilir, bükülerek doğal dal formuna getirilir ve kadim hasır geleneğinden gelen tekniklerle örülür.
+                Seselka’nın kurucusu Sefa Selver, örgünün en yeni öğrencisi. Örerken bulduğu huzuru bir girişime dönüştürdü: bu emeğe destek olmanın, birlikte üretmenin ve o huzuru çoğaltmanın yollarını ararken Seselka doğdu.
               </p>
               <p className="mt-6 max-w-md text-base leading-[1.9] text-muted">
-                Sefa Selver Karaçalı tarafından kurulan atölyede kadın ustalar kendi üretim ritimlerinde çalışır. Her bir sepet, ayna ya da nesne, saatler süren sakin bir emeğin ve el işçiliğinin hikayesidir. Bu yüzden hiçbir parça bir diğerinin tıpatıp aynısı değildir.
+                Burada fabrikadan çıkmış ürünler bulmayacaksınız. Her parça, “kadın isterse” diye başlayan cümlelerin elle tutulabilir hali; sabırla, emekle örülmüş tekil bir hikâye. Bu yüzden hiçbiri bir diğerinin tıpatıp aynısı değildir.
+              </p>
+              <p className="mt-6 max-w-md text-base leading-[1.9] text-muted">
+                Çünkü Seselka değer yaratmak için burada: hem üreten kadınlara, hem dayanışmayla yanında duranlara. İlerici bir vizyon, kadın emeği odaklı bir misyon ve bu yoldaki yaşanmışlıkları paylaşmanın vaadi.
               </p>
               <p className="mt-9 font-display text-xl italic text-accent">Doğada köklenir · Elde yeniden doğar</p>
             </div>
