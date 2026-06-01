@@ -7,7 +7,16 @@ import { useCart } from '@/components/shop/CartProvider';
 
 type Props = { product: Product; priority?: boolean };
 
-/** Dark, full-width add-to-cart (or "Sipariş ver" for made-to-order). */
+// Largest real piece (the mirror) fills the stage; others scale by real cm.
+const MAX_CM = 50;
+const MIN_RATIO = 0.46; // floor so the smallest piece is still substantial
+
+function sizePct(cm?: number) {
+  const r = Math.max(MIN_RATIO, Math.min(1, (cm ?? 30) / MAX_CM));
+  return `${Math.round(r * 100)}%`;
+}
+
+/** Dark, full-width add-to-cart (or "Bize yazın" for made-to-order). */
 function BuyButton({ product, className = '' }: { product: Product; className?: string }) {
   const cart = useCart();
   const base =
@@ -29,12 +38,12 @@ function BuyButton({ product, className = '' }: { product: Product; className?: 
 }
 
 export function ProductCard({ product, priority = false }: Props) {
-  const { name, image, sub, badge, desc, price, meta } = product;
+  const { name, image, sub, badge, desc, price, meta, sold, custom } = product;
 
-  // Made-to-order — wide card with the wax seal, routes to the form.
-  if (product.custom) {
+  // Made-to-order — full-width banner card with the wax seal.
+  if (custom) {
     return (
-      <article className="flex flex-col items-start gap-6 rounded-[1.7rem] bg-card p-7 shadow-[0_30px_60px_-38px_rgba(120,70,25,0.45)] sm:col-span-2 sm:flex-row sm:items-center lg:col-span-3">
+      <article className="flex h-full flex-col items-start gap-6 rounded-[1.7rem] bg-card p-7 shadow-[0_30px_60px_-38px_rgba(120,70,25,0.45)] sm:flex-row sm:items-center">
         <Image src={withBase(image)} alt="" width={72} height={72} className="h-16 w-16 shrink-0 object-contain opacity-90" />
         <div className="flex-1">
           <span className="block text-[0.62rem] uppercase tracking-[0.2em] text-muted">{sub}</span>
@@ -50,93 +59,67 @@ export function ProductCard({ product, priority = false }: Props) {
     );
   }
 
-  // Sold piece — dimmed, not orderable.
-  if (product.sold) {
-    return (
-      <article className="relative flex flex-col">
-        <span className="absolute left-4 top-3 z-20 rounded-full bg-ink/80 px-3 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-linen">
-          Satıldı
-        </span>
+  const dim = sold ? 'opacity-55 grayscale' : '';
 
-        <div className="relative z-10 -mb-12 flex h-72 items-end justify-center px-4">
-          <div className="relative h-full w-full opacity-55 grayscale">
-            <Image
-              src={withBase(image)}
-              alt={`${name} (satıldı)`}
-              fill
-              priority={priority}
-              sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 90vw"
-              className="object-contain object-bottom drop-shadow-[0_22px_28px_rgba(120,70,25,0.18)]"
-            />
-          </div>
+  return (
+    <article className="group relative flex h-full flex-col">
+      <span
+        className={`absolute left-4 top-4 z-20 rounded-full px-3 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] ${
+          sold ? 'bg-ink/80 text-linen' : badge ? 'bg-accent-fill text-on-accent' : 'hidden'
+        }`}
+      >
+        {sold ? 'Satıldı' : badge}
+      </span>
+
+      {/* image stage — fixed height for every card; cutout sized by real cm */}
+      <div className="relative z-10 -mb-14 flex h-64 items-end justify-center px-6">
+        <div
+          className={`relative h-full ${dim} ${
+            sold ? '' : 'transition-transform duration-700 ease-quiet group-hover:-translate-y-2 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0'
+          }`}
+          style={{ width: sizePct(product.cm) }}
+        >
+          <Image
+            src={withBase(image)}
+            alt={sold ? `${name} (satıldı)` : name}
+            fill
+            priority={priority}
+            sizes="(min-width:1024px) 26vw, (min-width:640px) 60vw, 80vw"
+            className="object-contain object-bottom drop-shadow-[0_22px_30px_rgba(120,70,25,0.28)]"
+          />
         </div>
+      </div>
 
-        <div className="rounded-[1.7rem] bg-card/70 px-6 pb-6 pt-20 shadow-[0_34px_64px_-44px_rgba(120,70,25,0.4)]">
-          <div className="flex items-start justify-between gap-3">
-            <span className="font-display text-[1.9rem] leading-none text-muted line-through decoration-1">{formatPrice(price)}</span>
-            {meta?.[0] ? (
-              <span className="shrink-0 rounded-full border border-line px-3 py-1 text-[0.62rem] uppercase tracking-[0.1em] text-muted">{meta[0]}</span>
-            ) : null}
-          </div>
-          <span className="mt-4 block text-[0.62rem] uppercase tracking-[0.2em] text-muted">{sub}</span>
-          <h3 className="mt-1 font-display text-2xl leading-none text-muted">
-            {name}
-            <span className="text-accent/50">.</span>
-          </h3>
-          {desc ? <p className="mt-2 text-sm leading-relaxed text-muted/80">{desc}</p> : null}
-          <div className="mt-6">
+      {/* text block — flex-1 so all cards end at the same height */}
+      <div className={`flex flex-1 flex-col rounded-[1.7rem] px-6 pb-6 pt-20 shadow-[0_34px_64px_-36px_rgba(120,70,25,0.5)] ${sold ? 'bg-card/70' : 'bg-card'}`}>
+        <div className="flex items-start justify-between gap-3">
+          <span className={`font-display text-[1.9rem] leading-none ${sold ? 'text-muted line-through decoration-1' : 'text-fg'}`}>
+            {formatPrice(price)}
+          </span>
+          {meta?.[0] ? (
+            <span className="shrink-0 rounded-full border border-line px-3 py-1 text-[0.62rem] uppercase tracking-[0.1em] text-muted">{meta[0]}</span>
+          ) : null}
+        </div>
+        <span className="mt-4 block text-[0.62rem] uppercase tracking-[0.2em] text-muted">{sub}</span>
+        <h3 className={`mt-1 font-display text-2xl leading-none ${sold ? 'text-muted' : 'text-fg'}`}>
+          {name}
+          <span className={sold ? 'text-accent/50' : 'text-accent'}>.</span>
+        </h3>
+        {desc ? <p className={`mt-2 text-sm leading-relaxed ${sold ? 'text-muted/80' : 'text-muted'}`}>{desc}</p> : null}
+        {product.maker ? <MakerTag maker={product.maker} /> : null}
+
+        {/* CTA pinned to the bottom of every card */}
+        <div className="mt-6 pt-2 [margin-top:auto]">
+          {sold ? (
             <span
               aria-disabled="true"
               className="flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-full border border-line py-3.5 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-muted"
             >
               Satıldı
             </span>
-          </div>
-        </div>
-      </article>
-    );
-  }
-
-  // Standard cutout card — product floats above a warm-white card.
-  return (
-    <article className="group relative flex flex-col">
-      {badge ? (
-        <span className="absolute left-4 top-3 z-20 rounded-full bg-accent-fill px-3 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-on-accent">
-          {badge}
-        </span>
-      ) : null}
-
-      <div className="relative z-10 -mb-16 flex h-52 items-end justify-center px-8">
-        <div className="relative h-full w-full transition-transform duration-700 ease-quiet group-hover:-translate-y-2 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
-          <div className="relative h-full w-full origin-bottom" style={{ transform: `scale(${product.scale ?? 1})` }}>
-            <Image
-              src={withBase(image)}
-              alt={name}
-              fill
-              priority={priority}
-              sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 90vw"
-              className="object-contain object-bottom drop-shadow-[0_22px_28px_rgba(120,70,25,0.3)]"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="rounded-[1.7rem] bg-card px-6 pb-6 pt-20 shadow-[0_34px_64px_-36px_rgba(120,70,25,0.5)]">
-        <div className="flex items-start justify-between gap-3">
-          <span className="font-display text-[1.9rem] leading-none text-fg">{formatPrice(price)}</span>
-          {meta?.[0] ? (
-            <span className="shrink-0 rounded-full border border-line px-3 py-1 text-[0.62rem] uppercase tracking-[0.1em] text-muted">{meta[0]}</span>
-          ) : null}
-        </div>
-        <span className="mt-4 block text-[0.62rem] uppercase tracking-[0.2em] text-muted">{sub}</span>
-        <h3 className="mt-1 font-display text-2xl leading-none text-fg">
-          {name}
-          <span className="text-accent">.</span>
-        </h3>
-        {desc ? <p className="mt-2 text-sm leading-relaxed text-muted">{desc}</p> : null}
-        {product.maker ? <MakerTag maker={product.maker} /> : null}
-        <div className="mt-6">
-          <BuyButton product={product} />
+          ) : (
+            <BuyButton product={product} />
+          )}
         </div>
       </div>
     </article>
@@ -177,7 +160,6 @@ function MakerTag({ maker }: { maker: NonNullable<Product['maker']> }) {
           <InstagramIcon />
         </span>
       </div>
-      {/* reveal panel */}
       <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-quiet group-hover/mk:grid-rows-[1fr] group-focus-visible/mk:grid-rows-[1fr]">
         <div className="overflow-hidden">
           <div className="flex items-center gap-2 border-t border-line px-4 py-2.5 text-[0.8rem] font-medium text-accent">
