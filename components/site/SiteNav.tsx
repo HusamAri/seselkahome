@@ -34,13 +34,20 @@ export function SiteNav() {
     };
   }, [open]);
 
+  // Just close the mobile menu; the global anchor handler (SmoothScrollProvider)
+  // performs the offset scroll, and a native fallback covers reduced-motion.
   const go = (href: string) => (e: React.MouseEvent) => {
-    e.preventDefault();
     setOpen(false);
-    const el = document.querySelector(href);
+    if (lenis) return; // global handler will preventDefault + smooth-scroll
+    e.preventDefault();
+    if (href === '#top') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    const el = document.querySelector(href) as HTMLElement | null;
     if (!el) return;
-    if (lenis) lenis.scrollTo(el as HTMLElement, { offset: -96 });
-    else el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const y = el.getBoundingClientRect().top + window.scrollY - 88;
+    window.scrollTo({ top: y, behavior: 'smooth' });
   };
 
   const Brand = ({ onClick }: { onClick?: (e: React.MouseEvent) => void }) => (
