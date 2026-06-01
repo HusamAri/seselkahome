@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { contact, products } from '@/lib/brand';
 
-const PIECES = [...products.filter((p) => !p.custom).map((p) => p.name), 'Özel Sipariş'];
+const PIECES = [...products.filter((p) => !p.custom && !p.sold).map((p) => p.name), 'Özel Sipariş'];
 
 /**
  * Made-to-order inquiry. Static-export friendly: composes a mailto with the

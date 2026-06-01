@@ -66,6 +66,8 @@ export type Product = {
   meta?: string[];
   /** Made-to-order piece: routes to the order form instead of the cart. */
   custom?: boolean;
+  /** Sold/archive piece: shown dimmed, not orderable. */
+  sold?: boolean;
 };
 
 /** Shop catalog — real product photography, Sessiz Cesaret copy. */
@@ -87,6 +89,12 @@ export const products: Product[] = [
     image: '/assets/products/horoz-sepet.webp', badge: 'Sınırlı sayıda',
     desc: 'Geleneksel hasır teknikleriyle elde örülen horoz formlu sepet; ikramlarınıza eşlik eden sıcak bir karşılaşma.',
     meta: ['~25 cm', 'Organik doku', 'Özel seri'],
+  },
+  {
+    id: 'orgu-ayna', name: 'Güneş Ayna', sub: 'Duvar · Ayna', price: 2240,
+    image: '/assets/products/orgu-ayna.webp', sold: true,
+    desc: 'Güneş formunda, elde örülmüş çerçeveli yuvarlak ayna. Tek parça olarak üretildi; sahibini buldu.',
+    meta: ['Ø ~50 cm', 'Doğal lif', 'Tek parça'],
   },
   {
     id: 'ozel', name: 'Özel Ölçü', sub: 'Ölçüye özel', price: null, custom: true,
