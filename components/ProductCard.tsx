@@ -59,7 +59,10 @@ export function ProductCard({ product, priority = false }: Props) {
         </span>
 
         <div className="relative z-10 -mb-16 flex h-52 items-end justify-center px-8">
-          <div className="relative h-full w-full opacity-55 grayscale">
+          <div
+            className="relative h-full w-full origin-bottom opacity-55 grayscale"
+            style={{ transform: `scale(${product.scale ?? 1})` }}
+          >
             <Image
               src={withBase(image)}
               alt={`${name} (satıldı)`}
@@ -107,15 +110,17 @@ export function ProductCard({ product, priority = false }: Props) {
       ) : null}
 
       <div className="relative z-10 -mb-16 flex h-52 items-end justify-center px-8">
-        <div className="relative h-full w-full">
-          <Image
-            src={withBase(image)}
-            alt={name}
-            fill
-            priority={priority}
-            sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 90vw"
-            className="object-contain object-bottom drop-shadow-[0_22px_28px_rgba(120,70,25,0.3)] transition-transform duration-700 ease-quiet group-hover:-translate-y-2 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0"
-          />
+        <div className="relative h-full w-full transition-transform duration-700 ease-quiet group-hover:-translate-y-2 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
+          <div className="relative h-full w-full origin-bottom" style={{ transform: `scale(${product.scale ?? 1})` }}>
+            <Image
+              src={withBase(image)}
+              alt={name}
+              fill
+              priority={priority}
+              sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 90vw"
+              className="object-contain object-bottom drop-shadow-[0_22px_28px_rgba(120,70,25,0.3)]"
+            />
+          </div>
         </div>
       </div>
 

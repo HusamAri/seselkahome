@@ -68,31 +68,33 @@ export type Product = {
   custom?: boolean;
   /** Sold/archive piece: shown dimmed, not orderable. */
   sold?: boolean;
+  /** Relative visual size of the cutout, by real dimensions (1 = base). */
+  scale?: number;
 };
 
 /** Shop catalog — real product photography, Sessiz Cesaret copy. */
 export const products: Product[] = [
   {
     id: 'asili-sepet', name: 'Asılı Sepet', sub: 'Duvar · Sepet', price: 1480,
-    image: '/assets/products/asili-sepet.webp', badge: 'Yeni',
+    image: '/assets/products/asili-sepet.webp', badge: 'Yeni', scale: 0.86,
     desc: 'Kuru çiçek tasarımıyla birlikte; duvarda ya da kapı arkasında rafine ve sessiz bir köşe.',
     meta: ['Ø ~28 cm', 'Doğal lif', 'El yapımı dekor'],
   },
   {
     id: 'yuvarlak-sepet', name: 'Yuvarlak Sepet', sub: 'Sepet · Tepsi', price: 1180,
-    image: '/assets/products/yuvarlak-sepet.webp',
+    image: '/assets/products/yuvarlak-sepet.webp', scale: 0.9,
     desc: 'Sık örgülü ve dayanıklı form. Masada ekmekten meyveye, gündelik yaşamın içinde sanatsal bir detay.',
     meta: ['Ø ~30 cm', 'Doğal ton', 'Siparişe özel'],
   },
   {
     id: 'horoz-sepet', name: 'Bayram Horozu', sub: 'Dekoratif · Bayram', price: 1680,
-    image: '/assets/products/horoz-sepet.webp', badge: 'Sınırlı sayıda',
+    image: '/assets/products/horoz-sepet.webp', badge: 'Sınırlı sayıda', scale: 0.8,
     desc: 'Geleneksel hasır teknikleriyle elde örülen horoz formlu sepet; ikramlarınıza eşlik eden sıcak bir karşılaşma.',
     meta: ['~25 cm', 'Organik doku', 'Özel seri'],
   },
   {
     id: 'orgu-ayna', name: 'Güneş Ayna', sub: 'Duvar · Ayna', price: 2240,
-    image: '/assets/products/orgu-ayna.webp', sold: true,
+    image: '/assets/products/orgu-ayna.webp', sold: true, scale: 1.55,
     desc: 'Güneş formunda, elde örülmüş çerçeveli yuvarlak ayna. Tek parça olarak üretildi; sahibini buldu.',
     meta: ['Ø ~50 cm', 'Doğal lif', 'Tek parça'],
   },
