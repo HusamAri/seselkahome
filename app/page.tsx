@@ -4,6 +4,7 @@ import { RevealImage } from '@/components/motion/RevealImage';
 import { RevealText } from '@/components/motion/RevealText';
 import { ProductCard } from '@/components/ProductCard';
 import { CartProvider } from '@/components/shop/CartProvider';
+import { LaunchPopup } from '@/components/shop/LaunchPopup';
 import { ProductModalProvider } from '@/components/shop/ProductModalProvider';
 import { OrderForm } from '@/components/site/OrderForm';
 import { ProcessSteps } from '@/components/site/ProcessSteps';
@@ -35,6 +36,7 @@ export default function Home() {
     <CartProvider>
       <ProductModalProvider>
       <SiteNav />
+      <LaunchPopup />
 
       <main id="top" className="bg-bg text-fg">
         {/* ---------------------------------------------------- HERO (compact, shop-leading) */}
