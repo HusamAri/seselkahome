@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { withBase } from '@/lib/basePath';
 import { type Product } from '@/lib/brand';
 import { BuyButton } from '@/components/shop/BuyButton';
+import { InstagramIcon } from '@/components/shop/InstagramIcon';
 import { PriceTag } from '@/components/shop/PriceTag';
 import { useProductModal } from '@/components/shop/ProductModalProvider';
 
@@ -19,7 +20,7 @@ function sizePct(cm?: number) {
 }
 
 export function ProductCard({ product, priority = false }: Props) {
-  const { name, image, sub, badge, desc, price, meta, sold, custom } = product;
+  const { name, image, sub, badge, desc, meta, sold, custom } = product;
   const modal = useProductModal();
 
   // Made-to-order — full-width banner card with the wax seal (no detail modal).
@@ -103,7 +104,7 @@ export function ProductCard({ product, priority = false }: Props) {
           {name}
           <span className={sold ? 'text-accent/50' : 'text-accent'}>.</span>
         </h3>
-        {desc ? <p className={`mt-2 text-sm leading-relaxed ${sold ? 'text-muted/80' : 'text-muted'}`}>{desc}</p> : null}
+        {desc ? <p className="mt-2 text-sm leading-relaxed text-muted">{desc}</p> : null}
         {product.maker ? <MakerTag maker={product.maker} /> : null}
 
         {/* CTA pinned to the bottom of every card */}
@@ -121,16 +122,6 @@ export function ProductCard({ product, priority = false }: Props) {
         </div>
       </div>
     </article>
-  );
-}
-
-function InstagramIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
-    </svg>
   );
 }
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePrefersReducedMotion } from '@/components/motion/usePrefersReducedMotion';
 import { useLenis } from '@/components/providers/SmoothScrollProvider';
 import { useCart } from '@/components/shop/CartProvider';
 
@@ -17,6 +18,7 @@ const EASE = 'cubic-bezier(0.32,0.72,0,1)';
 export function SiteNav() {
   const lenis = useLenis();
   const cart = useCart();
+  const reduced = usePrefersReducedMotion();
   const [tight, setTight] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -157,7 +159,7 @@ export function SiteNav() {
                   transitionTimingFunction: EASE,
                   transform: open ? 'translateY(0)' : 'translateY(40px)',
                   opacity: open ? 1 : 0,
-                  transitionDelay: open ? `${120 + i * 70}ms` : '0ms',
+                  transitionDelay: open && !reduced ? `${120 + i * 70}ms` : '0ms',
                 }}
               >
                 {l.label}

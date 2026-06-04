@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useCallback, useContext, useRef, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 
 type CartCtx = {
   count: number;
@@ -28,6 +28,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     if (timer.current) clearTimeout(timer.current);
     timer.current = setTimeout(() => setToast(null), 2400);
   }, []);
+
+  // Clear the pending toast timer on unmount.
+  useEffect(() => () => { if (timer.current) clearTimeout(timer.current); }, []);
 
   const add = useCallback(
     (name: string) => {
