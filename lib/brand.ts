@@ -97,6 +97,10 @@ export const products: Product[] = [
     meta: ['~50 cm', 'Aydınlatma', 'El yapımı'],
     gallery: ['/assets/products/hasir-avize-1.webp', '/assets/products/hasir-avize-2.webp', '/assets/products/hasir-avize-3.webp'],
     use: 'Yemek masasının, antrenin ya da oturma alanının üzerinde tek başına bir heykel gibi durur; ışığını açtığınızda örgü deseni mekâna sıcak, hareketli bir gölge oyununa dönüşür.',
+    maker: {
+      name: 'Derya Gül', handle: '@deryagu197211', instagram: 'https://www.instagram.com/deryagu197211',
+      note: 'Derya bu avizeyi örerken düz ve simetrik bir form peşinde değildi; ışığın kâğıt dalların arasından nasıl süzüleceğini düşündü. Rüzgârda kıpırdayan suyu ve usulca toplanan bulutları hayal ederek her katmanı serbestçe dalgalandırdı. İstediği yalnızca bir aydınlatma değil, yakıldığında tavana ve duvarlara huzur veren, dantel gibi bir gölge oyunu armağan etmekti.',
+    },
   },
   {
     id: 'yuvarlak-sepet', name: 'Yuvarlak Sepet', sub: 'Sepet · Tepsi', price: 1650,
