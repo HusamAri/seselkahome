@@ -70,8 +70,12 @@ export type Product = {
   sold?: boolean;
   /** Real size in cm (longest dimension); drives proportional render height. */
   cm?: number;
-  /** Crediting the maker, with their Instagram. */
-  maker?: { name: string; handle: string; instagram: string };
+  /** Detail-view photos (lifestyle/close-ups). Falls back to [image]. */
+  gallery?: string[];
+  /** Detail-page paragraph: what the piece is for / how it lives at home. */
+  use?: string;
+  /** Crediting the maker, with their Instagram + a sentence on their craft. */
+  maker?: { name: string; handle: string; instagram: string; note?: string };
 };
 
 /** Shop catalog — real product photography, Sessiz Cesaret copy. */
@@ -81,25 +85,33 @@ export const products: Product[] = [
     image: '/assets/products/asili-sepet.webp', badge: 'Yeni', cm: 28,
     desc: 'Kuru çiçek tasarımıyla birlikte; duvarda ya da kapı arkasında rafine ve sessiz bir köşe.',
     meta: ['Ø ~28 cm', 'Doğal lif', 'El yapımı dekor'],
+    use: 'Duvarda ya da kapı arkasında; kurutulmuş çiçekler, ince dallar veya sevdiğiniz küçük objelerle eşleştiğinde sessiz, sıcak bir köşe yaratır.',
   },
   {
     id: 'yuvarlak-sepet', name: 'Yuvarlak Sepet', sub: 'Sepet · Tepsi', price: 1180,
     image: '/assets/products/yuvarlak-sepet.webp', cm: 30,
     desc: 'Sık örgülü ve dayanıklı form. Masada ekmekten meyveye, gündelik yaşamın içinde sanatsal bir detay.',
     meta: ['Ø ~30 cm', 'Doğal ton', 'Siparişe özel'],
+    use: 'Masada ekmekten meyveye, girişte anahtardan mektuba; gündelik dağınıklığı toparlayan, her ortama yakışan sakin bir form.',
   },
   {
     id: 'horoz-sepet', name: 'Bayram Horozu', sub: 'Dekoratif · Bayram', price: 1680,
     image: '/assets/products/horoz-sepet.webp', badge: 'Sınırlı sayıda', cm: 25,
     desc: 'Geleneksel hasır teknikleriyle elde örülen horoz formlu sepet; ikramlarınıza eşlik eden sıcak bir karşılaşma.',
     meta: ['~25 cm', 'Organik doku', 'Özel seri'],
-    maker: { name: 'Banu Kayaalp', handle: '@banukayaalp', instagram: 'https://www.instagram.com/banukayaalp' },
+    gallery: ['/assets/products/horoz-sepet.webp'],
+    use: 'Bayram ve kahvaltı sofralarının neşeli misafiri. Yumurtalarınızı, şekerlerinizi ya da küçük ikramlarınızı ağırlar; bir rafta tek başına dururken bile sofranıza geleneğin ve el emeğinin sıcaklığını taşır.',
+    maker: {
+      name: 'Banu Kayaalp', handle: '@banukayaalp', instagram: 'https://www.instagram.com/banukayaalp',
+      note: 'Banu, her horozu kağıt ipini sabırla bükerek elde şekillendiriyor; tarağından ibiğine kadar tüm detaylar tek tek örülüyor. Bu yüzden hiçbir parça bir diğerinin tıpatıp aynısı değil.',
+    },
   },
   {
     id: 'orgu-ayna', name: 'Güneş Ayna', sub: 'Duvar · Ayna', price: 2240,
     image: '/assets/products/orgu-ayna.webp', sold: true, cm: 50,
     desc: 'Güneş formunda, elde örülmüş çerçeveli yuvarlak ayna. Tek parça olarak üretildi; sahibini buldu.',
     meta: ['Ø ~50 cm', 'Doğal lif', 'Tek parça'],
+    use: 'Girişte, konsol üstünde ya da çalışma köşesinde; güneş formuyla duvara doğal bir odak ve yumuşak bir ışık oyunu taşır.',
   },
   {
     id: 'ozel', name: 'Özel Ölçü', sub: 'Ölçüye özel', price: null, custom: true,

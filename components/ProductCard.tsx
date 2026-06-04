@@ -3,7 +3,8 @@
 import Image from 'next/image';
 import { withBase } from '@/lib/basePath';
 import { formatPrice, type Product } from '@/lib/brand';
-import { useCart } from '@/components/shop/CartProvider';
+import { BuyButton } from '@/components/shop/BuyButton';
+import { useProductModal } from '@/components/shop/ProductModalProvider';
 
 type Props = { product: Product; priority?: boolean };
 
@@ -16,31 +17,11 @@ function sizePct(cm?: number) {
   return `${Math.round(r * 100)}%`;
 }
 
-/** Dark, full-width add-to-cart (or "Bize yazın" for made-to-order). */
-function BuyButton({ product, className = '' }: { product: Product; className?: string }) {
-  const cart = useCart();
-  const base =
-    'flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-bg bg-fg transition-all duration-500 ease-quiet hover:bg-ink active:scale-[0.99]';
-  if (product.custom) {
-    return (
-      <a href="#siparis" className={`${base} ${className}`}>
-        Bize yazın
-        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
-      </a>
-    );
-  }
-  return (
-    <button type="button" onClick={() => cart.add(product.name)} className={`${base} ${className}`}>
-      Sipariş listesine ekle
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
-    </button>
-  );
-}
-
 export function ProductCard({ product, priority = false }: Props) {
   const { name, image, sub, badge, desc, price, meta, sold, custom } = product;
+  const modal = useProductModal();
 
-  // Made-to-order — full-width banner card with the wax seal.
+  // Made-to-order — full-width banner card with the wax seal (no detail modal).
   if (custom) {
     return (
       <article className="flex h-full flex-col items-start gap-6 rounded-[1.7rem] bg-card p-7 shadow-[0_30px_60px_-38px_rgba(120,70,25,0.45)] sm:flex-row sm:items-center">
@@ -61,8 +42,15 @@ export function ProductCard({ product, priority = false }: Props) {
 
   const dim = sold ? 'opacity-55 grayscale' : '';
 
+  // Mouse: a click anywhere on the card (except real controls) opens the detail
+  // modal. Keyboard/AT users get the dedicated "detay" button (top-right).
+  function activate(e: React.MouseEvent) {
+    if ((e.target as HTMLElement).closest('[data-stop]')) return;
+    modal.open(product);
+  }
+
   return (
-    <article className="group relative flex h-full flex-col">
+    <article onClick={activate} className="group relative flex h-full cursor-pointer flex-col">
       <span
         className={`absolute left-4 top-4 z-20 rounded-full px-3 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] ${
           sold ? 'bg-ink/80 text-linen' : badge ? 'bg-accent-fill text-on-accent' : 'hidden'
@@ -70,6 +58,17 @@ export function ProductCard({ product, priority = false }: Props) {
       >
         {sold ? 'Satıldı' : badge}
       </span>
+
+      {/* detail trigger — the accessible, focusable control; cue on hover/focus */}
+      <button
+        type="button"
+        data-stop
+        onClick={() => modal.open(product)}
+        aria-label={`${name} detaylarını gör`}
+        className="absolute right-4 top-4 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-line bg-bg/70 text-fg opacity-0 backdrop-blur transition-all duration-500 ease-quiet group-hover:opacity-100 focus-visible:opacity-100 motion-reduce:opacity-100"
+      >
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
+      </button>
 
       {/* image stage — fixed height for every card; cutout sized by real cm */}
       <div className="relative z-10 -mb-14 flex h-64 items-end justify-center px-6">
@@ -138,8 +137,8 @@ function InstagramIcon() {
 
 /**
  * Maker credit: a tag showing "Üreten Eller: Banu Kayaalp"; on hover/focus the
- * panel behind it reveals the Instagram-linked handle. The whole tag is the
- * link, so a tap on touch devices opens Instagram directly.
+ * panel behind it reveals the Instagram-linked handle. data-stop keeps a tap
+ * from also opening the product modal — it goes straight to Instagram.
  */
 function MakerTag({ maker }: { maker: NonNullable<Product['maker']> }) {
   return (
@@ -148,6 +147,7 @@ function MakerTag({ maker }: { maker: NonNullable<Product['maker']> }) {
       target="_blank"
       rel="noopener noreferrer"
       data-noscroll
+      data-stop
       aria-label={`Üreten Eller: ${maker.name} — Instagram ${maker.handle}`}
       className="group/mk mt-5 block overflow-hidden rounded-[1rem] border border-line bg-bg/50 transition-colors duration-300 hover:border-accent/40 focus-visible:border-accent/40"
     >

@@ -4,6 +4,7 @@ import { RevealImage } from '@/components/motion/RevealImage';
 import { RevealText } from '@/components/motion/RevealText';
 import { ProductCard } from '@/components/ProductCard';
 import { CartProvider } from '@/components/shop/CartProvider';
+import { ProductModalProvider } from '@/components/shop/ProductModalProvider';
 import { OrderForm } from '@/components/site/OrderForm';
 import { ProcessSteps } from '@/components/site/ProcessSteps';
 import { SiteFooter } from '@/components/site/SiteFooter';
@@ -32,6 +33,7 @@ const FRAME_SHADOW = 'shadow-[0_50px_90px_-50px_rgba(120,70,25,0.45)]';
 export default function Home() {
   return (
     <CartProvider>
+      <ProductModalProvider>
       <SiteNav />
 
       <main id="top" className="bg-bg text-fg">
@@ -231,6 +233,7 @@ export default function Home() {
       </main>
 
       <SiteFooter />
+      </ProductModalProvider>
     </CartProvider>
   );
 }
