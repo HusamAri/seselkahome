@@ -19,6 +19,11 @@ export function PriceTag({ product, size = 'card' }: { product: Product; size?: 
     return <span className={`font-display ${big} leading-none text-muted line-through decoration-1`}>{formatPrice(price)}</span>;
   }
 
+  // Excluded from the launch discount — flat full price.
+  if (product.noDiscount) {
+    return <span className={`font-display ${big} leading-none text-fg`}>{formatPrice(price)}</span>;
+  }
+
   const sale = salePrice(price);
   const pct = Math.round(launchDiscount * 100);
   return (

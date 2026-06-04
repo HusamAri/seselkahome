@@ -68,6 +68,8 @@ export type Product = {
   custom?: boolean;
   /** Sold/archive piece: shown dimmed, not orderable. */
   sold?: boolean;
+  /** Excluded from the launch discount — shown at full price. */
+  noDiscount?: boolean;
   /** Real size in cm (longest dimension); drives proportional render height. */
   cm?: number;
   /** Detail-view photos (lifestyle/close-ups). Falls back to [image]. */
@@ -85,7 +87,16 @@ export const products: Product[] = [
     image: '/assets/products/asili-sepet.webp', badge: 'Yeni', cm: 28,
     desc: 'Kuru çiçek tasarımıyla birlikte; duvarda ya da kapı arkasında rafine ve sessiz bir köşe.',
     meta: ['Ø ~28 cm', 'Doğal lif', 'El yapımı dekor'],
+    gallery: ['/assets/products/asili-1.webp', '/assets/products/asili-2.webp'],
     use: 'Duvarda ya da kapı arkasında; kurutulmuş çiçekler, ince dallar veya sevdiğiniz küçük objelerle eşleştiğinde sessiz, sıcak bir köşe yaratır.',
+  },
+  {
+    id: 'hasir-avize', name: 'Hasır Avize', sub: 'Aydınlatma · Avize', price: 2500, noDiscount: true,
+    image: '/assets/products/hasir-avize.webp', badge: 'Yeni', cm: 50,
+    desc: 'Elde örülmüş, organik dalgalı formuyla hasır avize; yakıldığında tavana ve duvarlara dantel gibi yumuşak gölgeler düşürür.',
+    meta: ['~50 cm', 'Aydınlatma', 'El yapımı'],
+    gallery: ['/assets/products/hasir-avize-1.webp', '/assets/products/hasir-avize-2.webp', '/assets/products/hasir-avize-3.webp'],
+    use: 'Yemek masasının, antrenin ya da oturma alanının üzerinde tek başına bir heykel gibi durur; ışığını açtığınızda örgü deseni mekâna sıcak, hareketli bir gölge oyununa dönüşür.',
   },
   {
     id: 'yuvarlak-sepet', name: 'Yuvarlak Sepet', sub: 'Sepet · Tepsi', price: 1650,
