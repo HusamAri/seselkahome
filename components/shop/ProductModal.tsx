@@ -6,17 +6,8 @@ import { withBase } from '@/lib/basePath';
 import { type Product } from '@/lib/brand';
 import { useLenis } from '@/components/providers/SmoothScrollProvider';
 import { BuyButton } from '@/components/shop/BuyButton';
+import { InstagramIcon } from '@/components/shop/InstagramIcon';
 import { PriceTag } from '@/components/shop/PriceTag';
-
-function InstagramIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
-    </svg>
-  );
-}
 
 type Props = {
   /** Product to show; kept mounted through the close transition. */
@@ -29,7 +20,9 @@ type Props = {
  *  "Üreten Eller" block (usage paragraph + maker note + Instagram). */
 export function ProductModal({ active, open, onClose }: Props) {
   const lenis = useLenis();
-  const closeRef = useRef<HTMLButtonElement>(null);
+  const lenisRef = useRef(lenis);
+  lenisRef.current = lenis;
+  const panelRef = useRef<HTMLDivElement>(null);
   const [idx, setIdx] = useState(0);
 
   // Reset gallery to the first image whenever a new product opens.
@@ -37,36 +30,55 @@ export function ProductModal({ active, open, onClose }: Props) {
     setIdx(0);
   }, [active?.id]);
 
-  // Esc to close + focus the close button on open.
+  // Lifecycle: while the dialog is mounted, lock background scroll and hold
+  // focus inside it — released only when it fully unmounts (after the fade),
+  // so the page can't scroll or steal focus during the close transition.
   useEffect(() => {
-    if (!open) return;
+    if (!active) return;
     const prevFocus = document.activeElement as HTMLElement | null;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    document.addEventListener('keydown', onKey);
-    closeRef.current?.focus();
+    lenisRef.current?.stop();
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    panelRef.current?.focus();
     return () => {
-      document.removeEventListener('keydown', onKey);
+      lenisRef.current?.start();
+      document.body.style.overflow = prevOverflow;
       prevFocus?.focus?.();
     };
-  }, [open, onClose]);
+  }, [active]);
 
-  // Lock background scroll (Lenis + native fallback for reduced-motion).
+  // Interaction: Esc closes; Tab is trapped within the panel while visible.
   useEffect(() => {
     if (!open) return;
-    lenis?.stop();
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      lenis?.start();
-      document.body.style.overflow = prev;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      const root = panelRef.current;
+      if (!root) return;
+      const f = root.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      if (!f.length) return;
+      const first = f[0];
+      const last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
-  }, [open, lenis]);
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [open, onClose]);
 
   if (!active) return null;
 
-  const { name, sub, price, meta, desc, use, maker, sold } = active;
+  const { name, sub, meta, desc, use, maker, sold } = active;
   const images = active.gallery?.length ? active.gallery : [active.image];
   const hero = images[Math.min(idx, images.length - 1)];
   // Real lifestyle photos fill the frame; a transparent cutout floats on the
@@ -78,15 +90,13 @@ export function ProductModal({ active, open, onClose }: Props) {
       role="dialog"
       aria-modal="true"
       aria-label={`${name} — ürün detayı`}
-      className={`fixed inset-0 z-[90] flex items-end justify-center sm:items-center sm:p-6 ${
+      className={`fixed inset-0 z-[100] flex items-end justify-center sm:items-center sm:p-6 ${
         open ? '' : 'pointer-events-none'
       }`}
     >
-      {/* backdrop */}
-      <button
-        type="button"
-        aria-label="Kapat"
-        tabIndex={-1}
+      {/* backdrop — decorative click-to-close; the X button and Esc are the real controls */}
+      <div
+        aria-hidden="true"
         onClick={onClose}
         className={`absolute inset-0 bg-ink/45 backdrop-blur-[3px] transition-opacity duration-500 ease-quiet ${
           open ? 'opacity-100' : 'opacity-0'
@@ -95,13 +105,14 @@ export function ProductModal({ active, open, onClose }: Props) {
 
       {/* panel */}
       <div
+        ref={panelRef}
+        tabIndex={-1}
         data-lenis-prevent
-        className={`relative max-h-[92vh] w-full overflow-y-auto overscroll-contain rounded-t-[1.8rem] bg-card shadow-[0_-30px_80px_-40px_rgba(42,37,32,0.6)] transition-all duration-500 ease-quiet sm:max-w-4xl sm:rounded-[1.8rem] sm:shadow-[0_40px_120px_-50px_rgba(42,37,32,0.7)] ${
+        className={`relative max-h-[92vh] w-full overflow-y-auto overscroll-contain rounded-t-[1.8rem] bg-card shadow-[0_-30px_80px_-40px_rgba(42,37,32,0.6)] outline-none transition-all duration-500 ease-quiet sm:max-w-4xl sm:rounded-[1.8rem] sm:shadow-[0_40px_120px_-50px_rgba(42,37,32,0.7)] ${
           open ? 'translate-y-0 opacity-100 sm:scale-100' : 'translate-y-6 opacity-0 sm:translate-y-0 sm:scale-[0.97]'
         }`}
       >
         <button
-          ref={closeRef}
           type="button"
           onClick={onClose}
           aria-label="Kapat"

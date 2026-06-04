@@ -46,8 +46,7 @@
     --accent: #d8897b;      /* lightened ember — ~5.2:1 on bg */
     --accent-fill: #a8362b; /* ember fill keeps brand red, linen text on top */
     --on-accent: #f4efe6;
-    --plum: #a3768585;      /* lightened fig for dark accents */
-    --plum: #a37685;
+    --plum: #a37685;        /* lightened fig for dark accents */
     --wipe: #6e4a5a;
     --card: #322c25;          /* elevated warm dark — cards on dark */
     --glow: 168, 54, 43;      /* deep ember glow on dark */

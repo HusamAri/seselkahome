@@ -148,6 +148,7 @@ export const launchDiscount = 0.3;
 
 /** Launch-discounted price, rounded to the nearest ₺10 for a clean figure. */
 export function salePrice(value: number): number {
+  if (value <= 0) return value;
   return Math.round((value * (1 - launchDiscount)) / 10) * 10;
 }
 

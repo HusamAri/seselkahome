@@ -30,7 +30,7 @@ export function OrderForm() {
     window.setTimeout(() => setSent(false), 2600);
   }
 
-  const field = 'w-full rounded-[3px] border border-line bg-bg px-4 py-3 text-sm text-fg placeholder:text-muted/70 focus:border-accent focus:outline-none';
+  const field = 'w-full rounded-[3px] border border-line bg-bg px-4 py-3 text-sm text-fg placeholder:text-muted focus:border-accent focus:outline-none';
   const label = 'mb-1.5 block text-[0.7rem] uppercase tracking-[0.16em] text-muted';
 
   return (
