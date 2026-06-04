@@ -96,9 +96,22 @@ export default function Home() {
 
         {/* ---------------------------------------------------- SHOP */}
         <section id="koleksiyon" className="relative scroll-mt-28 overflow-hidden border-t border-line">
+          {/* full-bleed collection hero */}
+          <div className="relative h-[46vh] min-h-[320px] w-full overflow-hidden md:h-[62vh]">
+            <Image
+              src={withBase('/assets/koleksiyon-hero.webp')}
+              alt="Seselka koleksiyonu: örme sepetler, güneş ayna ve doğal dokular bir arada"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-bg via-bg/10 to-transparent" />
+          </div>
+
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-44 h-[520px] w-[860px] max-w-[120vw] -translate-x-1/2 rounded-full"
+            className="pointer-events-none absolute left-1/2 top-[60vh] h-[520px] w-[860px] max-w-[120vw] -translate-x-1/2 rounded-full"
             style={{ background: 'radial-gradient(circle, rgba(var(--glow), 0.45), transparent 64%)' }}
           />
           <div className="relative mx-auto max-w-wrap px-6 py-24 md:py-32">

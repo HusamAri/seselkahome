@@ -6,7 +6,16 @@ import { withBase } from '@/lib/basePath';
 import { formatPrice, type Product } from '@/lib/brand';
 import { useLenis } from '@/components/providers/SmoothScrollProvider';
 import { BuyButton } from '@/components/shop/BuyButton';
-import { InstagramEmbed } from '@/components/shop/InstagramEmbed';
+
+function InstagramIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+    </svg>
+  );
+}
 
 type Props = {
   /** Product to show; kept mounted through the close transition. */
@@ -191,9 +200,16 @@ export function ProductModal({ active, open, onClose }: Props) {
                 <span className="block text-[0.6rem] uppercase tracking-[0.2em] text-muted">Üreten Eller</span>
                 <span className="mt-1 block font-display text-xl leading-none text-fg">{maker.name}</span>
                 {maker.note ? <p className="mt-2.5 text-sm leading-[1.85] text-muted">{maker.note}</p> : null}
-                <div className="mt-4">
-                  <InstagramEmbed name={maker.name} handle={maker.handle} url={maker.instagram} />
-                </div>
+                <a
+                  href={maker.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-stop
+                  className="mt-4 inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm font-medium text-fg transition-colors duration-300 hover:border-accent/40 hover:text-accent"
+                >
+                  <InstagramIcon />
+                  {maker.handle}
+                </a>
               </div>
             ) : null}
           </div>
