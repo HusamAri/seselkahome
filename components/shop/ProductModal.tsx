@@ -3,9 +3,10 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { withBase } from '@/lib/basePath';
-import { formatPrice, type Product } from '@/lib/brand';
+import { type Product } from '@/lib/brand';
 import { useLenis } from '@/components/providers/SmoothScrollProvider';
 import { BuyButton } from '@/components/shop/BuyButton';
+import { PriceTag } from '@/components/shop/PriceTag';
 
 function InstagramIcon() {
   return (
@@ -161,9 +162,7 @@ export function ProductModal({ active, open, onClose }: Props) {
             </h2>
 
             <div className="mt-3 flex items-center gap-3">
-              <span className={`font-display text-2xl leading-none ${sold ? 'text-muted line-through decoration-1' : 'text-fg'}`}>
-                {formatPrice(price)}
-              </span>
+              <PriceTag product={active} size="modal" />
               {sold ? <span className="rounded-full bg-ink/10 px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-muted">Tek parça · satıldı</span> : null}
             </div>
 
