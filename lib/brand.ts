@@ -68,6 +68,8 @@ export type Product = {
   custom?: boolean;
   /** Sold/archive piece: shown dimmed, not orderable. */
   sold?: boolean;
+  /** Excluded from the launch discount — shown at full price. */
+  noDiscount?: boolean;
   /** Real size in cm (longest dimension); drives proportional render height. */
   cm?: number;
   /** Detail-view photos (lifestyle/close-ups). Falls back to [image]. */
@@ -82,10 +84,23 @@ export type Product = {
 export const products: Product[] = [
   {
     id: 'asili-sepet', name: 'Asılı Sepet', sub: 'Duvar · Sepet', price: 1850,
-    image: '/assets/products/asili-sepet.webp', badge: 'Yeni', cm: 28,
+    image: '/assets/products/asili-sepet.webp', cm: 28,
     desc: 'Kuru çiçek tasarımıyla birlikte; duvarda ya da kapı arkasında rafine ve sessiz bir köşe.',
     meta: ['Ø ~28 cm', 'Doğal lif', 'El yapımı dekor'],
+    gallery: ['/assets/products/asili-1.webp', '/assets/products/asili-2.webp'],
     use: 'Duvarda ya da kapı arkasında; kurutulmuş çiçekler, ince dallar veya sevdiğiniz küçük objelerle eşleştiğinde sessiz, sıcak bir köşe yaratır.',
+  },
+  {
+    id: 'hasir-avize', name: 'Hasır Avize', sub: 'Aydınlatma · Avize', price: 2500, noDiscount: true,
+    image: '/assets/products/hasir-avize.webp', badge: 'Yeni', cm: 50,
+    desc: 'Elde örülmüş, organik dalgalı formuyla hasır avize; yakıldığında tavana ve duvarlara dantel gibi yumuşak gölgeler düşürür.',
+    meta: ['~50 cm', 'Aydınlatma', 'El yapımı'],
+    gallery: ['/assets/products/hasir-avize-1.webp', '/assets/products/hasir-avize-2.webp', '/assets/products/hasir-avize-3.webp'],
+    use: 'Yemek masasının, antrenin ya da oturma alanının üzerinde tek başına bir heykel gibi durur; ışığını açtığınızda örgü deseni mekâna sıcak, hareketli bir gölge oyununa dönüşür.',
+    maker: {
+      name: 'Derya Gül', handle: '@deryagu197211', instagram: 'https://www.instagram.com/deryagu197211',
+      note: 'Derya bu avizeyi örerken düz ve simetrik bir form peşinde değildi; ışığın kâğıt dalların arasından nasıl süzüleceğini düşündü. Rüzgârda kıpırdayan suyu ve usulca toplanan bulutları hayal ederek her katmanı serbestçe dalgalandırdı. İstediği yalnızca bir aydınlatma değil, yakıldığında tavana ve duvarlara huzur veren, dantel gibi bir gölge oyunu armağan etmekti.',
+    },
   },
   {
     id: 'yuvarlak-sepet', name: 'Yuvarlak Sepet', sub: 'Sepet · Tepsi', price: 1650,
