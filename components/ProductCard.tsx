@@ -2,8 +2,9 @@
 
 import Image from 'next/image';
 import { withBase } from '@/lib/basePath';
-import { formatPrice, type Product } from '@/lib/brand';
+import { type Product } from '@/lib/brand';
 import { BuyButton } from '@/components/shop/BuyButton';
+import { PriceTag } from '@/components/shop/PriceTag';
 import { useProductModal } from '@/components/shop/ProductModalProvider';
 
 type Props = { product: Product; priority?: boolean };
@@ -92,9 +93,7 @@ export function ProductCard({ product, priority = false }: Props) {
       {/* text block — flex-1 so all cards end at the same height */}
       <div className={`flex flex-1 flex-col rounded-[1.7rem] px-6 pb-6 pt-20 shadow-[0_34px_64px_-36px_rgba(120,70,25,0.5)] ${sold ? 'bg-card/70' : 'bg-card'}`}>
         <div className="flex items-start justify-between gap-3">
-          <span className={`font-display text-[1.9rem] leading-none ${sold ? 'text-muted line-through decoration-1' : 'text-fg'}`}>
-            {formatPrice(price)}
-          </span>
+          <PriceTag product={product} size="card" />
           {meta?.[0] ? (
             <span className="shrink-0 rounded-full border border-line px-3 py-1 text-[0.62rem] uppercase tracking-[0.1em] text-muted">{meta[0]}</span>
           ) : null}

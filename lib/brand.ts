@@ -81,14 +81,14 @@ export type Product = {
 /** Shop catalog — real product photography, Sessiz Cesaret copy. */
 export const products: Product[] = [
   {
-    id: 'asili-sepet', name: 'Asılı Sepet', sub: 'Duvar · Sepet', price: 1480,
+    id: 'asili-sepet', name: 'Asılı Sepet', sub: 'Duvar · Sepet', price: 1850,
     image: '/assets/products/asili-sepet.webp', badge: 'Yeni', cm: 28,
     desc: 'Kuru çiçek tasarımıyla birlikte; duvarda ya da kapı arkasında rafine ve sessiz bir köşe.',
     meta: ['Ø ~28 cm', 'Doğal lif', 'El yapımı dekor'],
     use: 'Duvarda ya da kapı arkasında; kurutulmuş çiçekler, ince dallar veya sevdiğiniz küçük objelerle eşleştiğinde sessiz, sıcak bir köşe yaratır.',
   },
   {
-    id: 'yuvarlak-sepet', name: 'Yuvarlak Sepet', sub: 'Sepet · Tepsi', price: 1180,
+    id: 'yuvarlak-sepet', name: 'Yuvarlak Sepet', sub: 'Sepet · Tepsi', price: 1650,
     image: '/assets/products/yuvarlak-sepet.webp', cm: 30,
     desc: 'Sık örgülü ve dayanıklı form. Masada ekmekten meyveye, gündelik yaşamın içinde sanatsal bir detay.',
     meta: ['Ø ~30 cm', 'Doğal ton', 'Siparişe özel'],
@@ -96,7 +96,7 @@ export const products: Product[] = [
     use: 'Masada ekmekten meyveye, girişte anahtardan mektuba; gündelik dağınıklığı toparlayan, her ortama yakışan sakin bir form.',
   },
   {
-    id: 'horoz-sepet', name: 'Bayram Horozu', sub: 'Dekoratif · Bayram', price: 1680,
+    id: 'horoz-sepet', name: 'Bayram Horozu', sub: 'Dekoratif · Bayram', price: 2450,
     image: '/assets/products/horoz-sepet.webp', badge: 'Sınırlı sayıda', cm: 25,
     desc: 'Geleneksel hasır teknikleriyle elde örülen horoz formlu sepet; ikramlarınıza eşlik eden sıcak bir karşılaşma.',
     meta: ['~25 cm', 'Organik doku', 'Özel seri'],
@@ -108,7 +108,7 @@ export const products: Product[] = [
     },
   },
   {
-    id: 'orgu-ayna', name: 'Güneş Ayna', sub: 'Duvar · Ayna', price: 2240,
+    id: 'orgu-ayna', name: 'Güneş Ayna', sub: 'Duvar · Ayna', price: 3900,
     image: '/assets/products/orgu-ayna.webp', sold: true, cm: 50,
     desc: 'Güneş formunda, elde örülmüş çerçeveli yuvarlak ayna. Tek parça olarak üretildi; sahibini buldu.',
     meta: ['Ø ~50 cm', 'Doğal lif', 'Tek parça'],
@@ -126,6 +126,14 @@ export const products: Product[] = [
 export function formatPrice(value: number | null): string {
   if (value == null) return 'Konuşalım';
   return '₺ ' + value.toLocaleString('tr-TR');
+}
+
+/** Açılışa özel indirim — opening launch discount applied across the catalog. */
+export const launchDiscount = 0.3;
+
+/** Launch-discounted price, rounded to the nearest ₺10 for a clean figure. */
+export function salePrice(value: number): number {
+  return Math.round((value * (1 - launchDiscount)) / 10) * 10;
 }
 
 export const contact = {

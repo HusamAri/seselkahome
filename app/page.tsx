@@ -124,6 +124,10 @@ export default function Home() {
                 <p className="mt-5 max-w-md text-sm leading-relaxed text-muted">
                   Atölyemizde stok bulunmaz. Siparişinizle birlikte size özel örülen her parça, el işçiliğinin benzersiz izlerini taşır.
                 </p>
+                <span className="mt-5 inline-flex items-center gap-2 rounded-full border border-accent/30 px-3.5 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-accent">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+                  Açılışa özel · Tüm koleksiyonda %30
+                </span>
               </div>
               <p className="max-w-xs text-sm leading-relaxed text-muted">
                 Elde örülmüş, sınırlı sayıda tasarım nesneler.
