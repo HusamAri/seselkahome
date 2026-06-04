@@ -130,8 +130,12 @@ export default function Home() {
               </p>
             </div>
 
-            {/* one swipeable row on all breakpoints; cards equal size */}
-            <div className="no-scrollbar -mx-6 mt-12 flex snap-x snap-mandatory items-stretch gap-6 overflow-x-auto overflow-y-clip px-6 pb-4 pt-10 md:mt-16 md:gap-7 md:px-10 lg:[--card-w:340px]">
+            {/* full-bleed swipe row: first card aligns under the heading, cards
+                flow off the right edge to echo the full-bleed hero */}
+            <div
+              className="no-scrollbar relative left-1/2 mt-12 flex w-screen -translate-x-1/2 snap-x snap-mandatory items-stretch gap-6 overflow-x-auto overflow-y-clip pb-4 pt-10 md:mt-16 md:gap-7 lg:[--card-w:360px]"
+              style={{ paddingLeft: 'max(1.5rem, calc(50vw - 576px))', paddingRight: '1.5rem', scrollPaddingLeft: 'max(1.5rem, calc(50vw - 576px))' }}
+            >
               {products.map((p, i) => (
                 <div
                   key={p.id}
