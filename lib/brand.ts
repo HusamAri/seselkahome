@@ -25,9 +25,6 @@ export const colors = {
 
 export const brand = {
   name: 'Seselka Home',
-  /** Verbal + motion positioning. */
-  positioning: 'Sessiz Cesaret',
-  voice: 'Sessiz lüks: sakin, kendinden emin, gösterişsiz.',
   founded: 2026,
   taglines: {
     primary: 'Doğada köklenir, elde yeniden doğar.',
@@ -37,20 +34,6 @@ export const brand = {
     display: 'Cormorant Garamond', // high-contrast serif — the SESELKA wordmark
     body: 'Plus Jakarta Sans', // light, tracked humanist sans — labels + copy
   },
-  /** Logo variants map to the adaptive system on the board. */
-  logos: {
-    primary: '/assets/logo-primary-vertical-clean.png',
-    monogram: '/assets/monogram.webp',
-    seal: '/assets/wax-seal.webp',
-    monochrome: '/assets/icon-monogram-clean.png',
-  },
-  /** KULLANIM İLKELERİ — usage laws, enforced across the system. */
-  principles: [
-    'Logonun formu değişmez.',
-    'Kırmızı nokta (ember) marka imzasıdır.',
-    'Mor ton (fig plum) yalnızca seçili alanlarda vurgu olarak kullanılır.',
-    'Sessiz lüks, doğallık ve zamansızlık her kullanımda korunur.',
-  ],
   colors,
 } as const;
 
