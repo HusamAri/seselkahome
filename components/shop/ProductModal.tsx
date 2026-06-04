@@ -68,6 +68,9 @@ export function ProductModal({ active, open, onClose }: Props) {
   const { name, sub, price, meta, desc, use, maker, sold } = active;
   const images = active.gallery?.length ? active.gallery : [active.image];
   const hero = images[Math.min(idx, images.length - 1)];
+  // Real lifestyle photos fill the frame; a transparent cutout floats on the
+  // warm studio gradient instead.
+  const hasPhotos = !!active.gallery?.length;
 
   return (
     <div
@@ -120,7 +123,7 @@ export function ProductModal({ active, open, onClose }: Props) {
                 fill
                 priority
                 sizes="(min-width:768px) 42vw, 90vw"
-                className={`object-contain p-6 drop-shadow-[0_26px_36px_rgba(120,70,25,0.3)] ${sold ? 'opacity-70 grayscale' : ''}`}
+                className={`${hasPhotos ? 'object-cover' : 'object-contain p-6 drop-shadow-[0_26px_36px_rgba(120,70,25,0.3)]'} ${sold ? 'opacity-70 grayscale' : ''}`}
               />
               {sold ? (
                 <span className="absolute left-4 top-4 rounded-full bg-ink/80 px-3 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-linen">
@@ -143,7 +146,7 @@ export function ProductModal({ active, open, onClose }: Props) {
                       i === idx ? 'border-accent' : 'border-line hover:border-accent/40'
                     }`}
                   >
-                    <Image src={withBase(src)} alt="" fill sizes="64px" className="object-contain p-1.5" />
+                    <Image src={withBase(src)} alt="" fill sizes="64px" className={hasPhotos ? 'object-cover' : 'object-contain p-1.5'} />
                   </button>
                 ))}
               </div>

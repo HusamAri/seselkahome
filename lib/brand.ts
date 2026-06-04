@@ -92,6 +92,7 @@ export const products: Product[] = [
     image: '/assets/products/yuvarlak-sepet.webp', cm: 30,
     desc: 'Sık örgülü ve dayanıklı form. Masada ekmekten meyveye, gündelik yaşamın içinde sanatsal bir detay.',
     meta: ['Ø ~30 cm', 'Doğal ton', 'Siparişe özel'],
+    gallery: ['/assets/products/yuvarlak-1.webp', '/assets/products/yuvarlak-2.webp', '/assets/products/yuvarlak-3.webp'],
     use: 'Masada ekmekten meyveye, girişte anahtardan mektuba; gündelik dağınıklığı toparlayan, her ortama yakışan sakin bir form.',
   },
   {
@@ -99,7 +100,7 @@ export const products: Product[] = [
     image: '/assets/products/horoz-sepet.webp', badge: 'Sınırlı sayıda', cm: 25,
     desc: 'Geleneksel hasır teknikleriyle elde örülen horoz formlu sepet; ikramlarınıza eşlik eden sıcak bir karşılaşma.',
     meta: ['~25 cm', 'Organik doku', 'Özel seri'],
-    gallery: ['/assets/products/horoz-sepet.webp'],
+    gallery: ['/assets/products/horoz-1.webp', '/assets/products/horoz-2.webp', '/assets/products/horoz-3.webp'],
     use: 'Bayram ve kahvaltı sofralarının neşeli misafiri. Yumurtalarınızı, şekerlerinizi ya da küçük ikramlarınızı ağırlar; bir rafta tek başına dururken bile sofranıza geleneğin ve el emeğinin sıcaklığını taşır.',
     maker: {
       name: 'Banu Kayaalp', handle: '@banukayaalp', instagram: 'https://www.instagram.com/banukayaalp',
