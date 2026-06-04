@@ -84,7 +84,7 @@ export type Product = {
 export const products: Product[] = [
   {
     id: 'asili-sepet', name: 'Asılı Sepet', sub: 'Duvar · Sepet', price: 1850,
-    image: '/assets/products/asili-sepet.webp', badge: 'Yeni', cm: 28,
+    image: '/assets/products/asili-sepet.webp', cm: 28,
     desc: 'Kuru çiçek tasarımıyla birlikte; duvarda ya da kapı arkasında rafine ve sessiz bir köşe.',
     meta: ['Ø ~28 cm', 'Doğal lif', 'El yapımı dekor'],
     gallery: ['/assets/products/asili-1.webp', '/assets/products/asili-2.webp'],
