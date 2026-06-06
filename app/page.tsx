@@ -142,7 +142,7 @@ export default function Home() {
               className="no-scrollbar relative left-1/2 mt-12 flex w-screen -translate-x-1/2 snap-x snap-mandatory items-stretch gap-6 overflow-x-auto overflow-y-clip pb-4 pt-10 md:mt-16 md:gap-7 lg:[--card-w:360px]"
               style={{ paddingLeft: 'max(1.5rem, calc(50vw - 576px))', paddingRight: '1.5rem', scrollPaddingLeft: 'max(1.5rem, calc(50vw - 576px))' }}
             >
-              {products.map((p, i) => (
+              {products.filter((p) => !p.hidden).map((p, i) => (
                 <div
                   key={p.id}
                   className={`shrink-0 snap-start ${
