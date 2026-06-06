@@ -76,15 +76,15 @@ export const products: Product[] = [
     use: 'Duvarda ya da kapı arkasında; kurutulmuş çiçekler, ince dallar veya sevdiğiniz küçük objelerle eşleştiğinde sessiz, sıcak bir köşe yaratır.',
   },
   {
-    id: 'hasir-avize', name: 'Hasır Avize', sub: 'Aydınlatma · Avize', price: 2500, noDiscount: true, hidden: true,
+    id: 'hasir-avize', name: 'Hasır Avize', sub: 'Aydınlatma · Avize', price: 2500, noDiscount: true,
     image: '/assets/products/hasir-avize.webp', badge: 'Yeni', cm: 50,
     desc: 'Elde örülmüş, organik dalgalı formuyla hasır avize; yakıldığında tavana ve duvarlara dantel gibi yumuşak gölgeler düşürür.',
     meta: ['~50 cm', 'Aydınlatma', 'El yapımı'],
     gallery: ['/assets/products/hasir-avize-1.webp', '/assets/products/hasir-avize-2.webp', '/assets/products/hasir-avize-3.webp'],
     use: 'Yemek masasının, antrenin ya da oturma alanının üzerinde tek başına bir heykel gibi durur; ışığını açtığınızda örgü deseni mekâna sıcak, hareketli bir gölge oyununa dönüşür.',
     maker: {
-      name: 'Derya Gül', handle: '@deryagu197211', instagram: 'https://www.instagram.com/deryagu197211',
-      note: 'Derya bu avizeyi örerken düz ve simetrik bir form peşinde değildi; ışığın kâğıt dalların arasından nasıl süzüleceğini düşündü. Rüzgârda kıpırdayan suyu ve usulca toplanan bulutları hayal ederek her katmanı serbestçe dalgalandırdı. İstediği yalnızca bir aydınlatma değil, yakıldığında tavana ve duvarlara huzur veren, dantel gibi bir gölge oyunu armağan etmekti.',
+      name: 'Banu Kayaalp', handle: '@banukayaalp', instagram: 'https://www.instagram.com/banukayaalp',
+      note: 'Banu bu avizeyi örerken düz ve simetrik bir form peşinde değildi; ışığın kâğıt dalların arasından nasıl süzüleceğini düşündü. Rüzgârda kıpırdayan suyu ve usulca toplanan bulutları hayal ederek her katmanı serbestçe dalgalandırdı. İstediği yalnızca bir aydınlatma değil, yakıldığında tavana ve duvarlara huzur veren, dantel gibi bir gölge oyunu armağan etmekti.',
     },
   },
   {
