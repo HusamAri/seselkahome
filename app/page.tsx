@@ -6,6 +6,7 @@ import { ProductCard } from '@/components/ProductCard';
 import { CartProvider } from '@/components/shop/CartProvider';
 import { LaunchPopup } from '@/components/shop/LaunchPopup';
 import { ProductModalProvider } from '@/components/shop/ProductModalProvider';
+import { MakersExhibit } from '@/components/site/MakersExhibit';
 import { OrderForm } from '@/components/site/OrderForm';
 import { ProcessSteps } from '@/components/site/ProcessSteps';
 import { SiteFooter } from '@/components/site/SiteFooter';
@@ -189,6 +190,13 @@ export default function Home() {
               {/* wax seal overflowing the frame */}
               <FloatCutout src="/assets/wax-seal.webp" rotate={-10} className="-left-9 -top-9 h-24 w-24" />
             </div>
+          </div>
+        </section>
+
+        {/* ---------------------------------------------------- ÜRETEN ELLER (exhibition) */}
+        <section id="ureten-eller" className="scroll-mt-28 border-t border-line">
+          <div className="mx-auto max-w-wrap px-6 py-24 md:py-32">
+            <MakersExhibit />
           </div>
         </section>
 
