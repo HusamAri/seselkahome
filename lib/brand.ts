@@ -94,6 +94,10 @@ export const products: Product[] = [
     meta: ['Ø ~30 cm', 'Doğal ton', 'Siparişe özel'],
     gallery: ['/assets/products/yuvarlak-1.webp', '/assets/products/yuvarlak-2.webp', '/assets/products/yuvarlak-3.webp'],
     use: 'Masada ekmekten meyveye, girişte anahtardan mektuba; gündelik dağınıklığı toparlayan, her ortama yakışan sakin bir form.',
+    maker: {
+      name: 'Sefa Selver', handle: '@selversefakaracali', instagram: 'https://www.instagram.com/selversefakaracali',
+      note: 'Yuvarlak Sepet, Seselka’nın kurucusu Sefa Selver’in örgüdeki ilk adımları. En sade formu seçti; ilmeği, sabrı ve huzuru bu yuvarlak tepside öğrendi. Acemiliğin değil, yeni bir başlangıcın ve “kadın isterse” diye çıktığı yolun ilk somut izini taşır.',
+    },
   },
   {
     id: 'horoz-sepet', name: 'Bayram Horozu', sub: 'Dekoratif · Bayram', price: 2450,
