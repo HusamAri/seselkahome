@@ -56,54 +56,54 @@ export function MakersExhibit() {
 
   return (
     <>
-      <div className="grid items-center gap-10 md:grid-cols-[1.04fr_0.96fr] md:gap-16">
-        {/* intro */}
-        <div className="order-2 md:order-1">
-          <span className="eyebrow">Sergi · Üreten Eller</span>
-          <RevealText
-            as="h2"
-            text={['Görünmeyen emeği,', 'görünür kılmak.']}
-            className="mt-5 text-fg"
-            lineClassName="font-display font-medium text-[clamp(2.25rem,5vw,4rem)] leading-[0.95]"
-          />
-          <p className="mt-7 max-w-md text-base leading-[1.9] text-fg/75">
+      <div>
+        {/* header */}
+        <div className="flex flex-col gap-7 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-xl">
+            <span className="eyebrow">Sergi · Üreten Eller</span>
+            <RevealText
+              as="h2"
+              text={['Görünmeyen emeği,', 'görünür kılmak.']}
+              className="mt-5 text-fg"
+              lineClassName="font-display font-medium text-[clamp(2.25rem,5vw,4rem)] leading-[0.95]"
+            />
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-haspopup="dialog"
+              aria-expanded={open}
+              className="group mt-8 inline-flex items-center gap-2.5 rounded-full bg-accent-fill py-2 pl-6 pr-2 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-on-accent transition-transform duration-500 ease-quiet hover:-translate-y-0.5 active:scale-[0.98]"
+            >
+              Üreten elleri keşfet
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-on-accent/15 transition-transform duration-500 ease-quiet group-hover:translate-x-0.5 group-hover:-translate-y-0.5">{ARROW}</span>
+            </button>
+          </div>
+          <p className="max-w-xs text-sm leading-relaxed text-muted">
             Her sepet, her ilmek bir kadının elinden çıkıyor. Burası onların sergisi: ürettikleri parçayı ve kendi sayfalarını yan yana, saygıyla.
           </p>
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            aria-haspopup="dialog"
-            aria-expanded={open}
-            className="group mt-9 inline-flex items-center gap-2.5 rounded-full bg-accent-fill py-2 pl-6 pr-2 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-on-accent transition-transform duration-500 ease-quiet hover:-translate-y-0.5 active:scale-[0.98]"
-          >
-            Üreten elleri keşfet
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-on-accent/15 transition-transform duration-500 ease-quiet group-hover:translate-x-0.5 group-hover:-translate-y-0.5">{ARROW}</span>
-          </button>
         </div>
 
-        {/* hero — also opens the drawer */}
-        <div className="order-1 md:order-2">
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            aria-label="Üreten Eller sergisini aç"
-            aria-haspopup="dialog"
-            className="group relative block w-full overflow-hidden rounded-[1.8rem] border border-line shadow-[0_50px_90px_-50px_rgba(120,70,25,0.45)]"
-          >
-            <div className="aspect-[4/5] w-full overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element -- intrinsic-aspect art, static export */}
-              <img
-                src={withBase('/assets/ureten-eller-hero.webp')}
-                alt="Üreten eller sergisi"
-                className="h-full w-full object-cover transition-transform duration-[1.2s] ease-quiet group-hover:scale-[1.04]"
-              />
-            </div>
-            <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/65 via-ink/5 to-transparent" />
-            <span className="absolute bottom-5 left-5 inline-flex items-center gap-2 rounded-full bg-bg/85 px-4 py-2 text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-fg backdrop-blur transition-transform duration-500 ease-quiet group-hover:-translate-y-0.5">
-              Sergiyi aç {ARROW}
-            </span>
-          </button>
-        </div>
+        {/* wide hero — a gallery banner; also opens the drawer */}
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-label="Üreten Eller sergisini aç"
+          aria-haspopup="dialog"
+          className="group relative mt-12 block w-full overflow-hidden rounded-[1.9rem] border border-line shadow-[0_50px_90px_-50px_rgba(120,70,25,0.45)] md:mt-14"
+        >
+          <div className="aspect-[16/9] w-full overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element -- intrinsic-aspect art, static export */}
+            <img
+              src={withBase('/assets/ureten-eller-hero.webp')}
+              alt="Üreten eller — ellerinde örgü şekillenen bir kadın"
+              className="h-full w-full object-cover transition-transform duration-[1.2s] ease-quiet group-hover:scale-[1.04]"
+            />
+          </div>
+          <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/5 to-transparent" />
+          <span className="absolute bottom-5 left-5 inline-flex items-center gap-2 rounded-full bg-bg/85 px-4 py-2 text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-fg backdrop-blur transition-transform duration-500 ease-quiet group-hover:-translate-y-0.5">
+            Sergiyi aç {ARROW}
+          </span>
+        </button>
       </div>
 
       {/* ---- gallery drawer ---- */}
