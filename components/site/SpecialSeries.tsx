@@ -68,16 +68,16 @@ export function SpecialSeries() {
                 <div
                   className={`pointer-events-none absolute z-10 w-56 max-w-[72vw] ${hPos} ${vPos} translate-y-1.5 scale-95 opacity-0 transition-all duration-300 ease-quiet group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:scale-100 group-focus-within:opacity-100`}
                 >
-                  <div className="overflow-hidden rounded-[1.1rem] border border-line bg-bg/95 shadow-[0_30px_60px_-25px_rgba(42,37,32,0.6)] backdrop-blur-md">
+                  <div className="overflow-hidden rounded-[1.1rem] border border-ink/10 bg-linen shadow-[0_30px_60px_-22px_rgba(42,37,32,0.65)]">
                     <div className="relative aspect-[4/3] w-full">
                       <Image src={withBase(it.image)} alt={it.name} fill sizes="224px" className="object-cover" />
                     </div>
                     <div className="px-3.5 pb-3.5 pt-3">
                       <div className="flex items-center justify-between gap-2">
-                        <span className="font-display text-lg leading-none text-fg">{it.name}</span>
-                        <Image src={withBase('/assets/favicon-48.png')} alt="Seselka" width={20} height={20} className="h-5 w-5 shrink-0 opacity-55" />
+                        <span className="font-display text-lg leading-none text-ink">{it.name}</span>
+                        <Image src={withBase('/assets/favicon-48.png')} alt="Seselka" width={20} height={20} className="h-5 w-5 shrink-0 opacity-50" />
                       </div>
-                      <p className="mt-2 text-xs leading-relaxed text-muted">{it.desc}</p>
+                      <p className="mt-2 text-xs leading-relaxed text-ink/65">{it.desc}</p>
                     </div>
                   </div>
                 </div>
