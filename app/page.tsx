@@ -99,8 +99,11 @@ export default function Home() {
         </section>
 
         {/* ---------------------------------------------------- ÖZEL SERİ (signature collection) */}
-        <section id="ozel-seri" className="scroll-mt-28 border-t border-line bg-surface">
-          <div className="mx-auto max-w-wrap px-6 py-24 md:py-32">
+        <section id="ozel-seri" className="relative scroll-mt-28 overflow-hidden border-t border-line bg-surface">
+          {/* full-bleed branded backdrop (faded in dark mode so text stays readable) */}
+          <Image src={withBase('/assets/special/cicek-bg.webp')} alt="" aria-hidden="true" fill sizes="100vw" className="object-cover dark:opacity-[0.12]" />
+          <div aria-hidden="true" className="absolute inset-0 bg-linen/35 dark:bg-transparent" />
+          <div className="relative mx-auto max-w-wrap px-6 py-24 md:py-32">
             <SpecialSeries />
           </div>
         </section>

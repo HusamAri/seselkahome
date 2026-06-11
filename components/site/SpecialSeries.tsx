@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { withBase } from '@/lib/basePath';
 import { contact, specialSeries } from '@/lib/brand';
 
-function InstagramIcon({ size = 16 }: { size?: number }) {
+function InstagramIcon({ size = 14 }: { size?: number }) {
   return (
     <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <rect x="3" y="3" width="18" height="18" rx="5" />
@@ -17,9 +17,10 @@ const MailArrow = (
 );
 
 /**
- * Premium signature collection. Square photo tiles (no cutout); hovering a tile
- * reveals only its description; each piece carries a handwritten maker signature.
- * Contact-for-price — no cart. Pure-CSS hover, so this stays a server component.
+ * Premium signature collection. The series banner is "shoppable": hovering (or
+ * tapping) a hotspot over a piece reveals a tag-style popup with its photo,
+ * description and a minimal Seselka mark. One handwritten maker signature for the
+ * whole section. Contact-for-price. Pure-CSS, so this stays a server component.
  */
 export function SpecialSeries() {
   const { eyebrow, title, maker, note, hero, items } = specialSeries;
@@ -37,56 +38,68 @@ export function SpecialSeries() {
         <p className="max-w-sm text-sm leading-relaxed text-muted">{note}</p>
       </div>
 
-      {/* series banner */}
-      <div className="mt-10 overflow-hidden rounded-[1.9rem] border border-line shadow-[0_50px_90px_-50px_rgba(120,70,25,0.45)]">
-        <div className="relative aspect-[16/9] w-full">
-          <Image src={withBase(hero)} alt={`${title} — ${maker.name} özel serisi`} fill priority sizes="(min-width:1024px) 1120px, 100vw" className="object-cover" />
+      {/* shoppable banner */}
+      <div className="relative mt-10">
+        <div className="overflow-hidden rounded-[1.9rem] border border-line shadow-[0_50px_90px_-50px_rgba(120,70,25,0.45)]">
+          <div className="relative aspect-[16/9] w-full">
+            <Image src={withBase(hero)} alt={`${title} — ${maker.name} özel serisi`} fill priority sizes="(min-width:1024px) 1120px, 100vw" className="object-cover" />
+          </div>
+        </div>
+
+        {/* hotspots + tag popups */}
+        <div className="pointer-events-none absolute inset-0">
+          {items.map((it) => {
+            const x = parseFloat(it.hotspot.x);
+            const hPos = x < 34 ? 'left-0' : x > 66 ? 'right-0' : 'left-1/2 -translate-x-1/2';
+            const vPos = it.hotspot.place === 'above' ? 'bottom-full mb-3.5' : 'top-full mt-3.5';
+            return (
+              <div key={it.id} className="group absolute" style={{ left: it.hotspot.x, top: it.hotspot.y }}>
+                <button
+                  type="button"
+                  aria-label={`${it.name} — ürünü gör`}
+                  className="pointer-events-auto absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full p-2.5 outline-none"
+                >
+                  <span className="relative flex h-3 w-3 items-center justify-center">
+                    <span className="absolute h-full w-full rounded-full bg-linen/50 opacity-70 motion-safe:animate-ping" aria-hidden="true" />
+                    <span className="relative h-3 w-3 rounded-full border border-linen/90 bg-ink/30 shadow-[0_2px_6px_rgba(0,0,0,0.4)] backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:border-accent group-hover:bg-accent-fill group-focus-within:scale-110 group-focus-within:bg-accent-fill" />
+                  </span>
+                </button>
+
+                <div
+                  className={`pointer-events-none absolute z-10 w-56 max-w-[72vw] ${hPos} ${vPos} translate-y-1.5 scale-95 opacity-0 transition-all duration-300 ease-quiet group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:scale-100 group-focus-within:opacity-100`}
+                >
+                  <div className="overflow-hidden rounded-[1.1rem] border border-line bg-bg/95 shadow-[0_30px_60px_-25px_rgba(42,37,32,0.6)] backdrop-blur-md">
+                    <div className="relative aspect-[4/3] w-full">
+                      <Image src={withBase(it.image)} alt={it.name} fill sizes="224px" className="object-cover" />
+                    </div>
+                    <div className="px-3.5 pb-3.5 pt-3">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-display text-lg leading-none text-fg">{it.name}</span>
+                        <Image src={withBase('/assets/favicon-48.png')} alt="Seselka" width={20} height={20} className="h-5 w-5 shrink-0 opacity-55" />
+                      </div>
+                      <p className="mt-2 text-xs leading-relaxed text-muted">{it.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      {/* maker credit + contact */}
-      <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <a
-          href={maker.instagram}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group inline-flex items-center gap-3 rounded-full border border-line py-2 pl-2 pr-5 transition-colors duration-300 hover:border-accent/40"
-        >
-          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-fg transition-all duration-300 group-hover:border-accent/40 group-hover:bg-accent-fill group-hover:text-on-accent">
-            <InstagramIcon size={15} />
-          </span>
-          <span>
-            <span className="block text-[0.58rem] uppercase tracking-[0.2em] text-muted">Üreten Eller</span>
-            <span className="block text-sm font-medium text-fg">Songül Güney · {maker.handle}</span>
-          </span>
+      {/* one signature + credit + contact */}
+      <div className="mt-10 flex flex-col items-center gap-4 text-center">
+        <span className="text-[0.6rem] uppercase tracking-[0.22em] text-muted">Üreten Eller · Özel Seri</span>
+        <a href={maker.instagram} target="_blank" rel="noopener noreferrer" className="group inline-flex flex-col items-center gap-2">
+          <span className="font-script text-[2.9rem] leading-[0.85] text-accent transition-colors duration-300 group-hover:text-fg">{maker.name}</span>
+          <span className="inline-flex items-center gap-1.5 text-xs text-muted transition-colors duration-300 group-hover:text-fg"><InstagramIcon /> {maker.handle}</span>
         </a>
         <a
           href={mailto}
-          className="inline-flex items-center gap-2 rounded-full bg-accent-fill px-6 py-3 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-on-accent transition-transform duration-500 ease-quiet hover:-translate-y-0.5 active:scale-[0.98]"
+          className="mt-1 inline-flex items-center gap-2 rounded-full bg-accent-fill px-6 py-3 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-on-accent transition-transform duration-500 ease-quiet hover:-translate-y-0.5 active:scale-[0.98]"
         >
           Fiyat için iletişime geçin {MailArrow}
         </a>
-      </div>
-
-      {/* square tiles — hover reveals only the description; handwritten signature below */}
-      <div className="mt-10 grid grid-cols-2 gap-x-5 gap-y-8 md:mt-12 md:grid-cols-4 md:gap-x-6 md:gap-y-10">
-        {items.map((it) => (
-          <figure key={it.id}>
-            <div className="group relative aspect-square overflow-hidden rounded-[1.2rem] border border-line bg-surface">
-              <Image
-                src={withBase(it.image)}
-                alt={it.name}
-                fill
-                sizes="(min-width:768px) 25vw, 50vw"
-                className="object-cover transition-transform duration-[1.1s] ease-quiet group-hover:scale-[1.06]"
-              />
-              <figcaption className="absolute inset-0 flex items-end bg-gradient-to-t from-ink/90 via-ink/35 to-transparent p-5 opacity-0 transition-opacity duration-500 ease-quiet group-hover:opacity-100">
-                <span className="text-sm leading-relaxed text-linen">{it.desc}</span>
-              </figcaption>
-            </div>
-            <span className="mt-3.5 block text-center font-script text-[1.9rem] leading-none text-accent">{maker.name}</span>
-          </figure>
-        ))}
       </div>
     </div>
   );
