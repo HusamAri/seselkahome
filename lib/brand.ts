@@ -68,6 +68,18 @@ export type Product = {
 /** Shop catalog — real product photography, Sessiz Cesaret copy. */
 export const products: Product[] = [
   {
+    id: 'hasir-sehpa', name: 'Hasır Sehpa', sub: 'Mobilya · Sehpa', price: 4900,
+    image: '/assets/products/hasir-sehpa.webp', badge: 'Yeni', cm: 58,
+    desc: 'Elde örülen iki katlı yuvarlak sehpa; üstte tepsi formlu bir yüzey, altta kapaklı sepet gözü. Ahşap iskeleti ve sıcak dokusuyla her köşeye zamansız bir duruş.',
+    meta: ['~58 cm', 'İki katlı · sepetli', 'El örgüsü'],
+    gallery: ['/assets/products/sehpa-1.webp', '/assets/products/sehpa-2.webp', '/assets/products/sehpa-3.webp'],
+    use: 'Koltuğun ya da yatağın yanında; üstüne kitabınızı ve kahvenizi, alt sepetine gazete, örtü veya küçük eşyalarınızı alır. İşlevle zarafeti bir arada taşıyan, taşınabilir bir köşe.',
+    maker: {
+      name: 'Sefa Selver', handle: '@selversefakaracali', instagram: 'https://www.instagram.com/selversefakaracali',
+      note: 'Sefa Selver’in atölyedeki en iddialı işlerinden biri. Sepet örmekle başlayan yolculuğu, ahşap bir iskelet üzerinde iki katlı bir sehpaya dönüştü; sabırla örülen her sıra, emeğin işlevle buluştuğu bir parçaya kavuştu.',
+    },
+  },
+  {
     id: 'asili-sepet', name: 'Asılı Sepet', sub: 'Duvar · Sepet', price: 1850,
     image: '/assets/products/asili-sepet.webp', cm: 28,
     desc: 'Kuru çiçek tasarımıyla birlikte; duvarda ya da kapı arkasında rafine ve sessiz bir köşe.',
