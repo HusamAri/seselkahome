@@ -159,6 +159,23 @@ export const contact = {
   location: 'İstanbul',
 };
 
+/** Premium, contact-for-price signature collection shown above the catalog. */
+export type SpecialItem = { id: string; name: string; image: string; desc: string };
+export const specialSeries = {
+  eyebrow: 'Özel Seri',
+  title: 'Çiçek Açtıran Eller',
+  /** Maker, credited with a handwritten signature under each piece. */
+  maker: { name: 'Songül Güney', handle: '@songul_guney92', instagram: 'https://www.instagram.com/songul_guney92' },
+  note: 'Kâğıttan açan çiçekler ve çiçek formlu lambalar — sınırlı, özel üretim. Fiyat için bizimle iletişime geçin.',
+  hero: '/assets/special/cicek-acturan-eller.webp',
+  items: [
+    { id: 'lotus-lamba', name: 'Lotus Lamba', image: '/assets/special/lotus-lamba.webp', desc: 'Kâğıt yapraklardan açan, içeriden ışıyan bir lotus. Yakıldığında odaya sıcak, pembe bir gün batımı düşürür.' },
+    { id: 'kagit-sakayik', name: 'Kâğıt Şakayık', image: '/assets/special/kagit-sakayik.webp', desc: 'Tek dalda kocaman bir şakayık; solmayan, kâğıttan. Mevsimi olmayan bir bahar köşesi.' },
+    { id: 'kagit-cicek', name: 'Kâğıt Çiçek', image: '/assets/special/kagit-cicek.webp', desc: 'İnce kâğıt yapraklarıyla el açmış çiçekler; vazoda hafif, zarif bir kıpırtı.' },
+    { id: 'dev-cicek', name: 'Dev Çiçek', image: '/assets/special/dev-cicek.webp', desc: 'Boyunu aşan bir çiçek dalı; bir köşeyi tek başına şenlendiren iddialı, zarif bir duruş.' },
+  ] satisfies SpecialItem[],
+};
+
 export const heroMeta = [
   { k: 'Malzeme', v: 'Geri dönüşen kağıt' },
   { k: 'Üretim', v: 'Siparişe özel' },

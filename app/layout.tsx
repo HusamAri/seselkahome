@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Cormorant_Garamond, Plus_Jakarta_Sans } from 'next/font/google';
+import { Cormorant_Garamond, Parisienne, Plus_Jakarta_Sans } from 'next/font/google';
 import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider';
 import { BASE_PATH } from '@/lib/basePath';
 import './globals.css';
@@ -17,6 +17,14 @@ const body = Plus_Jakarta_Sans({
   subsets: ['latin', 'latin-ext'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-body',
+  display: 'swap',
+});
+
+// Script = handwritten signature accent (maker "imza").
+const script = Parisienne({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-script',
   display: 'swap',
 });
 
@@ -51,7 +59,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="tr" className={`${display.variable} ${body.variable}`}>
+    <html lang="tr" className={`${display.variable} ${body.variable} ${script.variable}`}>
       <body>
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
