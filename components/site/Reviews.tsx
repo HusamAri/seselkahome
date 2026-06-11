@@ -14,6 +14,16 @@ function Stars({ n }: { n: number }) {
   );
 }
 
+function InstagramIcon({ size = 14 }: { size?: number }) {
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+    </svg>
+  );
+}
+
 /**
  * Customer reviews with their own photos. Static-export friendly: the list is
  * curated in lib/brand.ts and customers submit theirs (with a photo) via a
@@ -37,18 +47,25 @@ export function Reviews() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 md:mt-16 md:gap-7">
+        <div className="mt-12 flex flex-wrap justify-center gap-6 md:mt-16 md:gap-7">
           {reviews.map((r) => (
-            <figure key={`${r.name}-${r.piece}`} className="flex flex-col overflow-hidden rounded-[1.7rem] bg-card shadow-[0_34px_64px_-40px_rgba(120,70,25,0.5)] sm:flex-row">
-              <div className="relative aspect-[4/3] w-full shrink-0 sm:aspect-auto sm:w-44 md:w-52">
-                <Image src={withBase(r.image)} alt={`${r.name} — ${r.piece}`} fill sizes="(min-width:640px) 13rem, 100vw" className="object-cover" />
+            <figure key={`${r.name}-${r.piece}`} className="flex w-full max-w-[36rem] flex-col overflow-hidden rounded-[1.7rem] bg-card shadow-[0_34px_64px_-40px_rgba(120,70,25,0.5)] sm:flex-row">
+              <div className="relative aspect-[4/3] w-full shrink-0 sm:aspect-auto sm:w-48 md:w-56">
+                <Image src={withBase(r.image)} alt={`${r.name} — ${r.piece}`} fill sizes="(min-width:640px) 14rem, 100vw" className="object-cover" />
               </div>
               <figcaption className="flex flex-1 flex-col p-6">
                 <Stars n={r.rating} />
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-fg/80">“{r.text}”</p>
-                <div className="mt-5 border-t border-line pt-4">
-                  <span className="block font-display text-lg leading-none text-fg">{r.name}</span>
-                  <span className="mt-1.5 block text-[0.62rem] uppercase tracking-[0.16em] text-muted">{r.location} · {r.piece}</span>
+                <div className="mt-5 flex items-end justify-between gap-3 border-t border-line pt-4">
+                  <div>
+                    <span className="block font-display text-lg leading-none text-fg">{r.name}</span>
+                    <span className="mt-1.5 block text-[0.62rem] uppercase tracking-[0.16em] text-muted">{r.location ? `${r.location} · ` : ''}{r.piece}</span>
+                  </div>
+                  {r.instagram ? (
+                    <a href={r.instagram} target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center gap-1.5 text-xs font-medium text-accent transition-colors duration-300 hover:text-fg">
+                      <InstagramIcon /> {r.handle}
+                    </a>
+                  ) : null}
                 </div>
               </figcaption>
             </figure>

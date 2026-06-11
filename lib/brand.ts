@@ -205,11 +205,16 @@ export const stats: Stat[] = [
 ];
 
 /** Customer reviews with their own photos. Curated (no backend) — customers send
- *  theirs via the email CTA, then they're added here. Demo images for now. */
-export type Review = { name: string; location: string; piece: string; rating: number; text: string; image: string };
+ *  theirs via the email CTA, then they're added here. */
+export type Review = { name: string; piece: string; rating: number; text: string; image: string; handle?: string; instagram?: string; location?: string };
 export const reviews: Review[] = [
-  { name: 'Elif K.', location: 'İzmir', piece: 'Bayram Horozu', rating: 5, image: '/assets/products/horoz-1.webp', text: 'Soframızın yıldızı oldu; gelen herkes nereden aldığımızı soruyor. El işçiliği fotoğraflardakinden çok daha etkileyici.' },
-  { name: 'Merve T.', location: 'İstanbul', piece: 'Yuvarlak Sepet', rating: 5, image: '/assets/products/yuvarlak-1.webp', text: 'Mutfağımda her gün kullanıyorum; hem zarif hem şaşırtıcı derecede dayanıklı. Kağıttan olduğuna inanmak güç.' },
-  { name: 'Selin A.', location: 'Ankara', piece: 'Hasır Sehpa', rating: 5, image: '/assets/products/sehpa-1.webp', text: 'Salonun en sevdiğim köşesi oldu. Dokusu ve işçiliği muhteşem — emeğe değer bir parça.' },
-  { name: 'Deniz Y.', location: 'Bodrum', piece: 'Asılı Sepet', rating: 5, image: '/assets/products/asili-1.webp', text: 'Antre duvarımızı bambaşka bir yere taşıdı. Kuru çiçeklerle birlikte adeta bir sanat eseri.' },
+  {
+    name: 'Şule Kömoğlu',
+    handle: '@sulekomooglu',
+    instagram: 'https://www.instagram.com/sulekomooglu',
+    piece: 'Hasır Sehpa',
+    rating: 5,
+    image: '/assets/reviews/sule-komoglu.webp',
+    text: 'Ellerine sağlık canım, çok güzel olmuş. Üzerinde güzel, hoş sohbetli kahve muhabbetlerine inşallah 💖🙏',
+  },
 ];
