@@ -68,7 +68,7 @@ export type Product = {
 /** Shop catalog — real product photography, Sessiz Cesaret copy. */
 export const products: Product[] = [
   {
-    id: 'hasir-sehpa', name: 'Hasır Sehpa', sub: 'Mobilya · Sehpa', price: 4900,
+    id: 'hasir-sehpa', name: 'Hasır Sehpa', sub: 'Mobilya · Sehpa', price: 8430,
     image: '/assets/products/hasir-sehpa.webp', badge: 'Yeni', cm: 58,
     desc: 'Elde örülen iki katlı yuvarlak sehpa; üstte tepsi formlu bir yüzey, altta kapaklı sepet gözü. Ahşap iskeleti ve sıcak dokusuyla her köşeye zamansız bir duruş.',
     meta: ['~58 cm', 'İki katlı · sepetli', 'El örgüsü'],
