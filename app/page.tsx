@@ -10,6 +10,7 @@ import { MakersExhibit } from '@/components/site/MakersExhibit';
 import { SpecialSeries } from '@/components/site/SpecialSeries';
 import { OrderForm } from '@/components/site/OrderForm';
 import { ProcessSteps } from '@/components/site/ProcessSteps';
+import { Reviews } from '@/components/site/Reviews';
 import { SiteFooter } from '@/components/site/SiteFooter';
 import { SiteNav } from '@/components/site/SiteNav';
 import { withBase } from '@/lib/basePath';
@@ -247,6 +248,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* ---------------------------------------------------- REVIEWS */}
+        <Reviews />
 
         {/* ---------------------------------------------------- ORDER */}
         <section id="siparis" className="scroll-mt-28 bg-surface">

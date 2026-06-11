@@ -203,3 +203,13 @@ export const stats: Stat[] = [
   { big: '100', unit: '%', label: 'Doğal içerik', sub: 'Üretimin hiçbir aşamasında plastik, sentetik reçine ya da yapay boya kullanılmaz.' },
   { big: 'El', unit: 'le', label: 'Kadın emeği', sub: 'Her parça kadın elinde, “kadın isterse” diye başlayan bir cümlenin elle tutulabilir hali olarak doğar.' },
 ];
+
+/** Customer reviews with their own photos. Curated (no backend) — customers send
+ *  theirs via the email CTA, then they're added here. Demo images for now. */
+export type Review = { name: string; location: string; piece: string; rating: number; text: string; image: string };
+export const reviews: Review[] = [
+  { name: 'Elif K.', location: 'İzmir', piece: 'Bayram Horozu', rating: 5, image: '/assets/products/horoz-1.webp', text: 'Soframızın yıldızı oldu; gelen herkes nereden aldığımızı soruyor. El işçiliği fotoğraflardakinden çok daha etkileyici.' },
+  { name: 'Merve T.', location: 'İstanbul', piece: 'Yuvarlak Sepet', rating: 5, image: '/assets/products/yuvarlak-1.webp', text: 'Mutfağımda her gün kullanıyorum; hem zarif hem şaşırtıcı derecede dayanıklı. Kağıttan olduğuna inanmak güç.' },
+  { name: 'Selin A.', location: 'Ankara', piece: 'Hasır Sehpa', rating: 5, image: '/assets/products/sehpa-1.webp', text: 'Salonun en sevdiğim köşesi oldu. Dokusu ve işçiliği muhteşem — emeğe değer bir parça.' },
+  { name: 'Deniz Y.', location: 'Bodrum', piece: 'Asılı Sepet', rating: 5, image: '/assets/products/asili-1.webp', text: 'Antre duvarımızı bambaşka bir yere taşıdı. Kuru çiçeklerle birlikte adeta bir sanat eseri.' },
+];
