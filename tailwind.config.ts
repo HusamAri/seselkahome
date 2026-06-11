@@ -32,6 +32,7 @@ const config: Config = {
       fontFamily: {
         display: ['var(--font-display)', 'Cormorant Garamond', 'Georgia', 'serif'],
         body: ['var(--font-body)', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+        script: ['var(--font-script)', 'cursive'],
       },
       letterSpacing: {
         eyebrow: '0.22em',

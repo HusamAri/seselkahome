@@ -7,6 +7,7 @@ import { CartProvider } from '@/components/shop/CartProvider';
 import { LaunchPopup } from '@/components/shop/LaunchPopup';
 import { ProductModalProvider } from '@/components/shop/ProductModalProvider';
 import { MakersExhibit } from '@/components/site/MakersExhibit';
+import { SpecialSeries } from '@/components/site/SpecialSeries';
 import { OrderForm } from '@/components/site/OrderForm';
 import { ProcessSteps } from '@/components/site/ProcessSteps';
 import { SiteFooter } from '@/components/site/SiteFooter';
@@ -94,6 +95,13 @@ export default function Home() {
               <FloatCutout src="/assets/products/yuvarlak-sepet.webp" rotate={-7} className="-bottom-10 -left-12 h-40 w-40 lg:h-48 lg:w-48" />
               <span className="absolute -left-3 top-10 hidden h-2.5 w-2.5 rounded-full bg-accent md:block" aria-hidden="true" />
             </div>
+          </div>
+        </section>
+
+        {/* ---------------------------------------------------- ÖZEL SERİ (signature collection) */}
+        <section id="ozel-seri" className="scroll-mt-28 border-t border-line bg-surface">
+          <div className="mx-auto max-w-wrap px-6 py-24 md:py-32">
+            <SpecialSeries />
           </div>
         </section>
 
