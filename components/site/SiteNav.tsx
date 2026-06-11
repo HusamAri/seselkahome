@@ -88,7 +88,7 @@ export function SiteNav() {
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={cart.open}
+              onClick={cart.openCart}
               aria-label={`Sipariş listesi (${cart.count} parça)`}
               className="relative flex h-9 w-9 items-center justify-center rounded-full border border-line text-fg transition-colors duration-300 hover:bg-surface"
             >

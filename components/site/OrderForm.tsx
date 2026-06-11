@@ -2,28 +2,31 @@
 
 import { useState } from 'react';
 import { contact, products } from '@/lib/brand';
+import { useCart } from '@/components/shop/CartProvider';
 
 const PIECES = [...products.filter((p) => !p.custom && !p.sold && !p.hidden).map((p) => p.name), 'Özel Sipariş'];
 
 /**
  * Made-to-order inquiry. Static-export friendly: composes a mailto with the
- * order details, mirroring the artisan workshop flow (production starts on
- * confirmation). No backend.
+ * order. If the cart has pieces, the mail lists ALL of them (with quantities);
+ * otherwise it falls back to a single-piece inquiry. No backend.
  */
 export function OrderForm() {
+  const cart = useCart();
   const [sent, setSent] = useState(false);
+  const hasItems = cart.items.length > 0;
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
+    const data = new FormData(e.currentTarget);
     const name = String(data.get('fn') || '').trim();
     const email = String(data.get('em') || '').trim();
-    const piece = String(data.get('prc') || '');
     const note = String(data.get('msg') || '').trim();
+    const piece = String(data.get('prc') || '');
 
-    const subject = `Seselka - Tasarım Talebi: ${piece}`;
-    const body = [`Ad: ${name}`, `E-posta: ${email}`, `Parça: ${piece}`, `Not: ${note || '-'}`].join('\n');
+    const lines = hasItems ? cart.items.map((i) => `- ${i.name} × ${i.qty}`) : [`- ${piece}`];
+    const subject = hasItems ? `Seselka - Sipariş (${cart.count} parça)` : `Seselka - Tasarım Talebi: ${piece}`;
+    const body = [`Ad: ${name}`, `E-posta: ${email}`, '', 'Sipariş listesi:', ...lines, '', `Not: ${note || '-'}`].join('\n');
     window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
     setSent(true);
@@ -46,14 +49,31 @@ export function OrderForm() {
         </div>
       </div>
 
-      <div>
-        <label className={label} htmlFor="prc">İlgilendiğiniz tasarım</label>
-        <select className={field} id="prc" name="prc" defaultValue={PIECES[0]}>
-          {PIECES.map((p) => (
-            <option key={p}>{p}</option>
-          ))}
-        </select>
-      </div>
+      {hasItems ? (
+        <div>
+          <span className={label}>Sipariş listeniz ({cart.count} parça)</span>
+          <ul className="divide-y divide-line/60 rounded-[3px] border border-line bg-bg/60">
+            {cart.items.map((i) => (
+              <li key={i.name} className="flex items-center justify-between gap-3 px-4 py-2.5 text-sm text-fg">
+                <span>{i.name}</span>
+                <span className="text-muted tabular-nums">× {i.qty}</span>
+              </li>
+            ))}
+          </ul>
+          <button type="button" onClick={cart.openCart} className="mt-2 text-xs text-muted underline-offset-2 transition-colors hover:text-accent hover:underline">
+            Listeyi düzenle
+          </button>
+        </div>
+      ) : (
+        <div>
+          <label className={label} htmlFor="prc">İlgilendiğiniz tasarım</label>
+          <select className={field} id="prc" name="prc" defaultValue={PIECES[0]}>
+            {PIECES.map((p) => (
+              <option key={p}>{p}</option>
+            ))}
+          </select>
+        </div>
+      )}
 
       <div>
         <label className={label} htmlFor="msg">Notunuz</label>
@@ -64,7 +84,7 @@ export function OrderForm() {
         type="submit"
         className="inline-flex items-center gap-2 bg-accent-fill px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] text-on-accent transition-transform duration-500 ease-quiet hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
       >
-        {sent ? 'E-posta açılıyor' : 'Talebi İlet'} <span aria-hidden="true">&rarr;</span>
+        {sent ? 'E-posta açılıyor' : hasItems ? 'Siparişi İlet' : 'Talebi İlet'} <span aria-hidden="true">&rarr;</span>
       </button>
     </form>
   );

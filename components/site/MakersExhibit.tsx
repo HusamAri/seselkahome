@@ -6,10 +6,18 @@ import { products } from '@/lib/brand';
 import { useLenis } from '@/components/providers/SmoothScrollProvider';
 import { RevealText } from '@/components/motion/RevealText';
 
-/** Makers whose pieces are currently live (hidden products are left out). */
-const makers = products
-  .filter((p) => p.maker && !p.hidden)
-  .map((p) => ({ ...p.maker!, piece: p.name, sub: p.sub, cutout: p.image }));
+/** Makers whose pieces are live, grouped so each maker appears once with all
+ *  of their pieces together (hidden products are left out). */
+type MakerGroup = { name: string; handle: string; instagram: string; pieces: { name: string; cutout: string }[] };
+const makers: MakerGroup[] = Object.values(
+  products
+    .filter((p) => p.maker && !p.hidden)
+    .reduce<Record<string, MakerGroup>>((acc, p) => {
+      const m = p.maker!;
+      (acc[m.instagram] ??= { name: m.name, handle: m.handle, instagram: m.instagram, pieces: [] }).pieces.push({ name: p.name, cutout: p.image });
+      return acc;
+    }, {}),
+);
 
 function InstagramIcon({ size = 15 }: { size?: number }) {
   return (
@@ -146,32 +154,34 @@ export function MakersExhibit() {
 
           <ul className="mt-2 px-7 pb-10">
             {makers.map((m) => (
-              <li key={m.handle} className="border-b border-line/70 last:border-0">
+              <li key={m.instagram} className="border-b border-line/70 py-7 last:border-0">
+                {/* this maker's pieces, hung together like an exhibit */}
+                <div className="flex flex-wrap items-start gap-x-6 gap-y-4">
+                  {m.pieces.map((pc) => (
+                    <div key={pc.cutout} className="flex w-[4.5rem] flex-col items-center text-center">
+                      <span className="h-1.5 w-1.5 rounded-full bg-muted/70" aria-hidden="true" />
+                      <span className="h-6 w-px bg-line" aria-hidden="true" />
+                      {/* eslint-disable-next-line @next/next/no-img-element -- transparent cutout, static export */}
+                      <img
+                        src={withBase(pc.cutout)}
+                        alt={pc.name}
+                        className="mt-1 h-[4.5rem] w-[4.5rem] object-contain drop-shadow-[0_16px_18px_rgba(0,0,0,0.4)]"
+                      />
+                      <span className="mt-2 block text-[0.5rem] uppercase leading-tight tracking-[0.14em] text-muted">{pc.name}</span>
+                    </div>
+                  ))}
+                </div>
+                {/* maker — credited once, with their page */}
                 <a
                   href={m.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/m flex items-start gap-5 py-7"
+                  className="group/m mt-5 inline-flex items-center gap-3"
                 >
-                  {/* the piece, hung like an exhibit */}
-                  <div className="relative flex w-20 shrink-0 flex-col items-center">
-                    <span className="h-1.5 w-1.5 rounded-full bg-muted/70" aria-hidden="true" />
-                    <span className="h-6 w-px bg-line" aria-hidden="true" />
-                    {/* eslint-disable-next-line @next/next/no-img-element -- transparent cutout, static export */}
-                    <img
-                      src={withBase(m.cutout)}
-                      alt={m.piece}
-                      className="mt-1 h-20 w-20 object-contain drop-shadow-[0_16px_18px_rgba(0,0,0,0.4)] transition-transform duration-500 ease-quiet group-hover/m:-translate-y-1"
-                    />
-                  </div>
-                  {/* placard */}
-                  <div className="flex-1 pt-3">
-                    <span className="block text-[0.55rem] uppercase tracking-[0.2em] text-muted">{m.piece}</span>
-                    <span className="mt-1.5 block font-display text-xl leading-none text-fg">{m.name}</span>
-                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors group-hover/m:text-fg">
-                      <InstagramIcon /> {m.handle}
-                    </span>
-                  </div>
+                  <span className="font-display text-xl leading-none text-fg">{m.name}</span>
+                  <span className="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors group-hover/m:text-fg">
+                    <InstagramIcon /> {m.handle}
+                  </span>
                 </a>
               </li>
             ))}
