@@ -6,15 +6,18 @@ import { products } from '@/lib/brand';
 import { useLenis } from '@/components/providers/SmoothScrollProvider';
 import { RevealText } from '@/components/motion/RevealText';
 
-/** Makers whose pieces are live, grouped so each maker appears once with all
- *  of their pieces together (hidden products are left out). */
-type MakerGroup = { name: string; handle: string; instagram: string; pieces: { name: string; cutout: string }[] };
+/** Makers whose pieces are live, grouped so each maker appears once with all of
+ *  their pieces (the framed photo uses the lifestyle shot). Hidden left out. */
+type MakerGroup = { name: string; handle: string; instagram: string; pieces: { name: string; photo: string }[] };
 const makers: MakerGroup[] = Object.values(
   products
     .filter((p) => p.maker && !p.hidden)
     .reduce<Record<string, MakerGroup>>((acc, p) => {
       const m = p.maker!;
-      (acc[m.instagram] ??= { name: m.name, handle: m.handle, instagram: m.instagram, pieces: [] }).pieces.push({ name: p.name, cutout: p.image });
+      (acc[m.instagram] ??= { name: m.name, handle: m.handle, instagram: m.instagram, pieces: [] }).pieces.push({
+        name: p.name,
+        photo: p.gallery?.[0] ?? p.image,
+      });
       return acc;
     }, {}),
 );
@@ -33,10 +36,30 @@ const ARROW = (
   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
 );
 
+/** A piece, framed and hung from a nail like a picture on a gallery wall. */
+function FramedPiece({ name, photo }: { name: string; photo: string }) {
+  return (
+    <figure className="relative flex flex-col items-center pt-10">
+      {/* nail + two wires */}
+      <span className="absolute left-1/2 top-0 z-10 h-2 w-2 -translate-x-1/2 rounded-full bg-ink/70 ring-2 ring-linen/40" aria-hidden="true" />
+      <span className="absolute left-1/2 top-1.5 h-10 w-px origin-top -rotate-[15deg] bg-ink/25" aria-hidden="true" />
+      <span className="absolute left-1/2 top-1.5 h-10 w-px origin-top rotate-[15deg] bg-ink/25" aria-hidden="true" />
+      {/* frame */}
+      <div className="w-full rounded-[2px] border-[7px] border-[#b08d68] bg-linen p-2 shadow-[0_34px_50px_-22px_rgba(0,0,0,0.55)] transition-transform duration-500 ease-quiet hover:-translate-y-1">
+        <div className="relative aspect-square w-full overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element -- gallery photo, static export */}
+          <img src={withBase(photo)} alt={name} loading="lazy" className="h-full w-full object-cover" />
+        </div>
+      </div>
+      <figcaption className="mt-4 text-center font-display text-lg leading-none text-fg">{name}</figcaption>
+    </figure>
+  );
+}
+
 /**
- * "Üreten Eller" — a small exhibition honouring the makers. A short intro with
- * a hero image; clicking it slides a slim gallery drawer in from the side where
- * each maker's Instagram sits beside their piece, hung like a gallery exhibit.
+ * "Üreten Eller" exhibition. A short intro with a hero; opening it reveals a
+ * full-screen gallery wall where each piece hangs framed from a nail, grouped
+ * by maker — emeğe saygı, in an art-gallery feel.
  */
 export function MakersExhibit() {
   const lenis = useLenis();
@@ -82,16 +105,16 @@ export function MakersExhibit() {
               aria-expanded={open}
               className="group mt-8 inline-flex items-center gap-2.5 rounded-full bg-accent-fill py-2 pl-6 pr-2 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-on-accent transition-transform duration-500 ease-quiet hover:-translate-y-0.5 active:scale-[0.98]"
             >
-              Üreten elleri keşfet
+              Sergiyi gez
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-on-accent/15 transition-transform duration-500 ease-quiet group-hover:translate-x-0.5 group-hover:-translate-y-0.5">{ARROW}</span>
             </button>
           </div>
           <p className="max-w-xs text-sm leading-relaxed text-muted">
-            Her sepet, her ilmek bir kadının elinden çıkıyor. Burası onların sergisi: ürettikleri parçayı ve kendi sayfalarını yan yana, saygıyla.
+            Her sepet, her ilmek bir kadının elinden çıkıyor. Burası onların sergisi: her parça, üreteniyle birlikte, duvarda asılı.
           </p>
         </div>
 
-        {/* wide hero — a gallery banner; also opens the drawer */}
+        {/* wide hero — also opens the gallery */}
         <button
           type="button"
           onClick={() => setOpen(true)}
@@ -114,79 +137,58 @@ export function MakersExhibit() {
         </button>
       </div>
 
-      {/* ---- gallery drawer ---- */}
+      {/* ---- full-screen gallery wall ---- */}
       <div
         role="dialog"
         aria-modal="true"
         aria-label="Üreten Eller — sergi"
-        className={`fixed inset-0 z-[90] ${open ? '' : 'pointer-events-none'}`}
+        className={`fixed inset-0 z-[95] ${open ? '' : 'pointer-events-none'}`}
       >
-        <button
-          type="button"
-          aria-hidden="true"
-          tabIndex={-1}
-          onClick={close}
-          className={`absolute inset-0 bg-ink/55 backdrop-blur-[3px] transition-opacity duration-500 ease-quiet ${open ? 'opacity-100' : 'opacity-0'}`}
-        />
-        <aside
+        <div
           data-lenis-prevent
-          className={`absolute right-0 top-0 flex h-full w-[min(92vw,430px)] flex-col overflow-y-auto overscroll-contain border-l border-line bg-surface shadow-[0_0_120px_-20px_rgba(0,0,0,0.6)] transition-transform duration-500 ease-quiet ${open ? 'translate-x-0' : 'translate-x-full'}`}
+          className={`absolute inset-0 overflow-y-auto overscroll-contain bg-surface transition-opacity duration-500 ease-quiet ${open ? 'opacity-100' : 'opacity-0'}`}
+          style={{ backgroundImage: 'radial-gradient(120% 90% at 50% -10%, rgba(255,255,255,0.06), transparent 60%)' }}
         >
-          <header className="flex items-start justify-between gap-4 px-7 pt-8">
+          <header className="sticky top-0 z-20 flex items-center justify-between gap-4 border-b border-line bg-surface/85 px-6 py-4 backdrop-blur-md md:px-10">
             <div>
               <span className="eyebrow">Üreten Eller</span>
-              <h3 className="mt-3 font-display text-[2rem] leading-none text-fg">Emeğe saygı<span className="text-accent">.</span></h3>
+              <p className="mt-1.5 font-display text-xl leading-none text-fg sm:text-2xl">Emeğe saygı<span className="text-accent">.</span></p>
             </div>
             <button
               ref={closeRef}
               type="button"
               onClick={close}
-              aria-label="Kapat"
-              className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line text-fg transition-colors duration-300 hover:bg-bg"
+              aria-label="Sergiyi kapat"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-bg/60 text-fg transition-colors duration-300 hover:bg-bg"
             >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
             </button>
           </header>
 
-          <p className="mt-4 px-7 text-sm leading-relaxed text-muted">
-            Her parçanın arkasında bir el, bir hikâye. Seselka’yı var eden kadınların imzası — her birinin sayfasına dokununca ulaşırsınız.
-          </p>
+          <div className="mx-auto max-w-wrap px-6 py-14 md:px-10 md:py-20">
+            <p className="mx-auto mb-14 max-w-md text-center text-sm leading-relaxed text-muted md:mb-20">
+              Her parçanın arkasında bir el, bir hikâye. Seselka’yı var eden kadınların eserleri — sayfalarına dokunarak ulaşabilirsiniz.
+            </p>
 
-          <ul className="mt-2 px-7 pb-10">
             {makers.map((m) => (
-              <li key={m.instagram} className="border-b border-line/70 py-7 last:border-0">
-                {/* this maker's pieces, hung together like an exhibit */}
-                <div className="flex flex-wrap items-start gap-x-6 gap-y-4">
+              <section key={m.instagram} className="mb-20 last:mb-0 md:mb-28">
+                {/* artist signature */}
+                <div className="mb-12 flex flex-col items-center text-center md:mb-16">
+                  <a href={m.instagram} target="_blank" rel="noopener noreferrer" className="group/m inline-flex flex-col items-center gap-2">
+                    <span className="font-script text-[2.6rem] leading-[0.85] text-accent transition-colors duration-300 group-hover/m:text-fg sm:text-5xl">{m.name}</span>
+                    <span className="inline-flex items-center gap-1.5 text-xs text-muted transition-colors duration-300 group-hover/m:text-fg"><InstagramIcon size={13} /> {m.handle}</span>
+                  </a>
+                </div>
+                {/* hung pieces */}
+                <div className="grid grid-cols-2 gap-x-7 gap-y-14 sm:grid-cols-3 sm:gap-x-10 md:gap-y-20 lg:grid-cols-4">
                   {m.pieces.map((pc) => (
-                    <div key={pc.cutout} className="flex w-[4.5rem] flex-col items-center text-center">
-                      <span className="h-1.5 w-1.5 rounded-full bg-muted/70" aria-hidden="true" />
-                      <span className="h-6 w-px bg-line" aria-hidden="true" />
-                      {/* eslint-disable-next-line @next/next/no-img-element -- transparent cutout, static export */}
-                      <img
-                        src={withBase(pc.cutout)}
-                        alt={pc.name}
-                        className="mt-1 h-[4.5rem] w-[4.5rem] object-contain drop-shadow-[0_16px_18px_rgba(0,0,0,0.4)]"
-                      />
-                      <span className="mt-2 block text-[0.5rem] uppercase leading-tight tracking-[0.14em] text-muted">{pc.name}</span>
-                    </div>
+                    <FramedPiece key={pc.photo} name={pc.name} photo={pc.photo} />
                   ))}
                 </div>
-                {/* maker — credited once, with their page */}
-                <a
-                  href={m.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group/m mt-5 inline-flex items-center gap-3"
-                >
-                  <span className="font-display text-xl leading-none text-fg">{m.name}</span>
-                  <span className="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors group-hover/m:text-fg">
-                    <InstagramIcon /> {m.handle}
-                  </span>
-                </a>
-              </li>
+              </section>
             ))}
-          </ul>
-        </aside>
+          </div>
+        </div>
       </div>
     </>
   );
