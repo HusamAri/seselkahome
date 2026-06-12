@@ -41,6 +41,7 @@ export function OrderForm() {
     const parts = [...head, '', 'Sipariş listesi:', ...lines];
     if (detail.length) parts.push('', 'Detaylar:', ...detail);
     parts.push('', `Not: ${note || '-'}`);
+    parts.push('', 'KVKK Aydınlatma Metni okundu ve onaylandı.');
     const body = parts.join('\n');
     window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
@@ -118,8 +119,16 @@ export function OrderForm() {
       </div>
 
       <p className="text-xs leading-relaxed text-muted">
-        Bu form bir <strong className="font-medium text-fg/75">taleptir</strong>; bu aşamada ödeme ya da kapora alınmaz. Size dönüp teklifi, üretim süresini ve süreci birlikte netleştiririz.
+        Bu form bir <strong className="font-medium text-fg/75">taleptir</strong>; bu aşamada ödeme ya da kapora alınmaz. Size dönüp teklifi, üretim süresini ve süreci birlikte netleştiririz. Satış ve teslimat koşulları için{' '}
+        <a href="/mesafeli-satis/" className="underline underline-offset-2 transition-colors hover:text-accent">Ön Bilgilendirme &amp; Mesafeli Satış</a>{' '}sayfamıza göz atabilirsiniz.
       </p>
+
+      <label className="flex items-start gap-2.5 text-xs leading-relaxed text-muted">
+        <input type="checkbox" name="kvkk" required className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--accent-fill)]" />
+        <span>
+          <a href="/kvkk-aydinlatma/" className="text-fg/80 underline underline-offset-2 transition-colors hover:text-accent">KVKK Aydınlatma Metni</a>’ni okudum; iletişim bilgilerimin talebimi yanıtlamak amacıyla işlenmesini onaylıyorum.
+        </span>
+      </label>
 
       <button
         type="submit"

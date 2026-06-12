@@ -156,7 +156,33 @@ export function salePrice(value: number): number {
 export const contact = {
   email: 'atolye@seselkahome.com',
   phone: '',
-  location: 'İstanbul',
+  location: 'Hatay, İskenderun',
+};
+
+/**
+ * Yasal satıcı künyesi — Mesafeli Satış / KVKK sayfaları ve footer "Satıcı
+ * Bilgileri" bloğu buradan beslenir (tek kaynak). Esnaf muafiyeti kapsamında
+ * kendi ev/atölye ortamında üretim yapan gerçek kişi.
+ *
+ * DOLDURULACAK: `taxId` (vergi/T.C. kimlik no) ve `phone` henüz verilmedi.
+ * Boş kaldıkları sürece künyede GÖSTERİLMEZ (ekranda sahte veri yok); değerleri
+ * girdiğin an footer + yasal sayfalarda otomatik görünürler. `phone`, footer
+ * iletişim satırını da otomatik açar (contact.phone ile ortak kaynak).
+ */
+export const seller = {
+  /** Yasal ad / ünvan. */
+  legalName: 'Sefa Selver Karaçalı',
+  /** Vergi Kimlik No veya T.C. Kimlik No — DOLDURULACAK. */
+  taxId: '',
+  /** Açık adres yerine yalnızca İl/İlçe yayımlanır (ev adresi gizli). */
+  city: 'Hatay',
+  district: 'İskenderun',
+  /** İletişim e-postası (contact ile ortak kaynak). */
+  email: contact.email,
+  /** Telefon — DOLDURULACAK (contact.phone ile ortak kaynak). */
+  phone: contact.phone,
+  /** Faaliyet temeli — künye dipnotu. */
+  basis: 'Esnaf muafiyeti kapsamında ev üretimi.',
 };
 
 /**
@@ -211,14 +237,14 @@ export const specialSeries = {
 };
 
 export const heroMeta = [
-  { k: 'Malzeme', v: 'Geri dönüşen kağıt' },
+  { k: 'Malzeme', v: 'Geri dönüştürülmüş kağıt' },
   { k: 'Üretim', v: 'Siparişe özel' },
   { k: 'Emek', v: 'Kadın elinde' },
 ];
 
 export type Step = { n: string; t: string; d: string };
 export const processSteps: Step[] = [
-  { n: '01', t: 'Geri Dönüşen Kağıt', d: 'Üretim, geri dönüştürülmüş kağıtla başlar. Kimyasal işlemlerden geçmeden, fiziksel yöntemlerle elde işlenmeye hazırlanır; doğadan gelen lif yeniden değer kazanır.' },
+  { n: '01', t: 'Geri Dönüştürülmüş Kağıt', d: 'Üretim, hazır geri dönüştürülmüş kağıtla başlar. Kimyasal işlemlerden geçmeden, fiziksel yöntemlerle elde işlenmeye hazırlanır; doğadan gelen lif yeniden değer kazanır.' },
   { n: '02', t: 'Kordon ve Dal Formu', d: 'Temizlenen kağıtlar ince şeritler halinde kesilerek elde sıkıca bükülür. Ortaya hasır kadar dayanıklı, organik lif yapısında kağıt dallar çıkar.' },
   { n: '03', t: 'Örgü ve Zanaat', d: 'Hazırlanan kordonlar bir kadın ustanın ellerinde biçim kazanır. Sabır ve sakinlikle yürütülen bu örgü sürecinde kağıt, yeni ve zamansız bir gövdeye kavuşur.' },
   { n: '04', t: 'Özen ve İmza', d: 'Üretimi tamamlanan her parça, el yazısı özel bir not ve mum mührüyle taçlandırılarak sürdürülebilir el yapımı ambalajına girer.' },
