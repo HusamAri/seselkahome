@@ -24,7 +24,7 @@ const MailArrow = (
  */
 export function SpecialSeries() {
   const { eyebrow, title, maker, note, hero, items } = specialSeries;
-  const mailto = `mailto:${contact.email}?subject=${encodeURIComponent(`Özel Seri — ${title} · Fiyat talebi`)}`;
+  const mailto = `mailto:${contact.email}?subject=${encodeURIComponent(`Özel Seri: ${title} · Fiyat talebi`)}`;
 
   return (
     <div>

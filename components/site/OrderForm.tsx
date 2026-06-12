@@ -21,12 +21,27 @@ export function OrderForm() {
     const data = new FormData(e.currentTarget);
     const name = String(data.get('fn') || '').trim();
     const email = String(data.get('em') || '').trim();
+    const phone = String(data.get('ph') || '').trim();
+    const size = String(data.get('sz') || '').trim();
+    const palette = String(data.get('pl') || '').trim();
+    const deadline = String(data.get('dl') || '').trim();
     const note = String(data.get('msg') || '').trim();
     const piece = String(data.get('prc') || '');
 
     const lines = hasItems ? cart.items.map((i) => `- ${i.name} × ${i.qty}`) : [`- ${piece}`];
     const subject = hasItems ? `Seselka - Sipariş (${cart.count} parça)` : `Seselka - Tasarım Talebi: ${piece}`;
-    const body = [`Ad: ${name}`, `E-posta: ${email}`, '', 'Sipariş listesi:', ...lines, '', `Not: ${note || '-'}`].join('\n');
+
+    const head = [`Ad: ${name}`, `E-posta: ${email}`];
+    if (phone) head.push(`Telefon: ${phone}`);
+    const detail: string[] = [];
+    if (size) detail.push(`Ölçü: ${size}`);
+    if (palette) detail.push(`Renk / Palet: ${palette}`);
+    if (deadline) detail.push(`Teslim tarihi: ${deadline}`);
+
+    const parts = [...head, '', 'Sipariş listesi:', ...lines];
+    if (detail.length) parts.push('', 'Detaylar:', ...detail);
+    parts.push('', `Not: ${note || '-'}`);
+    const body = parts.join('\n');
     window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
     setSent(true);
@@ -46,6 +61,17 @@ export function OrderForm() {
         <div>
           <label className={label} htmlFor="em">E-posta</label>
           <input className={field} id="em" name="em" type="email" autoComplete="email" placeholder="defne@ev.com" required />
+        </div>
+      </div>
+
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label className={label} htmlFor="ph">Telefon <span className="normal-case tracking-normal text-muted/70">(opsiyonel)</span></label>
+          <input className={field} id="ph" name="ph" type="tel" autoComplete="tel" placeholder="05__ ___ __ __" />
+        </div>
+        <div>
+          <label className={label} htmlFor="dl">Teslim tarihi <span className="normal-case tracking-normal text-muted/70">(opsiyonel)</span></label>
+          <input className={field} id="dl" name="dl" type="text" placeholder="Örn. yeni yıl, doğum günü…" />
         </div>
       </div>
 
@@ -75,10 +101,25 @@ export function OrderForm() {
         </div>
       )}
 
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label className={label} htmlFor="sz">Ölçü / boyut <span className="normal-case tracking-normal text-muted/70">(opsiyonel)</span></label>
+          <input className={field} id="sz" name="sz" type="text" placeholder="Örn. 40×30 cm, masa boyu…" />
+        </div>
+        <div>
+          <label className={label} htmlFor="pl">Renk & palet <span className="normal-case tracking-normal text-muted/70">(opsiyonel)</span></label>
+          <input className={field} id="pl" name="pl" type="text" placeholder="Örn. naturel, ekru, toprak…" />
+        </div>
+      </div>
+
       <div>
         <label className={label} htmlFor="msg">Notunuz</label>
-        <textarea className={`${field} min-h-28 resize-y`} id="msg" name="msg" placeholder="Düşlediğiniz renk, ölçü ya da yaşam alanınıza dair detaylar..." />
+        <textarea className={`${field} min-h-28 resize-y`} id="msg" name="msg" placeholder="Düşlediğiniz form, yaşam alanınız ya da ilham görselleriniz hakkında birkaç satır..." />
       </div>
+
+      <p className="text-xs leading-relaxed text-muted">
+        Bu form bir <strong className="font-medium text-fg/75">taleptir</strong>; bu aşamada ödeme ya da kapora alınmaz. Size dönüp teklifi, üretim süresini ve süreci birlikte netleştiririz.
+      </p>
 
       <button
         type="submit"

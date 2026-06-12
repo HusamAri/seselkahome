@@ -30,7 +30,7 @@ function InstagramIcon({ size = 14 }: { size?: number }) {
  * mailto CTA — no backend.
  */
 export function Reviews() {
-  const mailto = `mailto:${contact.email}?subject=${encodeURIComponent('Müşteri Yorumu — Seselka')}&body=${encodeURIComponent('Aldığınız parça:\nŞehir:\nDeğerlendirmeniz:\n\n(Lütfen evinizdeki fotoğrafınızı bu e-postaya ekleyin — sayfamızda sergileyelim.)')}`;
+  const mailto = `mailto:${contact.email}?subject=${encodeURIComponent('Seselka - Müşteri Yorumu')}&body=${encodeURIComponent('Aldığınız parça:\nŞehir:\nDeğerlendirmeniz:\n\n(Lütfen evinizdeki fotoğrafınızı bu e-postaya ekleyin, sayfamızda sergileyelim.)')}`;
 
   return (
     <section id="yorumlar" className="scroll-mt-28 border-t border-line">
@@ -43,7 +43,7 @@ export function Reviews() {
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-relaxed text-muted">
-            Satın alanların kendi köşelerinden kareler ve sözler. Sen de parçanı evinde yakaladıysan, fotoğrafınla birlikte bize gönder — burada sergileyelim.
+            Satın alanların kendi köşelerinden kareler ve sözler. Sen de parçanı evinde yakaladıysan, fotoğrafınla birlikte bize gönder, burada sergileyelim.
           </p>
         </div>
 

@@ -9,6 +9,7 @@ const LINKS = [
   { href: '#koleksiyon', label: 'Koleksiyon' },
   { href: '#hikaye', label: 'Hikaye' },
   { href: '#surec', label: 'Süreç' },
+  { href: '#odeme', label: 'Ödeme' },
 ];
 
 const EASE = 'cubic-bezier(0.32,0.72,0,1)';
