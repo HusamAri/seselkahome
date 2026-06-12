@@ -167,7 +167,7 @@ export function MakersExhibit() {
 
           <div className="mx-auto max-w-wrap px-6 py-14 md:px-10 md:py-20">
             <p className="mx-auto mb-14 max-w-md text-center text-sm leading-relaxed text-muted md:mb-20">
-              Her parçanın arkasında bir el, bir hikâye. Seselka’yı var eden kadınların eserleri — sayfalarına dokunarak ulaşabilirsiniz.
+              Her parçanın arkasında bir el, bir hikâye. Seselka’yı var eden kadınların eserleri. Sayfalarına dokunarak ulaşabilirsiniz.
             </p>
 
             {makers.map((m) => (

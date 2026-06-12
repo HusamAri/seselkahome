@@ -9,6 +9,7 @@ import { ProductModalProvider } from '@/components/shop/ProductModalProvider';
 import { MakersExhibit } from '@/components/site/MakersExhibit';
 import { SpecialSeries } from '@/components/site/SpecialSeries';
 import { OrderForm } from '@/components/site/OrderForm';
+import { OrderProcess } from '@/components/site/OrderProcess';
 import { ProcessSteps } from '@/components/site/ProcessSteps';
 import { Reviews } from '@/components/site/Reviews';
 import { SiteFooter } from '@/components/site/SiteFooter';
@@ -251,6 +252,13 @@ export default function Home() {
 
         {/* ---------------------------------------------------- REVIEWS */}
         <Reviews />
+
+        {/* ---------------------------------------------------- SİPARİŞ & ÖDEME (how it works) */}
+        <section id="odeme" className="scroll-mt-28 border-t border-line">
+          <div className="mx-auto max-w-wrap px-6 py-24 md:py-32">
+            <OrderProcess />
+          </div>
+        </section>
 
         {/* ---------------------------------------------------- ORDER */}
         <section id="siparis" className="scroll-mt-28 bg-surface">

@@ -159,6 +159,33 @@ export const contact = {
   location: 'İstanbul',
 };
 
+/**
+ * Made-to-order deposit + how the customer pays. Fill `iban`/`cardLink` to go
+ * live; empty values fall back to tasteful "paylaşılır" copy so nothing looks
+ * broken before the real details are in.
+ */
+export const payment = {
+  /** Deposit share required to start production (0–1). */
+  deposit: 0.3,
+  /** Bank transfer (havale/EFT). Leave '' to hide the IBAN and show a fallback. */
+  iban: '',
+  ibanName: 'Seselka Home',
+  bankName: '',
+  /** Hosted card-payment link (Shopier/iyzico). Leave '' to show a fallback. */
+  cardLink: '',
+};
+
+export type OrderStep = { n: string; t: string; d: string };
+/** The bespoke order journey, shown in the "Sipariş & Ödeme" section. */
+export const orderFlow: OrderStep[] = [
+  { n: '01', t: 'Talep', d: 'Düşlediğiniz parçayı, ölçüyü ve rengi formla iletirsiniz; dilerseniz ilham görsellerinizi de eklersiniz.' },
+  { n: '02', t: 'Görüşme & Teklif', d: 'Size kısa sürede döner; fizibiliteyi, fiyatı ve üretim süresini birlikte netleştiririz.' },
+  { n: '03', t: 'Görsel Onayı', d: 'Benzer işlerimizin ya da taslağın fotoğraflarını paylaşırız; siz onayladıkça bir sonraki adıma geçeriz.' },
+  { n: '04', t: 'Kapora', d: 'Onayladığınız teklifin kaporasıyla siparişiniz üretim sırasına alınır. Her parça yalnızca sizin için örülür.' },
+  { n: '05', t: 'Üretim & İlerleme', d: 'El emeğiyle örülürken ara ara ilerleme fotoğrafları paylaşırız; süreç baştan sona şeffaftır.' },
+  { n: '06', t: 'Son Onay & Teslim', d: 'Biten parçanın fotoğraflarını gönderir, kalan ödemeyi alır, özenle paketleyip kargoya veririz.' },
+];
+
 /** Premium, contact-for-price signature collection shown above the catalog. */
 export type SpecialItem = {
   id: string;
@@ -173,7 +200,7 @@ export const specialSeries = {
   title: 'Çiçek Açtıran Eller',
   /** Maker, credited once with a handwritten signature. */
   maker: { name: 'Songül Güney', handle: '@songul_guney92', instagram: 'https://www.instagram.com/songul_guney92' },
-  note: 'Kâğıttan açan çiçekler ve çiçek formlu lambalar — sınırlı, özel üretim. Fiyat için bizimle iletişime geçin.',
+  note: 'Kâğıttan açan çiçekler ve çiçek formlu lambalar; sınırlı, özel üretim. Fiyat için bizimle iletişime geçin.',
   hero: '/assets/special/cicek-acturan-eller.webp',
   items: [
     { id: 'lotus-lamba', name: 'Lotus Lamba', image: '/assets/special/lotus-lamba.webp', desc: 'Kâğıt yapraklardan açan, içeriden ışıyan bir lotus. Yakıldığında odaya sıcak, pembe bir gün batımı düşürür.', hotspot: { x: '57%', y: '64%', place: 'above' } },
