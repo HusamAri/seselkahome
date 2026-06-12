@@ -55,7 +55,11 @@ export function Reviews() {
               </div>
               <figcaption className="flex flex-1 flex-col p-6">
                 <Stars n={r.rating} />
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-fg/80">“{r.text}”</p>
+                {r.text ? (
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-fg/80">“{r.text}”</p>
+                ) : (
+                  <div className="mt-3 flex-1" aria-hidden="true" />
+                )}
                 <div className="mt-5 flex items-end justify-between gap-3 border-t border-line pt-4">
                   <div>
                     <span className="block font-display text-lg leading-none text-fg">{r.name}</span>
