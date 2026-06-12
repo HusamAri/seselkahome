@@ -76,7 +76,7 @@ export const products: Product[] = [
     use: 'Koltuğun ya da yatağın yanında; üstüne kitabınızı ve kahvenizi, alt sepetine gazete, örtü veya küçük eşyalarınızı alır. İşlevle zarafeti bir arada taşıyan, taşınabilir bir köşe.',
     maker: {
       name: 'Sefa Selver', handle: '@selversefakaracali', instagram: 'https://www.instagram.com/selversefakaracali',
-      note: 'Sefa Selver’in atölyedeki en iddialı işlerinden biri. Sepet örmekle başlayan yolculuğu, ahşap bir iskelet üzerinde iki katlı bir sehpaya dönüştü; sabırla örülen her sıra, emeğin işlevle buluştuğu bir parçaya kavuştu.',
+      note: 'Sefa Selver’in en iddialı işlerinden biri. Sepet örmekle başlayan yolculuğu, ahşap bir iskelet üzerinde iki katlı bir sehpaya dönüştü; sabırla örülen her sıra, emeğin işlevle buluştuğu bir parçaya kavuştu.',
     },
   },
   {
@@ -133,7 +133,7 @@ export const products: Product[] = [
   {
     id: 'ozel', name: 'Özel Ölçü', sub: 'Ölçüye özel', price: null, custom: true,
     image: '/assets/wax-seal.webp',
-    desc: 'Düşlediğiniz ölçü, form veya kullanım amacını bize ulaştırın. Kağıttan dallar atölyemizde tamamen sizin için şekillensin.',
+    desc: 'Düşlediğiniz ölçü, form veya kullanım amacını bize ulaştırın. Kağıttan dallar, üreten kadınların ellerinde tamamen sizin için şekillensin.',
     meta: ['Konuşalım', 'Ölçüye özel', '4-6 hafta'],
   },
 ];
@@ -155,7 +155,7 @@ export function salePrice(value: number): number {
 
 export const contact = {
   email: 'atolye@seselkahome.com',
-  phone: '+90 212 000 00 00',
+  phone: '',
   location: 'İstanbul',
 };
 
@@ -213,12 +213,12 @@ export const specialSeries = {
 export const heroMeta = [
   { k: 'Malzeme', v: 'Geri dönüşen kağıt' },
   { k: 'Üretim', v: 'Siparişe özel' },
-  { k: 'Atölye', v: 'İstanbul' },
+  { k: 'Emek', v: 'Kadın elinde' },
 ];
 
 export type Step = { n: string; t: string; d: string };
 export const processSteps: Step[] = [
-  { n: '01', t: 'Toplama ve Dönüşüm', d: 'Şehrin atık kağıtları kimyasal işlemlere uğramadan, tamamen fiziksel yöntemlerle temizlenip ayıklanarak atölyemizin ham maddesine dönüşür.' },
+  { n: '01', t: 'Geri Dönüşen Kağıt', d: 'Üretim, geri dönüştürülmüş kağıtla başlar. Kimyasal işlemlerden geçmeden, fiziksel yöntemlerle elde işlenmeye hazırlanır; doğadan gelen lif yeniden değer kazanır.' },
   { n: '02', t: 'Kordon ve Dal Formu', d: 'Temizlenen kağıtlar ince şeritler halinde kesilerek elde sıkıca bükülür. Ortaya hasır kadar dayanıklı, organik lif yapısında kağıt dallar çıkar.' },
   { n: '03', t: 'Örgü ve Zanaat', d: 'Hazırlanan kordonlar bir kadın ustanın ellerinde biçim kazanır. Sabır ve sakinlikle yürütülen bu örgü sürecinde kağıt, yeni ve zamansız bir gövdeye kavuşur.' },
   { n: '04', t: 'Özen ve İmza', d: 'Üretimi tamamlanan her parça, el yazısı özel bir not ve mum mührüyle taçlandırılarak sürdürülebilir el yapımı ambalajına girer.' },
@@ -226,8 +226,8 @@ export const processSteps: Step[] = [
 
 export type Stat = { big: string; unit: string; label: string; sub: string };
 export const stats: Stat[] = [
-  { big: '8.4', unit: 't', label: 'Dönüşen kağıt', sub: 'Atölyede sanatsal tasarımlarla yeniden hayata kazandırılan kağıt miktarı.' },
-  { big: '100', unit: '%', label: 'Doğal içerik', sub: 'Üretimin hiçbir aşamasında plastik, sentetik reçine ya da yapay boya kullanılmaz.' },
+  { big: '100', unit: '%', label: 'El işçiliği', sub: 'Her parça baştan sona elde örülür; makine yok, kalıp yok, seri üretim yok.' },
+  { big: '0', unit: '', label: 'Stok', sub: 'Stok tutulmaz; her parça yalnızca siparişinizle, size özel ve tek tek üretilir.' },
   { big: 'El', unit: 'le', label: 'Kadın emeği', sub: 'Her parça kadın elinde, “kadın isterse” diye başlayan bir cümlenin elle tutulabilir hali olarak doğar.' },
 ];
 

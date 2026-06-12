@@ -37,7 +37,7 @@ export function SiteFooter() {
             <h4 className="text-[0.7rem] uppercase tracking-[0.2em] text-accent">İletişim</h4>
             <ul className="mt-4 space-y-2.5 text-sm text-fg/80">
               <li><a className="transition-colors hover:text-accent" href={`mailto:${contact.email}`}>{contact.email}</a></li>
-              <li><a className="transition-colors hover:text-accent" href={`tel:${contact.phone.replace(/\s/g, '')}`}>{contact.phone}</a></li>
+              {contact.phone ? <li><a className="transition-colors hover:text-accent" href={`tel:${contact.phone.replace(/\s/g, '')}`}>{contact.phone}</a></li> : null}
               <li className="text-muted">{contact.location}</li>
             </ul>
           </div>

@@ -30,14 +30,14 @@ function InstagramIcon({ size = 14 }: { size?: number }) {
  * mailto CTA — no backend.
  */
 export function Reviews() {
-  const mailto = `mailto:${contact.email}?subject=${encodeURIComponent('Seselka - Müşteri Yorumu')}&body=${encodeURIComponent('Aldığınız parça:\nŞehir:\nDeğerlendirmeniz:\n\n(Lütfen evinizdeki fotoğrafınızı bu e-postaya ekleyin, sayfamızda sergileyelim.)')}`;
+  const mailto = `mailto:${contact.email}?subject=${encodeURIComponent('Seselka - Ev Sahibi Yorumu')}&body=${encodeURIComponent('Aldığınız parça:\nŞehir:\nDeğerlendirmeniz:\n\n(Lütfen evinizdeki fotoğrafınızı bu e-postaya ekleyin, sayfamızda sergileyelim.)')}`;
 
   return (
     <section id="yorumlar" className="scroll-mt-28 border-t border-line">
       <div className="mx-auto max-w-wrap px-6 py-24 md:py-32">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <span className="eyebrow">Müşteri Yorumları</span>
+            <span className="eyebrow">Ev Sahiplerinden</span>
             <h2 className="mt-5 font-display font-medium leading-[0.95] text-fg text-[clamp(2.5rem,6.5vw,5rem)]">
               Onların evinde<span className="text-accent">.</span>
             </h2>
