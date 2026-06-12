@@ -206,7 +206,7 @@ export const stats: Stat[] = [
 
 /** Customer reviews with their own photos. Curated (no backend) — customers send
  *  theirs via the email CTA, then they're added here. */
-export type Review = { name: string; piece: string; rating: number; text: string; image: string; handle?: string; instagram?: string; location?: string };
+export type Review = { name: string; piece: string; rating: number; text?: string; image: string; handle?: string; instagram?: string; location?: string };
 export const reviews: Review[] = [
   {
     name: 'Şule Kömoğlu',
@@ -216,5 +216,13 @@ export const reviews: Review[] = [
     rating: 5,
     image: '/assets/reviews/sule-komoglu.webp',
     text: 'Ellerine sağlık canım, çok güzel olmuş. Üzerinde güzel, hoş sohbetli kahve muhabbetlerine inşallah 💖🙏',
+  },
+  {
+    name: 'Özlem Karaçalı',
+    handle: '@ozlemmkaracali',
+    instagram: 'https://www.instagram.com/ozlemmkaracali',
+    piece: 'Yuvarlak Sepet',
+    rating: 5,
+    image: '/assets/reviews/ozlem-karacali.webp',
   },
 ];
