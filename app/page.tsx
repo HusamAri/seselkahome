@@ -138,7 +138,7 @@ export default function Home() {
                   Atölyeden <span className="italic text-accent">eve</span>
                 </h2>
                 <p className="mt-5 max-w-md text-sm leading-relaxed text-muted">
-                  Atölyemizde stok bulunmaz. Siparişinizle birlikte size özel örülen her parça, el işçiliğinin benzersiz izlerini taşır.
+                  Stok tutmuyoruz; her parça siparişinizle, üreten kadınların evlerinde size özel örülür ve el işçiliğinin benzersiz izlerini taşır.
                 </p>
                 <span className="mt-5 inline-flex items-center gap-2 rounded-full border border-accent/30 px-3.5 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-accent">
                   <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
@@ -276,7 +276,7 @@ export default function Home() {
               <span className="eyebrow">Sipariş · 03</span>
               <RevealText as="h2" text={['Düşlediğiniz parçayı', 'bize iletin.']} className="mt-5 text-fg" lineClassName="font-display font-medium text-[clamp(2.5rem,6vw,5rem)] leading-[0.92]" />
               <p className="mt-6 max-w-md text-base leading-relaxed text-muted">
-                Atölyemizde seri üretim yapılmaz; nesneler yalnızca sizin için ve siparişiniz üzerine üretilir. Evinizin ölçülerine özel detaylar için aşağıdaki formu kullanabilirsiniz.
+                Seri üretim yapmıyoruz; her nesne yalnızca sizin için, siparişiniz üzerine üreten kadınların ellerinde üretilir. Evinizin ölçülerine özel detaylar için aşağıdaki formu kullanabilirsiniz.
               </p>
               <div className="mt-9 rounded-[1.6rem] border border-line bg-bg p-6 sm:p-8">
                 <OrderForm />
