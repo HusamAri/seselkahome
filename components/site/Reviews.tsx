@@ -51,7 +51,7 @@ export function Reviews() {
           {reviews.map((r) => (
             <figure key={`${r.name}-${r.piece}`} className="flex w-full max-w-[36rem] flex-col overflow-hidden rounded-[1.7rem] bg-card shadow-[0_34px_64px_-40px_rgba(120,70,25,0.5)] sm:flex-row">
               <div className="relative aspect-[4/3] w-full shrink-0 sm:aspect-auto sm:w-48 md:w-56">
-                <Image src={withBase(r.image)} alt={`${r.name} — ${r.piece}`} fill sizes="(min-width:640px) 14rem, 100vw" className="object-cover" />
+                <Image src={withBase(r.image)} alt={r.alt ?? `${r.name} — ${r.piece}`} fill sizes="(min-width:640px) 14rem, 100vw" className="object-cover" />
               </div>
               <figcaption className="flex flex-1 flex-col p-6">
                 <Stars n={r.rating} />

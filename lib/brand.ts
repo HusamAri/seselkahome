@@ -44,6 +44,8 @@ export type Product = {
   /** TRY price, or null for made-to-order pieces. */
   price: number | null;
   image: string;
+  /** Ana görsel için SEO/erişilebilirlik alt metni (yoksa name'e düşer). */
+  alt?: string;
   badge?: string;
   desc?: string;
   meta?: string[];
@@ -59,6 +61,8 @@ export type Product = {
   cm?: number;
   /** Detail-view photos (lifestyle/close-ups). Falls back to [image]. */
   gallery?: string[];
+  /** Alt metinleri, gallery[] ile aynı sırada (yoksa alt ?? name'e düşer). */
+  galleryAlt?: string[];
   /** Detail-page paragraph: what the piece is for / how it lives at home. */
   use?: string;
   /** Crediting the maker, with their Instagram + a sentence on their craft. */
@@ -73,6 +77,12 @@ export const products: Product[] = [
     desc: 'Elde örülen iki katlı yuvarlak sehpa; üstte tepsi formlu bir yüzey, altta kapaklı sepet gözü. Ahşap iskeleti ve sıcak dokusuyla her köşeye zamansız bir duruş.',
     meta: ['~58 cm', 'İki katlı · sepetli', 'El örgüsü'],
     gallery: ['/assets/products/sehpa-1.webp', '/assets/products/sehpa-2.webp', '/assets/products/sehpa-3.webp'],
+    alt: 'El örgüsü iki katlı kağıt hasır sehpa; üstte tepsi yüzeyi, altta sepetli ahşap iskelet',
+    galleryAlt: [
+      'El örgüsü hasır sehpanın tepsi formlu üst yüzeyi, yakın çekim',
+      'Hasır sehpanın kapaklı alt sepet gözü ve örgü dokusu',
+      'Kağıt hasır sehpa oturma alanında, yanında kitap ve kahve',
+    ],
     use: 'Koltuğun ya da yatağın yanında; üstüne kitabınızı ve kahvenizi, alt sepetine gazete, örtü veya küçük eşyalarınızı alır. İşlevle zarafeti bir arada taşıyan, taşınabilir bir köşe.',
     maker: {
       name: 'Sefa Selver', handle: '@selversefakaracali', instagram: 'https://www.instagram.com/selversefakaracali',
@@ -85,6 +95,11 @@ export const products: Product[] = [
     desc: 'Kuru çiçek tasarımıyla birlikte; duvarda ya da kapı arkasında rafine ve sessiz bir köşe.',
     meta: ['Ø ~28 cm', 'Doğal lif', 'El yapımı dekor'],
     gallery: ['/assets/products/asili-1.webp', '/assets/products/asili-2.webp'],
+    alt: 'Duvara asılan el yapımı kağıt hasır sepet, kuru çiçek düzenlemesiyle',
+    galleryAlt: [
+      'Doğal lif asılı sepet duvarda, kurutulmuş çiçeklerle',
+      'Kapı arkasında asılı örgü sepet ve ince dallar',
+    ],
     use: 'Duvarda ya da kapı arkasında; kurutulmuş çiçekler, ince dallar veya sevdiğiniz küçük objelerle eşleştiğinde sessiz, sıcak bir köşe yaratır.',
   },
   {
@@ -93,6 +108,12 @@ export const products: Product[] = [
     desc: 'Elde örülmüş, organik dalgalı formuyla hasır avize; yakıldığında tavana ve duvarlara dantel gibi yumuşak gölgeler düşürür.',
     meta: ['~50 cm', 'Aydınlatma', 'El yapımı'],
     gallery: ['/assets/products/hasir-avize-1.webp', '/assets/products/hasir-avize-2.webp', '/assets/products/hasir-avize-3.webp'],
+    alt: 'Geri dönüştürülmüş kağıttan elde örülen dalgalı formlu hasır avize',
+    galleryAlt: [
+      'Yakıldığında dantel gibi gölge düşüren kağıt hasır avize',
+      'Hasır avizenin organik örgü deseni, yakın çekim',
+      'Yemek masasının üzerinde asılı el yapımı hasır avize',
+    ],
     use: 'Yemek masasının, antrenin ya da oturma alanının üzerinde tek başına bir heykel gibi durur; ışığını açtığınızda örgü deseni mekâna sıcak, hareketli bir gölge oyununa dönüşür.',
     maker: {
       name: 'Banu Kayaalp', handle: '@banukayaalp', instagram: 'https://www.instagram.com/banukayaalp',
@@ -105,6 +126,12 @@ export const products: Product[] = [
     desc: 'Sık örgülü ve dayanıklı form. Masada ekmekten meyveye, gündelik yaşamın içinde sanatsal bir detay.',
     meta: ['Ø ~30 cm', 'Doğal ton', 'Siparişe özel'],
     gallery: ['/assets/products/yuvarlak-1.webp', '/assets/products/yuvarlak-2.webp', '/assets/products/yuvarlak-3.webp'],
+    alt: 'El örgüsü yuvarlak kağıt hasır sepet, sık dokulu doğal ton tepsi',
+    galleryAlt: [
+      'Yuvarlak hasır sepet masada, içinde ekmek ve meyve',
+      'Yuvarlak örgü sepetin sık dokulu tabanı, yakın çekim',
+      'Girişte yuvarlak hasır sepet, anahtar ve mektupla',
+    ],
     use: 'Masada ekmekten meyveye, girişte anahtardan mektuba; gündelik dağınıklığı toparlayan, her ortama yakışan sakin bir form.',
     maker: {
       name: 'Sefa Selver', handle: '@selversefakaracali', instagram: 'https://www.instagram.com/selversefakaracali',
@@ -117,6 +144,12 @@ export const products: Product[] = [
     desc: 'Geleneksel hasır teknikleriyle elde örülen horoz formlu sepet; ikramlarınıza eşlik eden sıcak bir karşılaşma.',
     meta: ['~25 cm', 'Organik doku', 'Özel seri'],
     gallery: ['/assets/products/horoz-1.webp', '/assets/products/horoz-2.webp', '/assets/products/horoz-3.webp'],
+    alt: 'Geleneksel tekniklerle elde örülen horoz formlu hasır sepet',
+    galleryAlt: [
+      'Bayram sofrasında horoz formlu hasır sepet, içinde yumurta',
+      'Horoz sepetin elle örülmüş tarak ve ibik detayı',
+      'Rafta tek başına duran kağıt hasır horoz sepet',
+    ],
     use: 'Bayram ve kahvaltı sofralarının neşeli misafiri. Yumurtalarınızı, şekerlerinizi ya da küçük ikramlarınızı ağırlar; bir rafta tek başına dururken bile sofranıza geleneğin ve el emeğinin sıcaklığını taşır.',
     maker: {
       name: 'Banu Kayaalp', handle: '@banukayaalp', instagram: 'https://www.instagram.com/banukayaalp',
@@ -126,6 +159,7 @@ export const products: Product[] = [
   {
     id: 'orgu-ayna', name: 'Güneş Ayna', sub: 'Duvar · Ayna', price: 3900,
     image: '/assets/products/orgu-ayna.webp', sold: true, cm: 50,
+    alt: 'Güneş formunda, elde örülmüş çerçeveli yuvarlak duvar aynası',
     desc: 'Güneş formunda, elde örülmüş çerçeveli yuvarlak ayna. Tek parça olarak üretildi; sahibini buldu.',
     meta: ['Ø ~50 cm', 'Doğal lif', 'Tek parça'],
     use: 'Girişte, konsol üstünde ya da çalışma köşesinde; güneş formuyla duvara doğal bir odak ve yumuşak bir ışık oyunu taşır.',
@@ -217,6 +251,8 @@ export type SpecialItem = {
   id: string;
   name: string;
   image: string;
+  /** Hero/popup görseli için alt metni (yoksa name'e düşer). */
+  alt?: string;
   desc: string;
   /** Hotspot over the piece in the hero photo; place = popup direction. */
   hotspot: { x: string; y: string; place: 'above' | 'below' };
@@ -228,11 +264,12 @@ export const specialSeries = {
   maker: { name: 'Songül Güney', handle: '@songul_guney92', instagram: 'https://www.instagram.com/songul_guney92' },
   note: 'Kâğıttan açan çiçekler ve çiçek formlu lambalar; sınırlı, özel üretim. Fiyat için bizimle iletişime geçin.',
   hero: '/assets/special/cicek-acturan-eller.webp',
+  heroAlt: 'Kâğıttan açan çiçekler ve çiçek formlu lambalardan oluşan özel seri kompozisyonu',
   items: [
-    { id: 'lotus-lamba', name: 'Lotus Lamba', image: '/assets/special/lotus-lamba.webp', desc: 'Kâğıt yapraklardan açan, içeriden ışıyan bir lotus. Yakıldığında odaya sıcak, pembe bir gün batımı düşürür.', hotspot: { x: '57%', y: '64%', place: 'above' } },
-    { id: 'kagit-cicek', name: 'Kâğıt Çiçek', image: '/assets/special/kagit-cicek.webp', desc: 'İnce kâğıt yapraklarıyla el açmış çiçekler; vazoda hafif, zarif bir kıpırtı.', hotspot: { x: '45%', y: '40%', place: 'below' } },
-    { id: 'kagit-sakayik', name: 'Kâğıt Şakayık', image: '/assets/special/kagit-sakayik.webp', desc: 'Tek dalda kocaman bir şakayık; solmayan, kâğıttan. Mevsimi olmayan bir bahar köşesi.', hotspot: { x: '61%', y: '39%', place: 'below' } },
-    { id: 'dev-cicek', name: 'Dev Çiçek', image: '/assets/special/dev-cicek.webp', desc: 'Boyunu aşan bir çiçek dalı; bir köşeyi tek başına şenlendiren iddialı, zarif bir duruş.', hotspot: { x: '13%', y: '80%', place: 'above' } },
+    { id: 'lotus-lamba', name: 'Lotus Lamba', image: '/assets/special/lotus-lamba.webp', alt: 'İçeriden ışıyan, kâğıt yapraklı el yapımı lotus lamba', desc: 'Kâğıt yapraklardan açan, içeriden ışıyan bir lotus. Yakıldığında odaya sıcak, pembe bir gün batımı düşürür.', hotspot: { x: '57%', y: '64%', place: 'above' } },
+    { id: 'kagit-cicek', name: 'Kâğıt Çiçek', image: '/assets/special/kagit-cicek.webp', alt: 'Vazoda ince kâğıt yapraklarıyla el açmış kâğıt çiçekler', desc: 'İnce kâğıt yapraklarıyla el açmış çiçekler; vazoda hafif, zarif bir kıpırtı.', hotspot: { x: '45%', y: '40%', place: 'below' } },
+    { id: 'kagit-sakayik', name: 'Kâğıt Şakayık', image: '/assets/special/kagit-sakayik.webp', alt: 'Tek dalda solmayan, kâğıttan el yapımı şakayık çiçeği', desc: 'Tek dalda kocaman bir şakayık; solmayan, kâğıttan. Mevsimi olmayan bir bahar köşesi.', hotspot: { x: '61%', y: '39%', place: 'below' } },
+    { id: 'dev-cicek', name: 'Dev Çiçek', image: '/assets/special/dev-cicek.webp', alt: 'Boyu aşan iri kâğıt çiçek dalı, köşe için iddialı dekor', desc: 'Boyunu aşan bir çiçek dalı; bir köşeyi tek başına şenlendiren iddialı, zarif bir duruş.', hotspot: { x: '13%', y: '80%', place: 'above' } },
   ] satisfies SpecialItem[],
 };
 
@@ -259,7 +296,7 @@ export const stats: Stat[] = [
 
 /** Customer reviews with their own photos. Curated (no backend) — customers send
  *  theirs via the email CTA, then they're added here. */
-export type Review = { name: string; piece: string; rating: number; text?: string; image: string; handle?: string; instagram?: string; location?: string };
+export type Review = { name: string; piece: string; rating: number; text?: string; alt?: string; image: string; handle?: string; instagram?: string; location?: string };
 export const reviews: Review[] = [
   {
     name: 'Şule Kömoğlu',
@@ -268,6 +305,7 @@ export const reviews: Review[] = [
     piece: 'Hasır Sehpa',
     rating: 5,
     image: '/assets/reviews/sule-komoglu.webp',
+    alt: 'Ev sahibinin evinde el yapımı kağıt hasır sehpa',
     text: 'Ellerine sağlık canım, çok güzel olmuş. Üzerinde güzel, hoş sohbetli kahve muhabbetlerine inşallah 💖🙏',
   },
   {
@@ -277,5 +315,6 @@ export const reviews: Review[] = [
     piece: 'Yuvarlak Sepet',
     rating: 5,
     image: '/assets/reviews/ozlem-karacali.webp',
+    alt: 'Ev sahibinin köşesinde el örgüsü yuvarlak hasır sepet',
   },
 ];

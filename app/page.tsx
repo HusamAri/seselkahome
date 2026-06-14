@@ -15,6 +15,8 @@ import { Reviews } from '@/components/site/Reviews';
 import { SiteFooter } from '@/components/site/SiteFooter';
 import { SiteNav } from '@/components/site/SiteNav';
 import { withBase } from '@/lib/basePath';
+import { JsonLd } from '@/components/site/JsonLd';
+import { productsLd } from '@/lib/seo';
 import { brand, heroMeta, products, stats } from '@/lib/brand';
 
 /** Decorative cutout that overflows/overlaps its neighbour (layered depth, md+). */
@@ -43,6 +45,7 @@ export default function Home() {
       <LaunchPopup />
 
       <main id="top" className="bg-bg text-fg">
+        <JsonLd data={productsLd()} />
         {/* ---------------------------------------------------- HERO (compact, shop-leading) */}
         <section className="relative overflow-hidden">
           <div className="mx-auto grid max-w-wrap items-center gap-10 px-6 pb-16 pt-32 md:min-h-[88vh] md:grid-cols-[1.04fr_0.96fr] md:gap-14 md:pb-12 md:pt-28">
@@ -55,7 +58,7 @@ export default function Home() {
                 lineClassName="font-display font-medium text-[clamp(2.75rem,7vw,6.5rem)] leading-[0.86]"
               />
               <p className="mt-7 max-w-md text-base leading-relaxed text-fg/70 sm:text-lg">
-                Geri dönüştürülen kağıt, kadın ustaların ellerinde sabırla bükülerek organik dallara ve gündelik yaşam için zamansız nesnelere dönüşür.
+                Geri dönüştürülen kağıt, kadın ustaların ellerinde sabırla bükülerek hasır dokulu organik dallara ve gündelik yaşam için zamansız nesnelere dönüşür.
               </p>
 
               <div className="mt-9 flex flex-wrap items-center gap-3">
@@ -266,7 +269,7 @@ export default function Home() {
             <div className={`rounded-[1.8rem] border border-line bg-bg/40 p-2 ${FRAME_SHADOW}`}>
               <RevealImage
                 src="/assets/photo-basket.webp"
-                alt="Örme sepetler, keten örtü ve Seselka etiketi"
+                alt="El yapımı kağıt hasır sepetler, keten örtü ve Seselka etiketi"
                 sizes="(min-width:768px) 45vw, 90vw"
                 className="aspect-[4/5] w-full rounded-[1.35rem]"
               />

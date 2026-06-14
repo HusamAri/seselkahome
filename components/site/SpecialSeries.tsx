@@ -23,7 +23,7 @@ const MailArrow = (
  * whole section. Contact-for-price. Pure-CSS, so this stays a server component.
  */
 export function SpecialSeries() {
-  const { eyebrow, title, maker, note, hero, items } = specialSeries;
+  const { eyebrow, title, maker, note, hero, heroAlt, items } = specialSeries;
   const mailto = `mailto:${contact.email}?subject=${encodeURIComponent(`Özel Seri: ${title} · Fiyat talebi`)}`;
 
   return (
@@ -42,7 +42,7 @@ export function SpecialSeries() {
       <div className="relative mt-10">
         <div className="overflow-hidden rounded-[1.9rem] border border-line shadow-[0_50px_90px_-50px_rgba(120,70,25,0.45)]">
           <div className="relative aspect-[16/9] w-full">
-            <Image src={withBase(hero)} alt={`${title} — ${maker.name} özel serisi`} fill priority sizes="(min-width:1024px) 1120px, 100vw" className="object-cover" />
+            <Image src={withBase(hero)} alt={heroAlt ?? `${title} — ${maker.name} özel serisi`} fill priority sizes="(min-width:1024px) 1120px, 100vw" className="object-cover" />
           </div>
         </div>
 
@@ -70,7 +70,7 @@ export function SpecialSeries() {
                 >
                   <div className="overflow-hidden rounded-[1.1rem] border border-ink/10 bg-linen shadow-[0_30px_60px_-22px_rgba(42,37,32,0.65)]">
                     <div className="relative aspect-[4/3] w-full">
-                      <Image src={withBase(it.image)} alt={it.name} fill sizes="224px" className="object-cover" />
+                      <Image src={withBase(it.image)} alt={it.alt ?? it.name} fill sizes="224px" className="object-cover" />
                     </div>
                     <div className="px-3.5 pb-3.5 pt-3">
                       <div className="flex items-center justify-between gap-2">

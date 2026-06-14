@@ -8,7 +8,7 @@ import { RevealText } from '@/components/motion/RevealText';
 
 /** Makers whose pieces are live, grouped so each maker appears once with all of
  *  their pieces (the framed photo uses the lifestyle shot). Hidden left out. */
-type MakerGroup = { name: string; handle: string; instagram: string; pieces: { name: string; photo: string }[] };
+type MakerGroup = { name: string; handle: string; instagram: string; pieces: { name: string; photo: string; alt: string }[] };
 const makers: MakerGroup[] = Object.values(
   products
     .filter((p) => p.maker && !p.hidden)
@@ -17,6 +17,7 @@ const makers: MakerGroup[] = Object.values(
       (acc[m.instagram] ??= { name: m.name, handle: m.handle, instagram: m.instagram, pieces: [] }).pieces.push({
         name: p.name,
         photo: p.gallery?.[0] ?? p.image,
+        alt: p.alt ?? p.name,
       });
       return acc;
     }, {}),
@@ -37,7 +38,7 @@ const ARROW = (
 );
 
 /** A piece, framed and hung from a nail like a picture on a gallery wall. */
-function FramedPiece({ name, photo }: { name: string; photo: string }) {
+function FramedPiece({ name, photo, alt }: { name: string; photo: string; alt: string }) {
   return (
     <figure className="relative flex flex-col items-center pt-10">
       {/* nail + two wires */}
@@ -48,7 +49,7 @@ function FramedPiece({ name, photo }: { name: string; photo: string }) {
       <div className="w-full rounded-[2px] border-[7px] border-[#b08d68] bg-linen p-2 shadow-[0_34px_50px_-22px_rgba(0,0,0,0.55)] transition-transform duration-500 ease-quiet hover:-translate-y-1">
         <div className="relative aspect-square w-full overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element -- gallery photo, static export */}
-          <img src={withBase(photo)} alt={name} loading="lazy" className="h-full w-full object-cover" />
+          <img src={withBase(photo)} alt={alt} loading="lazy" className="h-full w-full object-cover" />
         </div>
       </div>
       <figcaption className="mt-4 text-center font-display text-lg leading-none text-fg">{name}</figcaption>
@@ -182,7 +183,7 @@ export function MakersExhibit() {
                 {/* hung pieces */}
                 <div className="grid grid-cols-2 gap-x-7 gap-y-14 sm:grid-cols-3 sm:gap-x-10 md:gap-y-20 lg:grid-cols-4">
                   {m.pieces.map((pc) => (
-                    <FramedPiece key={pc.photo} name={pc.name} photo={pc.photo} />
+                    <FramedPiece key={pc.photo} name={pc.name} photo={pc.photo} alt={pc.alt} />
                   ))}
                 </div>
               </section>

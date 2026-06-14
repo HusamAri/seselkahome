@@ -80,7 +80,10 @@ export function ProductModal({ active, open, onClose }: Props) {
 
   const { name, sub, meta, desc, use, maker, sold } = active;
   const images = active.gallery?.length ? active.gallery : [active.image];
-  const hero = images[Math.min(idx, images.length - 1)];
+  const heroIdx = Math.min(idx, images.length - 1);
+  const hero = images[heroIdx];
+  const baseAlt = active.alt ?? name;
+  const heroAlt = active.gallery?.length ? active.galleryAlt?.[heroIdx] ?? baseAlt : baseAlt;
   // Real lifestyle photos fill the frame; a transparent cutout floats on the
   // warm studio gradient instead.
   const hasPhotos = !!active.gallery?.length;
@@ -131,7 +134,7 @@ export function ProductModal({ active, open, onClose }: Props) {
               <Image
                 key={hero}
                 src={withBase(hero)}
-                alt={sold ? `${name} (satıldı)` : name}
+                alt={sold ? `${heroAlt} (satıldı)` : heroAlt}
                 fill
                 priority
                 sizes="(min-width:768px) 42vw, 90vw"
