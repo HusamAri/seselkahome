@@ -20,7 +20,8 @@ function sizePct(cm?: number) {
 }
 
 export function ProductCard({ product, priority = false }: Props) {
-  const { name, image, sub, badge, desc, meta, sold, custom } = product;
+  const { name, image, sub, badge, desc, meta, sold, custom, alt: imgAlt } = product;
+  const mainAlt = imgAlt ?? name;
   const modal = useProductModal();
 
   // Made-to-order — full-width banner card with the wax seal (no detail modal).
@@ -82,7 +83,7 @@ export function ProductCard({ product, priority = false }: Props) {
         >
           <Image
             src={withBase(image)}
-            alt={sold ? `${name} (satıldı)` : name}
+            alt={sold ? `${mainAlt} (satıldı)` : mainAlt}
             fill
             priority={priority}
             sizes="(min-width:1024px) 26vw, (min-width:640px) 60vw, 80vw"
