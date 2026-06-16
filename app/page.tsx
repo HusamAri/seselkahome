@@ -12,6 +12,7 @@ import { OrderForm } from '@/components/site/OrderForm';
 import { OrderProcess } from '@/components/site/OrderProcess';
 import { ProcessSteps } from '@/components/site/ProcessSteps';
 import { Reviews } from '@/components/site/Reviews';
+import { Faq } from '@/components/site/Faq';
 import { SiteFooter } from '@/components/site/SiteFooter';
 import { SiteNav } from '@/components/site/SiteNav';
 import { withBase } from '@/lib/basePath';
@@ -285,6 +286,13 @@ export default function Home() {
                 <OrderForm />
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ---------------------------------------------------- SSS (FAQ + FAQPage schema) */}
+        <section id="sss" className="scroll-mt-28 border-t border-line">
+          <div className="mx-auto max-w-wrap px-6 py-24 md:py-32">
+            <Faq />
           </div>
         </section>
       </main>

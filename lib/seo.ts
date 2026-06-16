@@ -3,7 +3,7 @@
  * Statik export'ta server component'lerde render edilir, böylece SSG HTML'ine
  * girer ve crawler'lar görür. Veriler lib/brand.ts'ten beslenir.
  */
-import { brand, contact, products, salePrice, seller, type Product } from '@/lib/brand';
+import { brand, contact, faqs, products, salePrice, seller, type Product } from '@/lib/brand';
 
 /** Canonical site kökü — app/layout.tsx metadataBase ile aynı olmalı. */
 export const SITE_URL = 'https://seselkahome.com';
@@ -95,5 +95,18 @@ export function productsLd() {
   return {
     '@context': 'https://schema.org',
     '@graph': products.filter((p) => !p.hidden).map(productLd),
+  };
+}
+
+/** FAQPage — görünür SSS bölümüyle birebir aynı sorulardan üretilir. */
+export function faqLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
   };
 }

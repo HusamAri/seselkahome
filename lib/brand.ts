@@ -318,3 +318,36 @@ export const reviews: Review[] = [
     alt: 'Ev sahibinin köşesinde el örgüsü yuvarlak hasır sepet',
   },
 ];
+
+/** Sıkça sorulan sorular — görünür SSS bölümü + FAQPage JSON-LD aynı kaynaktan
+ *  beslenir. Yanıtlar mevcut sipariş akışı / kapora / cayma verisiyle tutarlıdır. */
+export const faqs: { q: string; a: string }[] = [
+  {
+    q: 'Siparişe özel üretim nasıl çalışır?',
+    a: 'Stok tutmuyoruz; her parça siparişinizle üretilir. Süreç altı adımdır: talebinizi formla iletirsiniz, görüşüp teklifi ve süreyi netleştiririz, benzer işlerin görsellerini onayınıza sunarız, kaporayla üretim sırasına alırız, örülürken ara ara ilerleme paylaşırız ve biten parçayı özenle paketleyip kargoya veririz.',
+  },
+  {
+    q: 'Kapora ne kadar ve neden alınıyor?',
+    a: 'Onayladığınız teklif üzerinden yaklaşık %30 kapora alınır; bu, parçanız için malzeme ve emeğin ayrılıp üretim sırasına alınması içindir. Kalan tutar teslim öncesinde tahsil edilir.',
+  },
+  {
+    q: 'Üretim ve teslimat ne kadar sürer?',
+    a: 'Her parça el işçiliğiyle ve siparişe özel üretildiğinden süre ürüne göre değişir; ölçüye özel işlerde genellikle 4–6 haftadır. Kesin üretim ve teslim süresi, siparişinizi onaylarken birlikte netleştirilir.',
+  },
+  {
+    q: 'Türkiye’nin her yerine kargo var mı?',
+    a: 'Evet. Tamamlanan parçalar özenle paketlenip Türkiye geneline kargoyla gönderilir.',
+  },
+  {
+    q: 'Siparişe özel ürünlerde iade ve cayma hakkı nasıl işliyor?',
+    a: 'Ürünler kişiye/siparişe özel üretildiğinden, Mesafeli Sözleşmeler Yönetmeliği’nin 15/1-b maddesi uyarınca cayma hakkının istisnası kapsamındadır. Yine de ürün ayıplı veya hasarlı ulaşırsa yasal haklarınız saklıdır; ayrıntılar Mesafeli Satış sayfamızda yer alır.',
+  },
+  {
+    q: 'Kağıt hasır ürünlerin bakımı nasıl yapılır?',
+    a: 'Kuru ve yumuşak bir bez ya da fırçayla tozunu alabilirsiniz. Doğal lif yapısı gereği doğrudan suya, aşırı neme ve uzun süreli güneşe maruz bırakmamanızı öneririz; böylece formunu ve rengini uzun yıllar korur.',
+  },
+  {
+    q: 'Ürünler gerçekten geri dönüştürülmüş kağıttan mı üretiliyor?',
+    a: 'Evet. Üretim, hazır geri dönüştürülmüş kağıttan başlar; ince şeritler elde sıkıca bükülerek hasır kadar dayanıklı organik dallara dönüşür ve kadın ustaların elinde örülür.',
+  },
+];

@@ -1,7 +1,7 @@
 import { brand, contact, seller } from '@/lib/brand';
 
 const COLS = [
-  { h: 'Atölye', items: [{ t: 'Hikaye', href: '#hikaye' }, { t: 'Süreç', href: '#surec' }, { t: 'Koleksiyon', href: '#koleksiyon' }] },
+  { h: 'Atölye', items: [{ t: 'Hikaye', href: '#hikaye' }, { t: 'Süreç', href: '#surec' }, { t: 'SSS', href: '#sss' }, { t: 'Koleksiyon', href: '#koleksiyon' }] },
   { h: 'Koleksiyon', items: [{ t: 'Asılı Sepet', href: '#koleksiyon' }, { t: 'Yuvarlak Sepet', href: '#koleksiyon' }, { t: 'Özel Ölçü', href: '#siparis' }] },
 ];
 
