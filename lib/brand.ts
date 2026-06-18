@@ -366,7 +366,7 @@ export const instagram = {
    * en son gönderileri çeker); boşken aşağıdaki kürasyonlu liste gösterilir.
    * Ücretsiz Behold planı: günde 1 güncelleme, son 6 gönderi.
    */
-  feedUrl: '',
+  feedUrl: 'https://feeds.behold.so/IsJcuD9IAzdHjqk1FTMw',
   posts: [
     { image: '/assets/products/sehpa-3.webp', alt: 'Kağıt hasır sehpa oturma alanında, kitap ve kahveyle' },
     { image: '/assets/products/hasir-avize-1.webp', alt: 'Yakıldığında dantel gibi gölge düşüren el yapımı hasır avize' },
