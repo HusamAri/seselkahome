@@ -361,6 +361,12 @@ export const faqs: { q: string; a: string }[] = [
 export const instagram = {
   handle: '@seselkahome',
   url: 'https://www.instagram.com/seselkahome',
+  /**
+   * Behold.so JSON feed URL. Doldurulunca canlı senkron devreye girer (istemci
+   * en son gönderileri çeker); boşken aşağıdaki kürasyonlu liste gösterilir.
+   * Ücretsiz Behold planı: günde 1 güncelleme, son 6 gönderi.
+   */
+  feedUrl: '',
   posts: [
     { image: '/assets/products/sehpa-3.webp', alt: 'Kağıt hasır sehpa oturma alanında, kitap ve kahveyle' },
     { image: '/assets/products/hasir-avize-1.webp', alt: 'Yakıldığında dantel gibi gölge düşüren el yapımı hasır avize' },

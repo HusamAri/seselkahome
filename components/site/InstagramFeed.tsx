@@ -1,6 +1,30 @@
-import Image from 'next/image';
+'use client';
+
+import { useEffect, useState } from 'react';
 import { withBase } from '@/lib/basePath';
 import { instagram } from '@/lib/brand';
+
+type Tile = { key: string; image: string; alt: string; href: string };
+
+/** Minimal slice of a Behold.so JSON-feed post (behold.so/docs/json-feeds). */
+type BeholdPost = {
+  id?: string;
+  permalink?: string;
+  mediaUrl?: string;
+  thumbnailUrl?: string;
+  altText?: string;
+  prunedCaption?: string;
+  sizes?: { small?: { mediaUrl?: string }; medium?: { mediaUrl?: string } };
+};
+
+/** Curated fallback — real Seselka imagery, shown server-side and whenever the
+ *  live feed is unset or unreachable. */
+const CURATED: Tile[] = instagram.posts.map((p, i) => ({
+  key: `c${i}`,
+  image: p.image,
+  alt: p.alt,
+  href: p.href ?? instagram.url,
+}));
 
 function IgIcon({ size = 16 }: { size?: number }) {
   return (
@@ -13,15 +37,45 @@ function IgIcon({ size = 16 }: { size?: number }) {
 }
 
 /**
- * Instagram — curated, auto-scrolling ("kendiliğinden akan") strip of real
- * Seselka imagery linking to @seselkahome. Pure-CSS marquee (no JS, SSG-safe):
- * the track holds the set twice and slides -50% for a seamless loop; pauses on
- * hover/focus, disabled under prefers-reduced-motion (falls back to a manually
- * scrollable row). The duplicated second set is decorative (aria-hidden), so
- * screen readers and keyboard focus only see each tile once.
+ * Instagram — auto-scrolling ("kendiliğinden akan") strip. Renders the curated
+ * fallback on the server, then — if `instagram.feedUrl` is set — fetches the live
+ * Behold.so JSON feed on the client and swaps in the latest posts. Behold (free
+ * tier) auto-updates daily and handles the Instagram token/refresh, so the site
+ * stays fully static with no secrets. Pure-CSS marquee: the track holds the set
+ * twice and slides -50% for a seamless loop; pauses on hover/focus; disabled
+ * under prefers-reduced-motion. The duplicate set is decorative (aria-hidden).
  */
 export function InstagramFeed() {
-  const tiles = instagram.posts;
+  const [tiles, setTiles] = useState<Tile[]>(CURATED);
+
+  useEffect(() => {
+    if (!instagram.feedUrl) return;
+    let cancelled = false;
+    fetch(instagram.feedUrl)
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((data: { posts?: BeholdPost[] }) => {
+        const mapped = (data.posts ?? [])
+          .map((p, i): Tile | null => {
+            const image = p.sizes?.medium?.mediaUrl ?? p.sizes?.small?.mediaUrl ?? p.thumbnailUrl ?? p.mediaUrl;
+            if (!image) return null;
+            return {
+              key: p.id ?? `l${i}`,
+              image,
+              alt: p.altText || p.prunedCaption || `${instagram.handle} Instagram gönderisi`,
+              href: p.permalink ?? instagram.url,
+            };
+          })
+          .filter((t): t is Tile => t !== null);
+        if (!cancelled && mapped.length) setTiles(mapped);
+      })
+      .catch(() => {
+        /* network/parse error — keep the curated fallback */
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <div>
       <div className="mx-auto flex max-w-wrap flex-col items-center gap-4 px-6 text-center">
@@ -48,20 +102,20 @@ export function InstagramFeed() {
             const dup = i >= tiles.length;
             return (
               <a
-                key={i}
-                href={t.href ?? instagram.url}
+                key={`${t.key}-${i}`}
+                href={t.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-hidden={dup}
                 tabIndex={dup ? -1 : 0}
                 className="group/ig relative mr-4 block aspect-square w-44 shrink-0 overflow-hidden rounded-[1.1rem] sm:mr-5 sm:w-56"
               >
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element -- curated (local) + live (Behold CDN) mix; static export */}
+                <img
                   src={withBase(t.image)}
                   alt={dup ? '' : t.alt}
-                  fill
-                  sizes="(min-width:640px) 224px, 176px"
-                  className="object-cover transition-transform duration-700 ease-quiet group-hover/ig:scale-105"
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-quiet group-hover/ig:scale-105"
                 />
                 <span className="absolute inset-0 flex items-center justify-center text-linen opacity-0 transition-all duration-300 group-hover/ig:bg-ink/35 group-hover/ig:opacity-100">
                   <IgIcon size={26} />
