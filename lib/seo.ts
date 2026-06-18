@@ -3,7 +3,7 @@
  * Statik export'ta server component'lerde render edilir, böylece SSG HTML'ine
  * girer ve crawler'lar görür. Veriler lib/brand.ts'ten beslenir.
  */
-import { brand, contact, faqs, products, salePrice, seller, type Product } from '@/lib/brand';
+import { brand, contact, faqs, instagram, products, salePrice, seller, type Product } from '@/lib/brand';
 
 /** Canonical site kökü — app/layout.tsx metadataBase ile aynı olmalı. */
 export const SITE_URL = 'https://seselkahome.com';
@@ -38,7 +38,7 @@ export function organizationLd() {
       addressRegion: seller.city,
       addressCountry: 'TR',
     },
-    // sameAs: resmî marka sosyal hesabı eklenince doldurulacak (şimdilik yok).
+    sameAs: [instagram.url],
   };
 }
 

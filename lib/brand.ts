@@ -351,3 +351,28 @@ export const faqs: { q: string; a: string }[] = [
     a: 'Evet. Üretim, hazır geri dönüştürülmüş kağıttan başlar; ince şeritler elde sıkıca bükülerek hasır kadar dayanıklı organik dallara dönüşür ve kadın ustaların elinde örülür.',
   },
 ];
+
+/**
+ * Instagram — alt bölümdeki "kendiliğinden akan" şerit, footer linki ve JSON-LD
+ * sameAs buradan beslenir. Kürasyonlu/statik: her kare gerçek bir Seselka
+ * görseli; `href` verilirse o gönderiye, yoksa profile gider. (Canlı oto-senkron
+ * için Business/Creator hesabı + widget ya da Graph API gerekir — PR notuna bkz.)
+ */
+export const instagram = {
+  handle: '@seselkahome',
+  url: 'https://www.instagram.com/seselkahome',
+  posts: [
+    { image: '/assets/products/sehpa-3.webp', alt: 'Kağıt hasır sehpa oturma alanında, kitap ve kahveyle' },
+    { image: '/assets/products/hasir-avize-1.webp', alt: 'Yakıldığında dantel gibi gölge düşüren el yapımı hasır avize' },
+    { image: '/assets/products/yuvarlak-1.webp', alt: 'Yuvarlak hasır sepet masada, içinde ekmek ve meyve' },
+    { image: '/assets/products/asili-1.webp', alt: 'Duvarda asılı örgü sepet, kurutulmuş çiçeklerle' },
+    { image: '/assets/products/horoz-1.webp', alt: 'Bayram sofrasında horoz formlu hasır sepet' },
+    { image: '/assets/special/lotus-lamba.webp', alt: 'İçeriden ışıyan, kâğıt yapraklı el yapımı lotus lamba' },
+    { image: '/assets/special/kagit-sakayik.webp', alt: 'Tek dalda solmayan, kâğıttan el yapımı şakayık çiçeği' },
+    { image: '/assets/reviews/sule-komoglu.webp', alt: 'Ev sahibinin evinde el yapımı kağıt hasır sehpa' },
+    { image: '/assets/photo-detail.webp', alt: 'Seselka hediye seti: kraft kutu, mum mührü ve örme kese' },
+    { image: '/assets/photo-packaging.webp', alt: 'Seselka ambalajı: kraft kutu, kuşak ve mum mührü' },
+    { image: '/assets/products/hasir-avize-3.webp', alt: 'Yemek masasının üzerinde asılı el yapımı hasır avize' },
+    { image: '/assets/reviews/ozlem-karacali.webp', alt: 'Ev sahibinin köşesinde el örgüsü yuvarlak hasır sepet' },
+  ] as { image: string; alt: string; href?: string }[],
+};

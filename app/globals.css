@@ -226,3 +226,31 @@ body::after {
   margin: 0;
   color: var(--fg);
 }
+
+/* ============================================================
+   Instagram — kendiliğinden akan şerit (pure-CSS marquee)
+   Track holds the set twice; -50% slide = seamless loop.
+   ============================================================ */
+@keyframes ig-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.ig-marquee-track {
+  animation: ig-marquee 60s linear infinite;
+}
+.ig-marquee:hover .ig-marquee-track,
+.ig-marquee:focus-within .ig-marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ig-marquee {
+    overflow-x: auto;
+  }
+  .ig-marquee-track {
+    animation: none;
+  }
+}
