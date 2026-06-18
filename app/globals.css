@@ -242,15 +242,21 @@ body::after {
 .ig-marquee-track {
   animation: ig-marquee 60s linear infinite;
 }
+.ig-marquee-track-rev {
+  animation: ig-marquee 78s linear infinite reverse;
+}
 .ig-marquee:hover .ig-marquee-track,
-.ig-marquee:focus-within .ig-marquee-track {
+.ig-marquee:hover .ig-marquee-track-rev,
+.ig-marquee:focus-within .ig-marquee-track,
+.ig-marquee:focus-within .ig-marquee-track-rev {
   animation-play-state: paused;
 }
 @media (prefers-reduced-motion: reduce) {
   .ig-marquee {
     overflow-x: auto;
   }
-  .ig-marquee-track {
+  .ig-marquee-track,
+  .ig-marquee-track-rev {
     animation: none;
   }
 }
