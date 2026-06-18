@@ -13,6 +13,7 @@ import { OrderProcess } from '@/components/site/OrderProcess';
 import { ProcessSteps } from '@/components/site/ProcessSteps';
 import { Reviews } from '@/components/site/Reviews';
 import { Faq } from '@/components/site/Faq';
+import { InstagramFeed } from '@/components/site/InstagramFeed';
 import { SiteFooter } from '@/components/site/SiteFooter';
 import { SiteNav } from '@/components/site/SiteNav';
 import { withBase } from '@/lib/basePath';
@@ -294,6 +295,11 @@ export default function Home() {
           <div className="mx-auto max-w-wrap px-6 py-24 md:py-32">
             <Faq />
           </div>
+        </section>
+
+        {/* ---------------------------------------------------- INSTAGRAM (kendiliğinden akan şerit) */}
+        <section id="instagram" className="scroll-mt-28 border-t border-line bg-bg py-20 md:py-28">
+          <InstagramFeed />
         </section>
       </main>
 

@@ -1,4 +1,4 @@
-import { brand, contact, seller } from '@/lib/brand';
+import { brand, contact, instagram, seller } from '@/lib/brand';
 
 const COLS = [
   { h: 'Atölye', items: [{ t: 'Hikaye', href: '#hikaye' }, { t: 'Süreç', href: '#surec' }, { t: 'SSS', href: '#sss' }, { t: 'Koleksiyon', href: '#koleksiyon' }] },
@@ -58,6 +58,7 @@ export function SiteFooter({ sectionBase = '' }: { sectionBase?: string }) {
             <ul className="mt-4 space-y-2.5 text-sm text-fg/80">
               <li><a className="transition-colors hover:text-accent" href={`mailto:${contact.email}`}>{contact.email}</a></li>
               {contact.phone ? <li><a className="transition-colors hover:text-accent" href={`tel:${contact.phone.replace(/\s/g, '')}`}>{contact.phone}</a></li> : null}
+              <li><a className="transition-colors hover:text-accent" href={instagram.url} target="_blank" rel="noopener noreferrer">Instagram · {instagram.handle}</a></li>
               <li className="text-muted">{contact.location}</li>
             </ul>
             <h4 className="mt-7 text-[0.7rem] uppercase tracking-[0.2em] text-accent">Yasal</h4>
