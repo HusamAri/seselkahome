@@ -78,6 +78,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="tr" className={`${display.variable} ${body.variable} ${script.variable}`}>
       <body>
+        <a
+          href="#top"
+          data-noscroll
+          className="sr-only rounded-full focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:border focus:border-line focus:bg-bg focus:px-5 focus:py-2.5 focus:text-xs focus:font-semibold focus:uppercase focus:tracking-[0.16em] focus:text-fg focus:shadow-[0_18px_50px_-28px_rgba(42,37,32,0.5)]"
+        >
+          İçeriğe geç
+        </a>
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
         <JsonLd data={organizationLd()} />
         <JsonLd data={webSiteLd()} />
