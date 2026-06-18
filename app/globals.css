@@ -65,6 +65,7 @@ body {
   font-family: var(--font-body), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  text-wrap: pretty; /* avoid orphans/short last lines in body copy */
 }
 
 ::selection {
@@ -111,6 +112,7 @@ html.lenis body {
 /* Editorial type rendering */
 .font-display {
   font-feature-settings: 'liga' 1, 'dlig' 1;
+  text-wrap: balance; /* even line lengths on multi-line headings */
 }
 
 /* Hide scrollbar (mobile product carousel) */

@@ -49,7 +49,7 @@ export function Reviews() {
 
         <div className="mt-12 flex flex-wrap justify-center gap-6 md:mt-16 md:gap-7">
           {reviews.map((r) => (
-            <figure key={`${r.name}-${r.piece}`} className="flex w-full max-w-[36rem] flex-col overflow-hidden rounded-[1.7rem] bg-card shadow-[0_34px_64px_-40px_rgba(120,70,25,0.5)] sm:flex-row">
+            <figure key={`${r.name}-${r.piece}`} className="flex w-full max-w-[36rem] flex-col overflow-hidden rounded-[1.7rem] bg-card shadow-[0_34px_64px_-40px_rgba(120,70,25,0.5)] transition-transform duration-500 ease-quiet hover:-translate-y-1 motion-reduce:hover:translate-y-0 sm:flex-row">
               <div className="relative aspect-[4/3] w-full shrink-0 sm:aspect-auto sm:w-48 md:w-56">
                 <Image src={withBase(r.image)} alt={r.alt ?? `${r.name} — ${r.piece}`} fill sizes="(min-width:640px) 14rem, 100vw" className="object-cover" />
               </div>
