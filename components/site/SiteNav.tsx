@@ -90,7 +90,9 @@ export function SiteNav() {
           background: tight ? 'color-mix(in oklab, var(--bg) 86%, transparent)' : 'color-mix(in oklab, var(--bg) 64%, transparent)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          boxShadow: tight ? '0 18px 50px -28px rgba(42,37,32,0.45)' : 'none',
+          boxShadow: tight
+            ? 'inset 0 1px 0 0 rgba(255,255,255,0.28), 0 18px 50px -28px rgba(42,37,32,0.45)'
+            : 'inset 0 1px 0 0 rgba(255,255,255,0.28)',
         }}
       >
         <nav className="flex items-center justify-between gap-4" aria-label="Birincil">

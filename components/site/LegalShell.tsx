@@ -35,7 +35,7 @@ export function LegalShell({
         </div>
       </header>
 
-      <main className="bg-bg text-fg">
+      <main id="top" tabIndex={-1} className="bg-bg text-fg outline-none">
         <article className="mx-auto max-w-3xl px-6 py-20 md:py-28">
           <span className="eyebrow">Yasal</span>
           <h1 className="mt-5 font-display font-medium leading-[0.95] text-fg text-[clamp(2.25rem,5vw,3.5rem)]">

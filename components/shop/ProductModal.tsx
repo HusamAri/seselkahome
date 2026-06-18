@@ -24,11 +24,20 @@ export function ProductModal({ active, open, onClose }: Props) {
   lenisRef.current = lenis;
   const panelRef = useRef<HTMLDivElement>(null);
   const [idx, setIdx] = useState(0);
+  const [zoom, setZoom] = useState(false);
+  const zoomRef = useRef(zoom);
+  zoomRef.current = zoom;
 
   // Reset gallery to the first image whenever a new product opens.
   useEffect(() => {
     setIdx(0);
+    setZoom(false);
   }, [active?.id]);
+
+  // Close the lightbox whenever the dialog closes.
+  useEffect(() => {
+    if (!open) setZoom(false);
+  }, [open]);
 
   // Lifecycle: while the dialog is mounted, lock background scroll and hold
   // focus inside it — released only when it fully unmounts (after the fade),
@@ -52,9 +61,11 @@ export function ProductModal({ active, open, onClose }: Props) {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        onClose();
+        if (zoomRef.current) setZoom(false);
+        else onClose();
         return;
       }
+      if (zoomRef.current) return; // lightbox open — let Tab move natively
       if (e.key !== 'Tab') return;
       const root = panelRef.current;
       if (!root) return;
@@ -141,10 +152,24 @@ export function ProductModal({ active, open, onClose }: Props) {
                 className={`${hasPhotos ? 'object-cover' : 'object-contain p-6 drop-shadow-[0_26px_36px_rgba(120,70,25,0.3)]'} ${sold ? 'opacity-70 grayscale' : ''}`}
               />
               {sold ? (
-                <span className="absolute left-4 top-4 rounded-full bg-ink/80 px-3 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-linen">
+                <span className="absolute left-4 top-4 z-20 rounded-full bg-ink/80 px-3 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-linen">
                   Satıldı
                 </span>
               ) : null}
+              <button
+                type="button"
+                data-stop
+                onClick={() => setZoom(true)}
+                aria-label={`${name} — görseli büyüt`}
+                className="group/zoom absolute inset-0 z-10 cursor-zoom-in"
+              >
+                <span
+                  aria-hidden="true"
+                  className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full border border-line bg-bg/80 text-fg backdrop-blur transition-opacity duration-300 sm:opacity-0 sm:group-hover/zoom:opacity-100"
+                >
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+                </span>
+              </button>
             </div>
 
             {images.length > 1 ? (
@@ -231,6 +256,55 @@ export function ProductModal({ active, open, onClose }: Props) {
           </div>
         </div>
       </div>
+
+      {zoom ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${name} — büyük görsel`}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setZoom(false);
+          }}
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-ink/92 p-4 backdrop-blur-sm sm:p-10"
+        >
+          <button
+            type="button"
+            onClick={() => setZoom(false)}
+            aria-label="Görseli kapat"
+            className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-linen/25 bg-ink/40 text-linen backdrop-blur transition-colors duration-300 hover:bg-ink/70"
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+          </button>
+
+          <div className="relative h-full max-h-[86vh] w-full max-w-5xl">
+            <Image key={`zoom-${hero}`} src={withBase(hero)} alt={heroAlt} fill sizes="100vw" className="object-contain" />
+          </div>
+
+          {images.length > 1 ? (
+            <>
+              <button
+                type="button"
+                onClick={() => setIdx((i) => (i - 1 + images.length) % images.length)}
+                aria-label="Önceki görsel"
+                className="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-linen/25 bg-ink/40 text-linen backdrop-blur transition-colors duration-300 hover:bg-ink/70 sm:left-6"
+              >
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+              </button>
+              <button
+                type="button"
+                onClick={() => setIdx((i) => (i + 1) % images.length)}
+                aria-label="Sonraki görsel"
+                className="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-linen/25 bg-ink/40 text-linen backdrop-blur transition-colors duration-300 hover:bg-ink/70 sm:right-6"
+              >
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+              </button>
+              <span className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-ink/50 px-3 py-1 text-xs tabular-nums text-linen backdrop-blur">
+                {heroIdx + 1} / {images.length}
+              </span>
+            </>
+          ) : null}
+        </div>
+      ) : null}
     </div>
   );
 }

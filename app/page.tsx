@@ -45,7 +45,7 @@ export default function Home() {
       <SiteNav />
       <LaunchPopup />
 
-      <main id="top" className="bg-bg text-fg">
+      <main id="top" tabIndex={-1} className="bg-bg text-fg outline-none">
         <JsonLd data={productsLd()} />
         {/* ---------------------------------------------------- HERO (compact, shop-leading) */}
         <section className="relative overflow-hidden">
