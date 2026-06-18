@@ -22,12 +22,32 @@ export function SiteNav() {
   const reduced = usePrefersReducedMotion();
   const [tight, setTight] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState('');
 
   useEffect(() => {
     const onScroll = () => setTight(window.scrollY > 24);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Scroll-spy: highlight the nav link whose section is currently in view.
+  useEffect(() => {
+    const els = LINKS.map((l) => document.getElementById(l.href.slice(1))).filter(
+      (el): el is HTMLElement => el !== null,
+    );
+    if (!els.length) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const vis = entries.filter((e) => e.isIntersecting);
+        if (!vis.length) return;
+        vis.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        setActive(vis[0].target.id);
+      },
+      { rootMargin: '-45% 0px -50% 0px' },
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
   }, []);
 
   useEffect(() => {
@@ -77,13 +97,25 @@ export function SiteNav() {
           <Brand onClick={go('#top')} />
 
           <ul className="hidden items-center gap-8 text-[0.78rem] font-medium uppercase tracking-[0.16em] text-muted md:flex">
-            {LINKS.map((l) => (
-              <li key={l.href}>
-                <a href={l.href} onClick={go(l.href)} className="transition-colors duration-300 hover:text-fg">
-                  {l.label}
-                </a>
-              </li>
-            ))}
+            {LINKS.map((l) => {
+              const isActive = active === l.href.slice(1);
+              return (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    onClick={go(l.href)}
+                    aria-current={isActive ? 'true' : undefined}
+                    className={`relative transition-colors duration-300 hover:text-fg ${isActive ? 'text-fg' : ''}`}
+                  >
+                    {l.label}
+                    <span
+                      aria-hidden="true"
+                      className={`absolute -bottom-1.5 left-0 h-px bg-accent transition-all duration-500 ease-quiet ${isActive ? 'w-full' : 'w-0'}`}
+                    />
+                  </a>
+                </li>
+              );
+            })}
           </ul>
 
           <div className="flex items-center gap-2">

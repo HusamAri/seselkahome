@@ -9,7 +9,7 @@ import { formatPrice, launchDiscount, salePrice, type Product } from '@/lib/bran
  */
 export function PriceTag({ product, size = 'card' }: { product: Product; size?: 'card' | 'modal' }) {
   const { price, custom, sold } = product;
-  const big = size === 'modal' ? 'text-2xl' : 'text-[1.9rem]';
+  const big = size === 'modal' ? 'text-2xl tabular-nums' : 'text-[1.9rem] tabular-nums';
 
   if (custom || price == null) {
     return <span className={`font-display ${big} leading-none text-fg`}>Konuşalım</span>;
