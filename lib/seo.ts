@@ -3,7 +3,7 @@
  * Statik export'ta server component'lerde render edilir, böylece SSG HTML'ine
  * girer ve crawler'lar görür. Veriler lib/brand.ts'ten beslenir.
  */
-import { brand, contact, faqs, instagram, products, salePrice, seller, type Product } from '@/lib/brand';
+import { brand, contact, faqs, instagram, products, reviews, salePrice, seller, type Product } from '@/lib/brand';
 
 /** Canonical site kökü — app/layout.tsx metadataBase ile aynı olmalı. */
 export const SITE_URL = 'https://seselkahome.com';
@@ -55,6 +55,24 @@ export function webSiteLd() {
   };
 }
 
+/** Tüm tekliflerde ortak: Türkiye geneli ücretsiz kargo. */
+const SHIPPING_DETAILS = {
+  '@type': 'OfferShippingDetails',
+  shippingRate: { '@type': 'MonetaryAmount', value: 0, currency: 'TRY' },
+  shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'TR' },
+  deliveryTime: {
+    '@type': 'ShippingDeliveryTime',
+    transitTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 4, unitCode: 'DAY' },
+  },
+};
+
+/** Siparişe/kişiye özel üretim → cayma istisnası (Mesafeli Söz. Yön. md. 15/1-b). */
+const RETURN_POLICY = {
+  '@type': 'MerchantReturnPolicy',
+  applicableCountry: 'TR',
+  returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+};
+
 /** Tek bir ürün için Product düğümü (TRY fiyat + made-to-order/sold uç durumları). */
 function productLd(p: Product) {
   const node: Record<string, unknown> = {
@@ -75,6 +93,8 @@ function productLd(p: Product) {
       ...(p.price != null ? { price: p.price } : {}),
       availability: 'https://schema.org/SoldOut',
       url: `${SITE_URL}/#koleksiyon`,
+      shippingDetails: SHIPPING_DETAILS,
+      hasMerchantReturnPolicy: RETURN_POLICY,
     };
   } else if (price != null) {
     node.offers = {
@@ -84,9 +104,31 @@ function productLd(p: Product) {
       availability: 'https://schema.org/PreOrder', // siparişe özel üretim
       itemCondition: 'https://schema.org/NewCondition',
       url: `${SITE_URL}/#koleksiyon`,
+      shippingDetails: SHIPPING_DETAILS,
+      hasMerchantReturnPolicy: RETURN_POLICY,
     };
   }
-  // price === null (Özel Ölçü): offers eklenmez.
+  // price === null (Özel Ölçü) kalemleri grafiğe alınmadığından offers her zaman vardır.
+
+  // Gerçek müşteri yorumları (görünür Yorumlar bölümüyle birebir eşleşir) → yıldız
+  // zengin sonucu. Yorumu olmayan ürüne puan UYDURULMAZ.
+  const productReviews = reviews.filter((r) => r.piece === p.name);
+  if (productReviews.length) {
+    node.review = productReviews.map((r) => ({
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5, worstRating: 1 },
+      author: { '@type': 'Person', name: r.name },
+      ...(r.text ? { reviewBody: r.text } : {}),
+    }));
+    node.aggregateRating = {
+      '@type': 'AggregateRating',
+      ratingValue: productReviews.reduce((s, r) => s + r.rating, 0) / productReviews.length,
+      reviewCount: productReviews.length,
+      bestRating: 5,
+      worstRating: 1,
+    };
+  }
+
   return node;
 }
 
@@ -94,7 +136,9 @@ function productLd(p: Product) {
 export function productsLd() {
   return {
     '@context': 'https://schema.org',
-    '@graph': products.filter((p) => !p.hidden).map(productLd),
+    // Fiyatsız "Özel Ölçü" (custom) kartı hariç: Product için offers/review/
+    // aggregateRating zorunlu ve fiyatsız öğe geçerli bir teklif üretemez.
+    '@graph': products.filter((p) => !p.hidden && p.price != null).map(productLd),
   };
 }
 

@@ -336,7 +336,7 @@ export const faqs: { q: string; a: string }[] = [
   },
   {
     q: 'Türkiye’nin her yerine kargo var mı?',
-    a: 'Evet. Tamamlanan parçalar özenle paketlenip Türkiye geneline kargoyla gönderilir.',
+    a: 'Evet. Tamamlanan parçalar özenle paketlenip Türkiye geneline ücretsiz kargoyla gönderilir.',
   },
   {
     q: 'Siparişe özel ürünlerde iade ve cayma hakkı nasıl işliyor?',
