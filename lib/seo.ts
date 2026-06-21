@@ -3,7 +3,7 @@
  * Statik export'ta server component'lerde render edilir, böylece SSG HTML'ine
  * girer ve crawler'lar görür. Veriler lib/brand.ts'ten beslenir.
  */
-import { brand, contact, faqs, instagram, products, salePrice, seller, type Product } from '@/lib/brand';
+import { brand, contact, faqs, instagram, products, reviews, salePrice, seller, type Product } from '@/lib/brand';
 
 /** Canonical site kökü — app/layout.tsx metadataBase ile aynı olmalı. */
 export const SITE_URL = 'https://seselkahome.com';
@@ -108,7 +108,27 @@ function productLd(p: Product) {
       hasMerchantReturnPolicy: RETURN_POLICY,
     };
   }
-  // price === null (Özel Ölçü): offers eklenmez.
+  // price === null (Özel Ölçü) kalemleri grafiğe alınmadığından offers her zaman vardır.
+
+  // Gerçek müşteri yorumları (görünür Yorumlar bölümüyle birebir eşleşir) → yıldız
+  // zengin sonucu. Yorumu olmayan ürüne puan UYDURULMAZ.
+  const productReviews = reviews.filter((r) => r.piece === p.name);
+  if (productReviews.length) {
+    node.review = productReviews.map((r) => ({
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5, worstRating: 1 },
+      author: { '@type': 'Person', name: r.name },
+      ...(r.text ? { reviewBody: r.text } : {}),
+    }));
+    node.aggregateRating = {
+      '@type': 'AggregateRating',
+      ratingValue: productReviews.reduce((s, r) => s + r.rating, 0) / productReviews.length,
+      reviewCount: productReviews.length,
+      bestRating: 5,
+      worstRating: 1,
+    };
+  }
+
   return node;
 }
 
