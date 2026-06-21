@@ -86,7 +86,7 @@ export default function MesafeliSatisPage() {
 
       <h2>6. Teslimat</h2>
       <p>
-        Ürünler kargo ile teslim edilir. Siparişe özel üretim olduğundan üretim ve teslim süresi
+        Ürünler Türkiye geneline ücretsiz kargo ile teslim edilir. Siparişe özel üretim olduğundan üretim ve teslim süresi
         ürüne göre değişir; taraflarca kararlaştırılan süre, siparişinizde ayrıca belirtilir.
         Kargo sırasında oluşabilecek hasarlara karşı, teslim aldığınız paketi açmadan kontrol
         etmenizi ve hasar halinde tutanak tutturmanızı öneririz.

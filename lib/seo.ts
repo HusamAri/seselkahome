@@ -55,6 +55,24 @@ export function webSiteLd() {
   };
 }
 
+/** Tüm tekliflerde ortak: Türkiye geneli ücretsiz kargo. */
+const SHIPPING_DETAILS = {
+  '@type': 'OfferShippingDetails',
+  shippingRate: { '@type': 'MonetaryAmount', value: 0, currency: 'TRY' },
+  shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'TR' },
+  deliveryTime: {
+    '@type': 'ShippingDeliveryTime',
+    transitTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 4, unitCode: 'DAY' },
+  },
+};
+
+/** Siparişe/kişiye özel üretim → cayma istisnası (Mesafeli Söz. Yön. md. 15/1-b). */
+const RETURN_POLICY = {
+  '@type': 'MerchantReturnPolicy',
+  applicableCountry: 'TR',
+  returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+};
+
 /** Tek bir ürün için Product düğümü (TRY fiyat + made-to-order/sold uç durumları). */
 function productLd(p: Product) {
   const node: Record<string, unknown> = {
@@ -75,6 +93,8 @@ function productLd(p: Product) {
       ...(p.price != null ? { price: p.price } : {}),
       availability: 'https://schema.org/SoldOut',
       url: `${SITE_URL}/#koleksiyon`,
+      shippingDetails: SHIPPING_DETAILS,
+      hasMerchantReturnPolicy: RETURN_POLICY,
     };
   } else if (price != null) {
     node.offers = {
@@ -84,6 +104,8 @@ function productLd(p: Product) {
       availability: 'https://schema.org/PreOrder', // siparişe özel üretim
       itemCondition: 'https://schema.org/NewCondition',
       url: `${SITE_URL}/#koleksiyon`,
+      shippingDetails: SHIPPING_DETAILS,
+      hasMerchantReturnPolicy: RETURN_POLICY,
     };
   }
   // price === null (Özel Ölçü): offers eklenmez.
@@ -94,7 +116,9 @@ function productLd(p: Product) {
 export function productsLd() {
   return {
     '@context': 'https://schema.org',
-    '@graph': products.filter((p) => !p.hidden).map(productLd),
+    // Fiyatsız "Özel Ölçü" (custom) kartı hariç: Product için offers/review/
+    // aggregateRating zorunlu ve fiyatsız öğe geçerli bir teklif üretemez.
+    '@graph': products.filter((p) => !p.hidden && p.price != null).map(productLd),
   };
 }
 
