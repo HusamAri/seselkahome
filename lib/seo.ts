@@ -62,6 +62,7 @@ const SHIPPING_DETAILS = {
   shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'TR' },
   deliveryTime: {
     '@type': 'ShippingDeliveryTime',
+    handlingTime: { '@type': 'QuantitativeValue', minValue: 14, maxValue: 42, unitCode: 'DAY' },
     transitTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 4, unitCode: 'DAY' },
   },
 };
