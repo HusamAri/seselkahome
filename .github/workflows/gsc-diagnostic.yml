@@ -1,0 +1,42 @@
+name: GSC diagnostic (live site)
+
+# One-shot diagnostic for the two Search Console notices: dumps live redirect
+# behavior for URL variants and checks the deployed JSON-LD offer fields.
+# Runs on this branch only; the branch is deleted after the log is read.
+on:
+  push:
+    branches: [claude/gsc-diagnostic]
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Redirect matrix
+        run: |
+          for u in \
+            "https://seselkahome.com/" \
+            "https://www.seselkahome.com/" \
+            "http://seselkahome.com/" \
+            "http://www.seselkahome.com/" \
+            "https://husamari.github.io/seselkahome/" \
+            "https://seselkahome.com/mesafeli-satis" \
+            "https://seselkahome.com/mesafeli-satis/" \
+            "https://seselkahome.com/kvkk-aydinlatma/"; do
+            echo "### $u"
+            curl -sSI -o /dev/null -w "status=%{http_code} redirect=%{redirect_url}\n" "$u" || true
+          done
+      - name: Live JSON-LD offer fields
+        run: |
+          curl -sS https://seselkahome.com/ -o home.html
+          echo "hasMerchantReturnPolicy count: $(grep -o 'hasMerchantReturnPolicy' home.html | wc -l)"
+          echo "shippingDetails count: $(grep -o 'shippingDetails' home.html | wc -l)"
+          echo "handlingTime count: $(grep -o 'handlingTime' home.html | wc -l)"
+          echo "Offer count: $(grep -o '"@type":"Offer"' home.html | wc -l)"
+          echo "canonical: $(grep -o '<link rel="canonical"[^>]*>' home.html)"
+      - name: Live sitemap + robots
+        run: |
+          echo "--- robots.txt"; curl -sS https://seselkahome.com/robots.txt
+          echo "--- sitemap.xml"; curl -sS https://seselkahome.com/sitemap.xml
