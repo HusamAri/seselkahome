@@ -106,6 +106,13 @@ export function ProductCard({ product, priority = false }: Props) {
           <span className={sold ? 'text-accent/50' : 'text-accent'}>.</span>
         </h3>
         {desc ? <p className="mt-2 text-sm leading-relaxed text-muted">{desc}</p> : null}
+        <a
+          href={`/urunler/${product.id}/`}
+          data-stop
+          className="mt-4 inline-flex items-center gap-1.5 self-start text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-fg transition-colors hover:text-accent"
+        >
+          Ürün sayfası <span aria-hidden="true">→</span>
+        </a>
         {product.maker ? <MakerTag maker={product.maker} /> : null}
 
         {/* CTA pinned to the bottom of every card */}

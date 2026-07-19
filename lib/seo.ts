@@ -10,6 +10,9 @@ export const SITE_URL = 'https://seselkahome.com';
 
 export const absUrl = (path: string) => `${SITE_URL}${path.startsWith('/') ? '' : '/'}${path}`;
 
+/** Her ürün için kalıcı ve taranabilir canonical URL. */
+export const productUrl = (p: Product) => absUrl(`/urunler/${p.id}/`);
+
 /** Sitede gösterilen efektif satış fiyatı (indirim hariç tutulanlar dışında). */
 function effectivePrice(p: Product): number | null {
   if (p.price == null) return null;
@@ -39,6 +42,7 @@ export function organizationLd() {
       addressCountry: 'TR',
     },
     sameAs: [instagram.url],
+    hasMerchantReturnPolicy: RETURN_POLICY,
   };
 }
 
@@ -58,10 +62,22 @@ export function webSiteLd() {
 /** Tüm tekliflerde ortak: Türkiye geneli ücretsiz kargo. */
 const SHIPPING_DETAILS = {
   '@type': 'OfferShippingDetails',
-  shippingRate: { '@type': 'MonetaryAmount', value: 0, currency: 'TRY' },
+  '@id': `${SITE_URL}/#shipping`,
+  shippingRate: { '@type': 'MonetaryAmount', value: '0', currency: 'TRY' },
   shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'TR' },
   deliveryTime: {
     '@type': 'ShippingDeliveryTime',
+    // Siparişe özel üretim: iş günü hesabı (hafta sonu hariç).
+    businessDays: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [
+        'https://schema.org/Monday',
+        'https://schema.org/Tuesday',
+        'https://schema.org/Wednesday',
+        'https://schema.org/Thursday',
+        'https://schema.org/Friday',
+      ],
+    },
     handlingTime: { '@type': 'QuantitativeValue', minValue: 14, maxValue: 42, unitCode: 'DAY' },
     transitTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 4, unitCode: 'DAY' },
   },
@@ -70,15 +86,20 @@ const SHIPPING_DETAILS = {
 /** Siparişe/kişiye özel üretim → cayma istisnası (Mesafeli Söz. Yön. md. 15/1-b). */
 const RETURN_POLICY = {
   '@type': 'MerchantReturnPolicy',
+  '@id': `${SITE_URL}/#return-policy`,
   applicableCountry: 'TR',
+  returnPolicyCountry: 'TR',
   returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
 };
 
 /** Tek bir ürün için Product düğümü (TRY fiyat + made-to-order/sold uç durumları). */
-function productLd(p: Product) {
+export function productLd(p: Product) {
+  const url = productUrl(p);
   const node: Record<string, unknown> = {
     '@type': 'Product',
-    '@id': `${SITE_URL}/#urun-${p.id}`,
+    '@id': `${url}#product`,
+    url,
+    sku: p.id,
     name: p.name,
     category: p.sub,
     image: (p.gallery?.length ? p.gallery : [p.image]).map(absUrl),
@@ -91,9 +112,10 @@ function productLd(p: Product) {
     node.offers = {
       '@type': 'Offer',
       priceCurrency: 'TRY',
-      ...(p.price != null ? { price: p.price } : {}),
+      ...(p.price != null ? { price: String(p.price) } : {}),
       availability: 'https://schema.org/SoldOut',
-      url: `${SITE_URL}/#koleksiyon`,
+      url,
+      seller: { '@id': `${SITE_URL}/#organization` },
       shippingDetails: SHIPPING_DETAILS,
       hasMerchantReturnPolicy: RETURN_POLICY,
     };
@@ -101,10 +123,11 @@ function productLd(p: Product) {
     node.offers = {
       '@type': 'Offer',
       priceCurrency: 'TRY',
-      price,
+      price: String(price),
       availability: 'https://schema.org/PreOrder', // siparişe özel üretim
       itemCondition: 'https://schema.org/NewCondition',
-      url: `${SITE_URL}/#koleksiyon`,
+      url,
+      seller: { '@id': `${SITE_URL}/#organization` },
       shippingDetails: SHIPPING_DETAILS,
       hasMerchantReturnPolicy: RETURN_POLICY,
     };
