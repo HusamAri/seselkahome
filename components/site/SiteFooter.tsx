@@ -1,8 +1,8 @@
 import { brand, contact, instagram, seller } from '@/lib/brand';
 
 const COLS = [
-  { h: 'Atölye', items: [{ t: 'Hikaye', href: '#hikaye' }, { t: 'Süreç', href: '#surec' }, { t: 'SSS', href: '#sss' }, { t: 'Koleksiyon', href: '#koleksiyon' }] },
-  { h: 'Koleksiyon', items: [{ t: 'Asılı Sepet', href: '#koleksiyon' }, { t: 'Yuvarlak Sepet', href: '#koleksiyon' }, { t: 'Özel Ölçü', href: '#siparis' }] },
+  { h: 'Atölye', items: [{ t: 'Hikaye', href: '#hikaye' }, { t: 'Süreç', href: '#surec' }, { t: 'SSS', href: '#sss' }, { t: 'Rehber', href: '/rehber/' }] },
+  { h: 'Koleksiyon', items: [{ t: 'Hasır Sehpa', href: '/urunler/hasir-sehpa/' }, { t: 'Hasır Avize', href: '/urunler/hasir-avize/' }, { t: 'Yuvarlak Sepet', href: '/urunler/yuvarlak-sepet/' }] },
 ];
 
 const LEGAL = [
@@ -18,6 +18,7 @@ const LEGAL = [
  * (taxId/phone) are hidden automatically — never shown as fake values.
  */
 export function SiteFooter({ sectionBase = '' }: { sectionBase?: string }) {
+  const resolveHref = (href: string) => (href.startsWith('#') ? `${sectionBase}${href}` : href);
   const sellerRows = [
     { k: 'Satıcı', v: seller.legalName },
     { k: 'Vergi / T.C. Kimlik No', v: seller.taxId },
@@ -46,7 +47,7 @@ export function SiteFooter({ sectionBase = '' }: { sectionBase?: string }) {
               <ul className="mt-4 space-y-2.5 text-sm text-fg/80">
                 {col.items.map((it) => (
                   <li key={it.t}>
-                    <a className="transition-colors hover:text-accent" href={`${sectionBase}${it.href}`}>{it.t}</a>
+                    <a className="transition-colors hover:text-accent" href={resolveHref(it.href)}>{it.t}</a>
                   </li>
                 ))}
               </ul>

@@ -10,6 +10,7 @@ const LINKS = [
   { href: '#hikaye', label: 'Hikaye' },
   { href: '#surec', label: 'Süreç' },
   { href: '#odeme', label: 'Ödeme' },
+  { href: '/rehber/', label: 'Rehber' },
 ];
 
 const EASE = 'cubic-bezier(0.32,0.72,0,1)';
@@ -33,7 +34,7 @@ export function SiteNav() {
 
   // Scroll-spy: highlight the nav link whose section is currently in view.
   useEffect(() => {
-    const els = LINKS.map((l) => document.getElementById(l.href.slice(1))).filter(
+    const els = LINKS.filter((l) => l.href.startsWith('#')).map((l) => document.getElementById(l.href.slice(1))).filter(
       (el): el is HTMLElement => el !== null,
     );
     if (!els.length) return;
@@ -61,6 +62,7 @@ export function SiteNav() {
   // performs the offset scroll, and a native fallback covers reduced-motion.
   const go = (href: string) => (e: React.MouseEvent) => {
     setOpen(false);
+    if (!href.startsWith('#')) return;
     if (lenis) return; // global handler will preventDefault + smooth-scroll
     e.preventDefault();
     if (href === '#top') {
